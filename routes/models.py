@@ -45,6 +45,7 @@ class Waypoint(models.Model, TimestampModelMixin):
 class Destination(models.Model, TimestampModelMixin, GeoPointMixin):
     title = models.CharField(verbose_name="Название", max_length=64)
     type = models.CharField(verbose_name="Тип", max_length=16, choices=DESTINATION_TYPES)
+    radius = models.PositiveIntegerField(verbose_name="Радиус области входа", help_text="В метрах")
     description = models.TextField(verbose_name="Описание")
 
     class Meta:
