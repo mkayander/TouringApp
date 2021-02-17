@@ -18,7 +18,7 @@ class GeoPointMixin:
 
 class Route(models.Model, TimestampModelMixin):
     title = models.CharField(max_length=64, verbose_name="Название", unique=True)
-    description = models.TextField(verbose_name="Описание")
+    description = models.TextField(verbose_name="Описание", null=True, blank=True)
     image = models.ImageField(verbose_name="Изображение",
                               help_text="Основное изображение/фото, представляющее маршрут.",
                               upload_to="route_headers/")
@@ -45,12 +45,15 @@ class Waypoint(models.Model, TimestampModelMixin):
 class Destination(models.Model, TimestampModelMixin, GeoPointMixin):
     title = models.CharField(verbose_name="Название", max_length=64)
     type = models.CharField(verbose_name="Тип", max_length=16, choices=DESTINATION_TYPES)
-    radius = models.PositiveIntegerField(verbose_name="Радиус области входа", help_text="В метрах")
-    description = models.TextField(verbose_name="Описание")
+    radius = models.PositiveIntegerField(verbose_name="Радиус области входа", help_text="В метрах", default=8)
+    description = models.TextField(verbose_name="Описание", null=True, blank=True)
 
     class Meta:
         verbose_name: "Пункт назначения"
         verbose_name_plural: "Пункты назначения"
+        constraints: [
+            models.UniqueConstraint(fields=["title", "longitude", "latitude"], name="unique_destination")
+        ]
 
 
 class DestinationPhoto(models.Model, TimestampModelMixin):
