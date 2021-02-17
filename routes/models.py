@@ -44,6 +44,8 @@ class Waypoint(TimestampModelMixin, GeoPointMixin):
 
 
 class Destination(TimestampModelMixin, GeoPointMixin):
+    route = models.ForeignKey(Route, verbose_name="Маршрут", on_delete=models.CASCADE,
+                              related_name="destinations")
     title = models.CharField(verbose_name="Название", max_length=64)
     type = models.CharField(verbose_name="Тип", max_length=16, choices=DESTINATION_TYPES)
     radius = models.PositiveIntegerField(verbose_name="Радиус области входа", help_text="В метрах", default=8)
