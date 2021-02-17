@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Маршрут',
                 'verbose_name_plural': 'Маршруты',
             },
-            bases=(models.Model, routes.models.TimestampModelMixin),
+            bases=[routes.models.TimestampModelMixin],
         ),
         migrations.CreateModel(
             name='Waypoint',
@@ -36,6 +36,6 @@ class Migration(migrations.Migration):
                 ('latitude', models.DecimalField(decimal_places=6, max_digits=9)),
                 ('route', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='waypoints', to='routes.route')),
             ],
-            bases=(models.Model, routes.models.TimestampModelMixin),
+            bases=[routes.models.TimestampModelMixin],
         ),
     ]

@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('type', models.CharField(choices=[('simple', 'Простая точка'), ('sight', 'Достопримечательность'), ('important', 'Важное')], max_length=16, verbose_name='Тип')),
                 ('description', models.TextField(verbose_name='Описание')),
             ],
-            bases=(models.Model, routes.models.TimestampModelMixin, routes.models.GeoPointMixin),
+            bases=(routes.models.TimestampModelMixin, routes.models.GeoPointMixin),
         ),
         migrations.CreateModel(
             name='DestinationPhoto',
@@ -29,6 +29,6 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(upload_to='destination_photos/', verbose_name='Фотография')),
                 ('destination', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='photos', to='routes.destination')),
             ],
-            bases=(models.Model, routes.models.TimestampModelMixin),
+            bases=[routes.models.TimestampModelMixin],
         ),
     ]
