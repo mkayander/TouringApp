@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from routes.choices import DESTINATION_TYPES
 
@@ -26,6 +27,9 @@ class Route(TimestampModelMixin):
                               help_text="Основное изображение/фото, представляющее маршрут.",
                               upload_to="route_headers/", null=True, blank=True)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = "Маршрут"
         verbose_name_plural = "Маршруты"
@@ -34,6 +38,9 @@ class Route(TimestampModelMixin):
 class Waypoint(TimestampModelMixin, GeoPointMixin):
     route = models.ForeignKey(Route, on_delete=models.CASCADE, related_name="waypoints")
     label = models.CharField(verbose_name="Метка", max_length=32, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.route.title} {self.label or '-'} {_('waypoint')} №{self.id}"
 
     class Meta:
         verbose_name = "Путевая точка"
@@ -51,6 +58,9 @@ class Destination(TimestampModelMixin, GeoPointMixin):
     radius = models.PositiveIntegerField(verbose_name="Радиус области входа", help_text="В метрах", default=8)
     description = models.TextField(verbose_name="Описание", null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.route.title} {self.title} {_('destination')}"
+
     class Meta:
         verbose_name = "Пункт назначения"
         verbose_name_plural = "Пункты назначения"
@@ -62,6 +72,9 @@ class Destination(TimestampModelMixin, GeoPointMixin):
 class DestinationPhoto(TimestampModelMixin):
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE, related_name="photos")
     image = models.ImageField(verbose_name="Фотография", upload_to="destination_photos/")
+
+    def __str__(self):
+        return f"{self.destination.title} {_('photo')} {self.image.name}"
 
     class Meta:
         verbose_name = "Фотография точки"
