@@ -11,58 +11,58 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.AlterField(
             model_name='destination',
             name='created_at',
             field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='Создано'),
             preserve_default=False,
         ),
-        migrations.AddField(
+        migrations.AlterField(
             model_name='destination',
             name='latitude',
             field=models.DecimalField(decimal_places=6, default=0, max_digits=9),
             preserve_default=False,
         ),
-        migrations.AddField(
+        migrations.AlterField(
             model_name='destination',
             name='longitude',
             field=models.DecimalField(decimal_places=6, default=0, max_digits=9),
             preserve_default=False,
         ),
-        migrations.AddField(
+        migrations.AlterField(
             model_name='destination',
             name='updated_at',
             field=models.DateTimeField(auto_now=True, verbose_name='Обновлено'),
         ),
-        migrations.AddField(
+        migrations.AlterField(
             model_name='destinationphoto',
             name='created_at',
             field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='Создано'),
             preserve_default=False,
         ),
-        migrations.AddField(
+        migrations.AlterField(
             model_name='destinationphoto',
             name='updated_at',
             field=models.DateTimeField(auto_now=True, verbose_name='Обновлено'),
         ),
-        migrations.AddField(
+        migrations.AlterField(
             model_name='route',
             name='created_at',
             field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='Создано'),
             preserve_default=False,
         ),
-        migrations.AddField(
+        migrations.AlterField(
             model_name='route',
             name='updated_at',
             field=models.DateTimeField(auto_now=True, verbose_name='Обновлено'),
         ),
-        migrations.AddField(
+        migrations.AlterField(
             model_name='waypoint',
             name='created_at',
             field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='Создано'),
             preserve_default=False,
         ),
-        migrations.AddField(
+        migrations.AlterField(
             model_name='waypoint',
             name='updated_at',
             field=models.DateTimeField(auto_now=True, verbose_name='Обновлено'),
