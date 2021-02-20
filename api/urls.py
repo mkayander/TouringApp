@@ -5,6 +5,7 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register('routes', views.RouteViewSet)
+router.register('waypoints', views.WaypointsViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
