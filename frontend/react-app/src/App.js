@@ -1,24 +1,29 @@
 import './App.css';
-import {Map, Marker, Overlay} from 'pigeon-maps';
+import {MapContainer, Marker, Popup, TileLayer} from 'react-leaflet';
+import {useState} from "react";
+import {Container} from "react-bootstrap";
 
-const provider = (x, y, z) => {
-    const s = String.fromCharCode(97 + ((x + y + z) % 3));
-    return `https://${s}.tile.openstreetmap.org/${z}/${x}/${y}.png`;
-};
 
 function App() {
+    const [startPos, editStartPos] = useState([55.4331145, 37.5562910]);
+
     return (
         <div className="App">
             <div className="App-header">
-                <Map provider={provider} defaultCenter={[55.4331145, 37.5562910]} defaultZoom={12} width={1024}
-                     height={720}>
-                    <Marker anchor={[55.4331145, 37.5562910]} payload={1} onClick={({event, anchor, payload}) => {
-                    }}/>
-
-                    {/*<Overlay anchor={[50.879, 4.6997]} offset={[120, 79]}>*/}
-                    {/*    <img src='pigeon.jpg' width={240} height={158} alt=''/>*/}
-                    {/*</Overlay>*/}
-                </Map>
+                <Container>
+                    <MapContainer center={startPos} zoom={13} scrollWheelZoom={true}
+                                  style={{"height": "700px", "width": "100%"}}>
+                        <TileLayer
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={startPos}>
+                            <Popup>
+                                A pretty CSS3 popup. <br/> Easily customizable.
+                            </Popup>
+                        </Marker>
+                    </MapContainer>
+                </Container>
             </div>
         </div>
     );
