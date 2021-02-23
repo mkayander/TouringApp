@@ -2,6 +2,7 @@ import './App.css';
 import {MapContainer, Marker, Popup, TileLayer} from 'react-leaflet';
 import {useState} from "react";
 import {Container} from "react-bootstrap";
+import LocationMarker from "./components/LocationMarker";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                                 A pretty CSS3 popup. <br/> Easily customizable.
                             </Popup>
                         </Marker>
+                        <LocationMarker/>
                     </MapContainer>
                 </Container>
             </div>
