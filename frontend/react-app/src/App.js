@@ -3,6 +3,7 @@ import {MapContainer, Marker, Popup, TileLayer} from 'react-leaflet';
 import {useState} from "react";
 import {Container} from "react-bootstrap";
 import LocationMarker from "./components/LocationMarker";
+import {DrawController} from "./components/DrawController";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                             </Popup>
                         </Marker>
                         <LocationMarker/>
+                        <DrawController/>
                     </MapContainer>
                 </Container>
             </div>
