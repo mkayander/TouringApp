@@ -19,9 +19,9 @@ export const useGeoPoints = (initialValue) => {
         const distance = points.reduce((prev, current, i) => {
             if (i > 0) {
                 console.log(points[i - 1], points[i]);
-                return getDistanceFromLatLonInKm(points[i - 1], points[i]);
+                return prev + getDistanceFromLatLonInKm(points[i - 1], points[i]);
             }
-            return 0;
+            return prev;
         }, 0.0);
 
         console.log(distance);
