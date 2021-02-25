@@ -14,7 +14,7 @@ function App() {
         <Container>
             <h1>React Typescript Leaflet TEST</h1>
             <MapContainer center={startPos} zoom={defaultZoom} scrollWheelZoom={true}
-                          style={{height: "80vh", width: "100%", padding: "100, 100"}}>
+                          style={{height: "80vh", width: "100%"}}>
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
