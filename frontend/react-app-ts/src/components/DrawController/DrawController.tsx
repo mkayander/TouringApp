@@ -1,12 +1,19 @@
 import {CircleMarker, Polyline, useMapEvents} from "react-leaflet";
 import {useGeoPoints} from "../../hooks/useGeoPoints";
 import L from "leaflet";
+import React from "react";
 
-export const DrawController = () => {
+type DrawControllerProps = {
+    enabled: boolean
+}
+
+export const DrawController: React.FC<DrawControllerProps> = ({enabled}) => {
     const {points, addPoint} = useGeoPoints();
 
     const map = useMapEvents({
         click(e) {
+            if (!enabled) return;
+
             console.log(e);
             addPoint(e.latlng);
         },
