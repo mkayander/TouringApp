@@ -1,6 +1,12 @@
 body {
-    padding-top: 2rem;
     background-color: #282c34;
+    height: 100vh;
+}
+
+#root {
+    height: 100%;
+    display: flex;
+    position: relative;
 }
 
 button {
