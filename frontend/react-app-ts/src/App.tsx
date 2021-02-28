@@ -6,6 +6,7 @@ import {ToolButton} from "./components/ToggleButton/ToolButton";
 import pen from "./images/ico/pen1.ico";
 import classNames from "classnames";
 import {MapView} from "./components/MapView/MapView";
+import {Sidebar} from "./components/Sidebar/Sidebar";
 
 function App() {
     const [startPos, editStartPos] = useState(new LatLng(55.4331145, 37.5562910));
@@ -21,13 +22,16 @@ function App() {
     console.log(mapClasses);
 
     return (
-        <Container>
-            <h1>React Typescript Leaflet TEST</h1>
-            <ToolButton label={"Нанести маршрут"} iconUrl={pen} active={drawMode}
-                        callback={() => editDrawMode(!drawMode)}/>
+        <>
+            <Sidebar/>
+            <Container>
+                <h1>React Typescript Leaflet TEST</h1>
+                <ToolButton label={"Нанести маршрут"} iconUrl={pen} active={drawMode}
+                            callback={() => editDrawMode(!drawMode)}/>
 
-            <MapView startPosition={startPos} defaultZoom={defaultZoom} drawEnabled={drawMode}/>
-        </Container>
+                <MapView startPosition={startPos} defaultZoom={defaultZoom} drawEnabled={drawMode}/>
+            </Container>
+        </>
     );
 }
 
