@@ -7,12 +7,12 @@ import pen from "./images/ico/pen1.ico";
 import classNames from "classnames";
 import {MapView} from "./components/MapView/MapView";
 import {Sidebar} from "./components/Sidebar/Sidebar";
+import {TourRoute} from "./api/models/TourRoute";
 
 function App() {
     const [startPos, editStartPos] = useState(new LatLng(55.4331145, 37.5562910));
-    const [defaultZoom, editDefaultZoom] = useState(13);
-
     const [drawMode, editDrawMode] = useState(false);
+    const [selectedTour, setSelectedTour] = useState<TourRoute>()
 
     const mapClasses = classNames({
         "main-map": true,
@@ -29,7 +29,7 @@ function App() {
                 <ToolButton label={"Нанести маршрут"} iconUrl={pen} active={drawMode}
                             callback={() => editDrawMode(!drawMode)}/>
 
-                <MapView startPosition={startPos} defaultZoom={defaultZoom} drawEnabled={drawMode}/>
+                <MapView startPosition={startPos} defaultZoom={13} drawEnabled={drawMode}/>
             </Container>
         </>
     );
