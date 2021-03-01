@@ -1,21 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React, {Dispatch, useEffect, useState} from 'react';
 import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarHeader, SubMenu} from 'react-pro-sidebar';
 import {FaGem, FaRoute} from "react-icons/fa";
 import 'react-pro-sidebar/dist/css/styles.css';
-import {TourRoute} from "../../api/models/TourRoute";
+import {TourRoute, TourRouteResponse} from "../../api/models/TourRoute";
 import api from "../../api/api";
 
 
-export const Sidebar: React.FC = () => {
+export type SidebarProps = {
+    activeRouteId?: number | null,
+    setRouteId: Dispatch<number>
+}
+
+
+export const Sidebar: React.FC<SidebarProps> = ({activeRouteId, setRouteId}) => {
     const [routes, setRoutes] = useState<TourRoute[]>([]);
-    const aasd = Set;
 
     useEffect(() => {
-        api.get<TourRoute[]>("routes/")
+        api.get<TourRouteResponse[]>("routes/")
             .then(value => {
-                console.log(value);
-                setRoutes(value.data);
-                console.log(routes);
+                const result = value.data.map(value => {
+                    return new TourRoute(value);
+                });
+                setRoutes(result);
             })
             .catch(reason => {
                 console.error(reason);
@@ -47,7 +53,8 @@ export const Sidebar: React.FC = () => {
                     <MenuItem icon={<FaGem/>}>Dashboard</MenuItem>
                     <SubMenu title="Маршруты" icon={<FaRoute/>} defaultOpen={true}>
                         {routes.map(route => (
-                            <MenuItem key={route.id}>{route.title}</MenuItem>
+                            <MenuItem key={route.id} active={route.id === activeRouteId}
+                                      onClick={event => setRouteId(route.id)}>{route.title}</MenuItem>
                         ))}
                         {/*<MenuItem>Component 1</MenuItem>*/}
                     </SubMenu>

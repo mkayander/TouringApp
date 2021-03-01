@@ -4,10 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Route} from "react-router-dom";
+import {QueryParamProvider} from 'use-query-params';
 
 ReactDOM.render(
     <React.StrictMode>
-        <App/>
+        <BrowserRouter>
+            <QueryParamProvider ReactRouterRoute={Route}>
+                <App/>
+            </QueryParamProvider>
+        </BrowserRouter>,
     </React.StrictMode>,
     document.getElementById('root')
 );
