@@ -1,31 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarHeader, SubMenu} from 'react-pro-sidebar';
 import {FaGem, FaRoute} from "react-icons/fa";
 import 'react-pro-sidebar/dist/css/styles.css';
-import styled from "styled-components";
+import {TourRoute} from "../../api/models/TourRoute";
+import api from "../../api/api";
 
-type OverlayProps = {
-    active: boolean
-}
-
-const Overlay = styled.div<OverlayProps>`
-  transition: 0.3s;
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  background: #000000;
-  z-index: 1001;
-  opacity: ${({active}) => active ? "0.5" : "0"};
-  pointer-events: ${({active}) => (active ? "auto" : "none")};
-`;
 
 export const Sidebar: React.FC = () => {
-    const [opened, setOpened] = useState(false);
+    const [routes, setRoutes] = useState<TourRoute[]>([]);
+    const aasd = Set;
+
+    useEffect(() => {
+        api.get<TourRoute[]>("routes/")
+            .then(value => {
+                console.log(value);
+                setRoutes(value.data);
+                console.log(routes);
+            })
+            .catch(reason => {
+                console.error(reason);
+            });
+    }, []);
 
     return (
-        <ProSidebar collapsed={false} onClick={() => setOpened(true)}
+        <ProSidebar collapsed={false}
                     breakPoint={"md"}>
             <SidebarHeader>
                 <div
@@ -47,9 +45,11 @@ export const Sidebar: React.FC = () => {
             <SidebarContent>
                 <Menu iconShape="square">
                     <MenuItem icon={<FaGem/>}>Dashboard</MenuItem>
-                    <SubMenu title="Маршруты" icon={<FaRoute/>}>
-                        <MenuItem>Component 1</MenuItem>
-                        <MenuItem>Component 2</MenuItem>
+                    <SubMenu title="Маршруты" icon={<FaRoute/>} defaultOpen={true}>
+                        {routes.map(route => (
+                            <MenuItem key={route.id}>{route.title}</MenuItem>
+                        ))}
+                        {/*<MenuItem>Component 1</MenuItem>*/}
                     </SubMenu>
                 </Menu>
             </SidebarContent>
