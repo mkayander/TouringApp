@@ -1,16 +1,21 @@
 import {useState} from "react";
 import {LatLng} from "leaflet";
+import {Waypoint} from "../api/models/Waypoint";
 
 export const useGeoPoints = (startPoint?: LatLng) => {
-    const [points, editPoints] = useState<LatLng[]>(startPoint ? [startPoint] : []);
+    const [points, setPoints] = useState<LatLng[]>(startPoint ? [startPoint] : []);
 
     const addPoint = (point: LatLng) => {
-        editPoints([...points, point]);
+        setPoints([...points, point]);
     };
 
     const removePoint = (point: LatLng) => {
         const newList = points.filter(value => value === point);
-        editPoints(newList);
+        setPoints(newList);
+    };
+
+    const setFromWaypoints = (waypoints: Waypoint[]) => {
+        setPoints(waypoints.map(value => value.latLng));
     };
 
     const getPoint = (index: number) => points.length > index ? points[index] : null;
@@ -28,5 +33,5 @@ export const useGeoPoints = (startPoint?: LatLng) => {
     //     return distance;
     // };
 
-    return {points, addPoint, removePoint, getPoint};
+    return {points, addPoint, removePoint, getPoint, setFromWaypoints};
 };

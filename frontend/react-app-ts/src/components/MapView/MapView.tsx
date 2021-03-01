@@ -7,6 +7,7 @@ import {LatLng, LeafletEventHandlerFnMap} from "leaflet";
 import "./MapView.css";
 import styled from "styled-components";
 import {MapEventsController} from "../MapEventsController/MapEventsController";
+import {TourRoute} from "../../api/models/TourRoute";
 
 
 enum CursorMode {
@@ -20,7 +21,8 @@ type MapViewProps = {
     startPosition: LatLng,
     defaultZoom: number,
     drawEnabled: boolean,
-    dragging?: boolean
+    dragging?: boolean,
+    route?: TourRoute
 }
 
 
@@ -32,20 +34,20 @@ type OverlayProps = {
 const Overlay = styled.div<OverlayProps>`
   & > div {
     ${({mode}) => {
-    switch (mode) {
+      switch (mode) {
         case CursorMode.Drawing:
-            return "cursor: pointer !important";
+          return "cursor: pointer !important";
 
         case CursorMode.Dragging:
-            return "cursor: grabbing !important";
+          return "cursor: grabbing !important";
 
         default:
-            return "";
-    }
-}}`;
+          return "";
+      }
+    }}`;
 
 
-export const MapView: React.FC<MapViewProps> = ({startPosition, defaultZoom, drawEnabled}) => {
+export const MapView: React.FC<MapViewProps> = ({startPosition, defaultZoom, drawEnabled, route}) => {
     const getCursorMode = (drawing: boolean = drawEnabled): CursorMode => {
         return drawing ? CursorMode.Drawing : CursorMode.Default;
     };
@@ -77,7 +79,7 @@ export const MapView: React.FC<MapViewProps> = ({startPosition, defaultZoom, dra
                     </Popup>
                 </Marker>
                 <LocationMarker/>
-                <DrawController enabled={drawEnabled}/>
+                <DrawController enabled={drawEnabled} waypoints={route?.waypoints || []}/>
 
                 <MapEventsController handlers={handlers}/>
             </MapContainer>

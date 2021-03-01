@@ -1,14 +1,16 @@
 import {CircleMarker, Polyline, useMapEvents} from "react-leaflet";
 import {useGeoPoints} from "../../hooks/useGeoPoints";
 import L from "leaflet";
-import React from "react";
+import React, {useEffect} from "react";
+import {Waypoint} from "../../api/models/Waypoint";
 
 type DrawControllerProps = {
-    enabled: boolean
+    enabled: boolean,
+    waypoints: Waypoint[]
 }
 
-export const DrawController: React.FC<DrawControllerProps> = ({enabled}) => {
-    const {points, addPoint} = useGeoPoints();
+export const DrawController: React.FC<DrawControllerProps> = ({enabled, waypoints}) => {
+    const {points, addPoint, setFromWaypoints} = useGeoPoints();
 
     const map = useMapEvents({
         click(e) {
@@ -18,6 +20,15 @@ export const DrawController: React.FC<DrawControllerProps> = ({enabled}) => {
             addPoint(e.latlng);
         },
     });
+
+    useEffect(() => {
+        setFromWaypoints(waypoints);
+        if (waypoints[0] !== undefined) {
+            map.panTo(waypoints[0].latLng);
+        }
+    }, [waypoints]);
+
+    console.log(waypoints, points);
 
     const color = "red";
 
