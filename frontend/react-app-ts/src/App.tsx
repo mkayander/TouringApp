@@ -19,7 +19,7 @@ const Toolbar = styled.ul`
   flex-flow: row wrap;
   padding: 1rem 0;
 
-  button:not(:first-child) {
+  button:not(:first-child):not(:last-child) {
     margin-left: 1rem;
     margin-right: 1rem;
   }
@@ -64,7 +64,15 @@ function App() {
                                     if (mapInstance && userPosition) mapInstance.panTo(userPosition);
                                 }}/>
 
+                    <ToolButton label={"Сохранить изменения"} icon={<FaSave/>}
+                                onClick={() => {
+                                    if (!selectedTour) return;
 
+                                    const newTour: TourRoute = {...selectedTour};
+                                    newTour.waypoints = routePoints.points.map(value => Waypoint.fromLatLng(selectedTour.id, value));
+                                    setSelectedTour(newTour);
+                                    console.log(newTour);
+                                }}/>
                 </Toolbar>
 
                 <MapView setMapInstance={setMapInstance} setUserPosition={setUserPosition} startPosition={startPos}
