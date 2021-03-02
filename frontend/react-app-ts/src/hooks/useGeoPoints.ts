@@ -2,6 +2,7 @@ import {useState} from "react";
 import {LatLng} from "leaflet";
 import {Waypoint} from "../api/models/Waypoint";
 
+
 export const useGeoPoints = (startPoint?: LatLng) => {
     const [points, setPoints] = useState<LatLng[]>(startPoint ? [startPoint] : []);
 
@@ -35,3 +36,5 @@ export const useGeoPoints = (startPoint?: LatLng) => {
 
     return {points, addPoint, removePoint, getPoint, setFromWaypoints};
 };
+
+export type GeoPointsHook = ReturnType<typeof useGeoPoints>
