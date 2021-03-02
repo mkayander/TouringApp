@@ -21,4 +21,15 @@ export class Waypoint implements TimestampModel {
         this.created_at = new Date(args.created_at);
         this.updated_at = new Date(args.updated_at);
     }
+
+    public static fromLatLng(routeId: number, latLng: LatLng) {
+        return new Waypoint({
+            updated_at: new Date(),
+            created_at: new Date(),
+            label: "",
+            latitude: latLng.lat,
+            longitude: latLng.lng,
+            route: routeId
+        });
+    }
 }
