@@ -1,20 +1,37 @@
 import React, {useEffect, useState} from 'react';
 import {Container} from 'react-bootstrap';
-import {LatLng} from "leaflet";
+import {LatLng, Map as LeafletMap} from "leaflet";
 import './App.css';
 import {ToolButton} from "./components/ToggleButton/ToolButton";
-import pen from "./images/ico/pen1.ico";
 import {MapView} from "./components/MapView/MapView";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {TourRoute, TourRouteResponse} from "./api/models/TourRoute";
 import {NumberParam, useQueryParam} from "use-query-params";
 import api from "./api/api";
+import styled from "styled-components";
+import {FaPen, FaSatelliteDish} from "react-icons/fa";
+
+
+const Toolbar = styled.ul`
+  display: flex;
+  flex-flow: row wrap;
+  padding: 1rem 0;
+
+  button:not(:first-child) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+`;
+
 
 function App() {
     const startPos = new LatLng(55.4331145, 37.5562910);
-    const [drawMode, editDrawMode] = useState(false);
+    const [drawMode, setDrawMode] = useState(false);
     const [routeId, setRouteId] = useQueryParam("routeId", NumberParam);
     const [selectedTour, setSelectedTour] = useState<TourRoute>();
+
+    const [mapInstance, setMapInstance] = useState<LeafletMap>();
+    const [userPosition, setUserPosition] = useState<LatLng>();
 
     useEffect(() => {
         if (routeId === null || routeId === undefined) return;
@@ -29,14 +46,25 @@ function App() {
 
     return (
         <>
-            <Sidebar activeRouteId={routeId} setRouteId={setRouteId}/>
+            <Sidebar activeRouteId={routeId} setRouteId={setRouteId} selectedTour={selectedTour}/>
             <Container>
                 <h1>React Typescript Leaflet TEST</h1>
                 <h6>{selectedTour?.title}</h6>
-                <ToolButton label={"Нанести маршрут"} iconUrl={pen} active={drawMode}
-                            callback={() => editDrawMode(!drawMode)}/>
+                <Toolbar>
+                    <ToolButton label={"Нанести маршрут"} icon={<FaPen/>} active={drawMode}
+                                onClick={() => setDrawMode(!drawMode)}/>
 
-                <MapView startPosition={startPos} defaultZoom={13} drawEnabled={drawMode} route={selectedTour}/>
+                    <ToolButton label={"Моё местоположение"} icon={<FaSatelliteDish/>}
+                                onClick={() => {
+                                    if (mapInstance && userPosition) mapInstance.panTo(userPosition);
+                                }}/>
+
+
+                </Toolbar>
+
+                <MapView setMapInstance={setMapInstance} setUserPosition={setUserPosition} startPosition={startPos}
+                         defaultZoom={13}
+                         drawEnabled={drawMode} route={selectedTour} setSelectedTour={setSelectedTour}/>
             </Container>
         </>
     );
