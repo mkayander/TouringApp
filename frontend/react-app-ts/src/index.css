@@ -1,6 +1,11 @@
+html {
+    overflow-x: hidden;
+}
+
 body {
     background-color: #282c34;
     height: 100vh;
+    color: white;
 }
 
 #root {
@@ -10,14 +15,32 @@ body {
 }
 
 button {
-  background: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 
 h1, h6 {
-    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+input, button {
+    font: inherit;
 }
 
 /*code {*/
