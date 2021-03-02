@@ -9,10 +9,10 @@ interface ILocMarkerProps {
 
 export const LocationMarker: React.FC<ILocMarkerProps> = ({color = "red", callback}) => {
     const [position, setPosition] = useState<LatLng>()
-    const map = useMapEvents({
-        click() {
-            map.locate();
-        },
+    useMapEvents({
+        // click() {
+        //     map.locate();
+        // },
         locationfound(e) {
             setPosition(e.latlng);
         },
