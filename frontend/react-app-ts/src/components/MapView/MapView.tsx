@@ -8,6 +8,7 @@ import "./MapView.css";
 import styled from "styled-components";
 import {MapEventsController} from "../MapEventsController/MapEventsController";
 import {TourRoute} from "../../api/models/TourRoute";
+import {GeoPointsHook} from "../../hooks/useGeoPoints";
 
 
 enum CursorMode {
@@ -45,8 +46,8 @@ type MapViewProps = {
     defaultZoom: number
     drawEnabled: boolean
     dragging?: boolean
-    route?: TourRoute
-    setSelectedTour: Dispatch<TourRoute>
+    tour?: TourRoute
+    routePoints: GeoPointsHook
 }
 
 export const MapView: React.FC<MapViewProps> = ({
@@ -55,8 +56,8 @@ export const MapView: React.FC<MapViewProps> = ({
                                                     startPosition,
                                                     defaultZoom,
                                                     drawEnabled,
-                                                    route,
-                                                    setSelectedTour
+                                                    tour,
+                                                    routePoints
                                                 }) => {
     const getCursorMode = (drawing: boolean = drawEnabled): CursorMode => {
         return drawing ? CursorMode.Drawing : CursorMode.Default;
@@ -99,7 +100,8 @@ export const MapView: React.FC<MapViewProps> = ({
                     </Popup>
                 </Marker>
                 <LocationMarker/>
-                <DrawController enabled={drawEnabled} route={route} setSelectedTour={setSelectedTour} waypoints={route?.waypoints || []}/>
+                <DrawController enabled={drawEnabled} tour={tour} waypoints={tour?.waypoints || []}
+                                routePoints={routePoints}/>
 
                 <MapEventsController handlers={handlers}/>
             </MapContainer>

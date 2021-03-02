@@ -1,19 +1,19 @@
 import {CircleMarker, Polyline, useMapEvents} from "react-leaflet";
-import {useGeoPoints} from "../../hooks/useGeoPoints";
+import {GeoPointsHook} from "../../hooks/useGeoPoints";
 import L, {LatLng} from "leaflet";
-import React, {Dispatch, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Waypoint} from "../../api/models/Waypoint";
 import {TourRoute} from "../../api/models/TourRoute";
 
 type DrawControllerProps = {
     enabled: boolean
     waypoints: Waypoint[]
-    route?: TourRoute
-    setSelectedTour: Dispatch<TourRoute>
+    tour?: TourRoute
+    routePoints: GeoPointsHook
 }
 
-export const DrawController: React.FC<DrawControllerProps> = ({enabled, waypoints, route, setSelectedTour}) => {
-    const {points, addPoint, setFromWaypoints} = useGeoPoints();
+export const DrawController: React.FC<DrawControllerProps> = ({enabled, waypoints, tour, routePoints}) => {
+    const {points, addPoint, setFromWaypoints} = routePoints;
     const [hoverPoint, setHoverPoint] = useState<LatLng | null>();
 
     const map = useMapEvents({
@@ -22,12 +22,6 @@ export const DrawController: React.FC<DrawControllerProps> = ({enabled, waypoint
 
             console.log(e);
             addPoint(e.latlng);
-
-            if (!route) return;
-
-            const newTour = route;
-            newTour.waypoints.push(Waypoint.fromLatLng(route.id, e.latlng))
-            setSelectedTour(newTour)
         },
         mousemove(e) {
             if (!enabled) return;
@@ -40,6 +34,8 @@ export const DrawController: React.FC<DrawControllerProps> = ({enabled, waypoint
     });
 
     useEffect(() => {
+        if (waypoints.length === 0) return;
+
         setFromWaypoints(waypoints);
         if (waypoints[0] !== undefined) {
             map.panTo(waypoints[0].latLng);
@@ -57,8 +53,8 @@ export const DrawController: React.FC<DrawControllerProps> = ({enabled, waypoint
                     <Polyline positions={[points[points.length - 1], hoverPoint]} color={color} opacity={0.5}/>}
                 </>
             ) : null}
-            {route && <Polyline positions={route?.waypoints.map(value => value.latLng)} color={color}
-                                renderer={L.svg({padding: 100})}/>}
+            {tour && <Polyline positions={points} color={color}
+                               renderer={L.svg({padding: 100})}/>}
             {points.length > 1 && <CircleMarker center={points[points.length - 1]} radius={2} color={color}/>}
         </>
     );

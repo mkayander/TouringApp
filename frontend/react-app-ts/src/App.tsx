@@ -9,7 +9,9 @@ import {TourRoute, TourRouteResponse} from "./api/models/TourRoute";
 import {NumberParam, useQueryParam} from "use-query-params";
 import api from "./api/api";
 import styled from "styled-components";
-import {FaPen, FaSatelliteDish} from "react-icons/fa";
+import {FaPen, FaSatelliteDish, FaSave} from "react-icons/fa";
+import {GeoPointsHook, useGeoPoints} from "./hooks/useGeoPoints";
+import {Waypoint} from "./api/models/Waypoint";
 
 
 const Toolbar = styled.ul`
@@ -26,7 +28,10 @@ const Toolbar = styled.ul`
 
 function App() {
     const startPos = new LatLng(55.4331145, 37.5562910);
+
     const [drawMode, setDrawMode] = useState(false);
+    const routePoints: GeoPointsHook = useGeoPoints();
+
     const [routeId, setRouteId] = useQueryParam("routeId", NumberParam);
     const [selectedTour, setSelectedTour] = useState<TourRoute>();
 
@@ -64,7 +69,7 @@ function App() {
 
                 <MapView setMapInstance={setMapInstance} setUserPosition={setUserPosition} startPosition={startPos}
                          defaultZoom={13}
-                         drawEnabled={drawMode} route={selectedTour} setSelectedTour={setSelectedTour}/>
+                         drawEnabled={drawMode} tour={selectedTour} routePoints={routePoints}/>
             </Container>
         </>
     );
