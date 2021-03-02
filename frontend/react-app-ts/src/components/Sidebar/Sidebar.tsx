@@ -7,12 +7,13 @@ import api from "../../api/api";
 
 
 export type SidebarProps = {
-    activeRouteId?: number | null,
+    activeRouteId?: number | null
     setRouteId: Dispatch<number>
+    selectedTour?: TourRoute
 }
 
 
-export const Sidebar: React.FC<SidebarProps> = ({activeRouteId, setRouteId}) => {
+export const Sidebar: React.FC<SidebarProps> = ({activeRouteId, setRouteId, selectedTour}) => {
     const [routes, setRoutes] = useState<TourRoute[]>([]);
 
     useEffect(() => {
@@ -27,6 +28,8 @@ export const Sidebar: React.FC<SidebarProps> = ({activeRouteId, setRouteId}) => 
                 console.error(reason);
             });
     }, []);
+
+    console.log(selectedTour?.waypoints);
 
     return (
         <ProSidebar collapsed={false}
@@ -54,10 +57,17 @@ export const Sidebar: React.FC<SidebarProps> = ({activeRouteId, setRouteId}) => 
                     <SubMenu title="Маршруты" icon={<FaRoute/>} defaultOpen={true}>
                         {routes.map(route => (
                             <MenuItem key={route.id} active={route.id === activeRouteId}
-                                      onClick={event => setRouteId(route.id)}>{route.title}</MenuItem>
+                                      onClick={() => setRouteId(route.id)}>{route.title}</MenuItem>
                         ))}
-                        {/*<MenuItem>Component 1</MenuItem>*/}
                     </SubMenu>
+                </Menu>
+                <Menu>
+                    {selectedTour && (
+                        <>
+                            <MenuItem>Информация о маршруте</MenuItem>
+                            <MenuItem>Кол-во точек: {selectedTour.waypoints.length}</MenuItem>
+                        </>
+                    )}
                 </Menu>
             </SidebarContent>
 
