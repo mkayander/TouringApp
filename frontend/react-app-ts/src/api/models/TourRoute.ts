@@ -15,8 +15,8 @@ export type TourRouteResponse = TimestampModel & {
 
 export class TourRoute implements TimestampModel {
     id: number;
-    created_at: Date;
-    updated_at: Date;
+    created_at?: Date;
+    updated_at?: Date;
     title: string;
     description: string;
     image: URL;
@@ -25,8 +25,8 @@ export class TourRoute implements TimestampModel {
 
     constructor(args: TourRouteResponse) {
         this.id = args.id;
-        this.created_at = new Date(args.created_at);
-        this.updated_at = new Date(args.updated_at);
+        this.created_at = args.created_at && new Date(args.created_at);
+        this.updated_at = args.updated_at && new Date(args.updated_at);
         this.title = args.title;
         this.description = args.description;
         this.image = args.image;
