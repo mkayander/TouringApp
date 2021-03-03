@@ -1,13 +1,14 @@
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 
-from api.mixins import ActionSerializerMixin
 from api.serializers import RouteSerializer, RouteListSerializer, WaypointSerializer
 from routes.models import Route, Waypoint
 
 
 class RouteViewSet(viewsets.GenericViewSet,
                    mixins.RetrieveModelMixin,
+                   mixins.CreateModelMixin,
+                   mixins.UpdateModelMixin,
                    mixins.ListModelMixin):
     queryset = Route.objects.all()
     serializer_class = RouteSerializer
