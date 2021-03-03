@@ -72,6 +72,10 @@ function App() {
                                     newTour.waypoints = routePoints.points.map(value => Waypoint.fromLatLng(selectedTour.id, value));
                                     setSelectedTour(newTour);
                                     console.log(newTour);
+
+                                    api.put(`routes/${newTour.id}/`, TourRoute.packData(newTour))
+                                        .then(value => console.log(value))
+                                        .catch(reason => console.error(reason));
                                 }}/>
                 </Toolbar>
 

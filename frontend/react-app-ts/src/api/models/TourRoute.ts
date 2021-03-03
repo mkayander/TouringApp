@@ -33,7 +33,20 @@ export class TourRoute implements TimestampModel {
         this.waypoints = args.waypoints?.map(value => new Waypoint(value)) || [];
         this.destinations = args.destinations;
     }
+
+    public static packData(instance: TourRoute) {
+        return {
+            id: instance.id,
+            title: instance.title,
+            description: instance.description,
+            image: instance.image,
+            waypoints: instance.waypoints,
+            destinations: instance.destinations
+        };
+    }
 }
+
+export type TourRoutePack = ReturnType<typeof TourRoute.packData>
 
 // export type TourRoute = TimestampModel & {
 //     id: number,
