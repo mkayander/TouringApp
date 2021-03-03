@@ -16,17 +16,62 @@ class DestinationPhotoSerializer(serializers.ModelSerializer):
 
 
 class DestinationSerializer(serializers.ModelSerializer):
-    photos = DestinationPhotoSerializer(many=True, read_only=True)
+    photos = DestinationPhotoSerializer(many=True)
 
     class Meta:
         model = Destination
         fields = ['route', 'longitude', 'latitude', 'title', 'type', 'radius', 'description', 'created_at',
                   'updated_at', 'photos']
+        nested_list_fields = ['photos']
+
+    def create(self, validated_data):
+        print(validated_data)
+        children_data = {}
+        for field_name in self.Meta.nested_list_fields:
+            children_data.update({field_name: validated_data.pop(field_name)})
+
+        instance = self.Meta.model.objects.create(**validated_data)
+
+        for name, data in children_data:
+            self.get_attribute(name).Meta.model.objects.create(**data)
+
+        # children_data = validated_data.pop(self.nested_list_fields[0])
+        # for child_data in children_data:
+        #     self.model.objects.create(**child_data)
+
+        return instance
+
+    def update(self, instance, validated_data):
+        print(validated_data)
+        children_data = {}
+        for field_name in self.Meta.nested_list_fields:
+            children_data.update({field_name: validated_data.pop(field_name)})
+
+        instance = self.Meta.model.objects.update(**validated_data)
+
+        for name, data in children_data:
+            self.get_attribute(name).Meta.model.objects.update_or_create(**data)
+            print(self.get_attribute(name).Meta)
+
+        # children_data = validated_data.pop(self.nested_list_fields[0])
+        # for child_data in children_data:
+        #     self.model.objects.create(**child_data)
+
+        return instance
+
+    # def update(self, instance, validated_data):
+    #     waypoints_data = validated_data.pop('waypoints')
+    #     route = Route.objects.update(**validated_data)
+    #
+    #     for waypoint_data in waypoints_data:
+    #         Waypoint.objects.update_or_create(route=route, **waypoint_data)
+    #
+    #     return route
 
 
 class RouteSerializer(serializers.ModelSerializer):
-    waypoints = WaypointSerializer(many=True)
-    destinations = DestinationSerializer(many=True)
+    waypoints = WaypointSerializer(many=True, required=False)
+    destinations = DestinationSerializer(many=True, required=False)
 
     class Meta:
         model = Route
