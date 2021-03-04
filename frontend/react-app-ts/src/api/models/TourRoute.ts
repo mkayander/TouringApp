@@ -39,9 +39,13 @@ export class TourRoute implements TimestampModel {
             id: instance.id,
             title: instance.title,
             description: instance.description,
-            image: instance.image,
+            // image: instance.image,
             waypoints: instance.waypoints,
-            destinations: instance.destinations
+            destinations: instance.destinations?.map(destination => {
+                destination.photos.map(photo => {
+                    // delete photo.image
+                })
+            })
         };
     }
 }
