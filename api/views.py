@@ -16,6 +16,10 @@ class RouteViewSet(viewsets.GenericViewSet,
         'list': RouteListSerializer,
     }
 
+    def update(self, request, *args, **kwargs):
+        print("View data:", dict(request.data))
+        return super().update(request, *args, **kwargs)
+
     def get_serializer_class(self):
         try:
             return self.serializer_action_classes[self.action]
