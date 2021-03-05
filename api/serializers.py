@@ -6,7 +6,7 @@ from routes.models import Route, Waypoint, Destination, DestinationPhoto
 class WaypointSerializer(serializers.ModelSerializer):
     class Meta:
         model = Waypoint
-        fields = ['id', 'route', 'label', 'longitude', 'latitude', 'created_at', 'updated_at']
+        fields = ['pk', 'route', 'label', 'longitude', 'latitude', 'created_at', 'updated_at']
 
 
 class DestinationPhotoSerializer(serializers.ModelSerializer):
@@ -30,9 +30,10 @@ class RouteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Route
-        fields = ['id', 'title', 'description', 'image', 'created_at', 'updated_at', 'waypoints', 'destinations']
+        fields = ['pk', 'title', 'description', 'image', 'created_at', 'updated_at', 'waypoints', 'destinations']
 
     def create(self, validated_data):
+        print(dict(validated_data))
         waypoints_data = validated_data.pop('waypoints')
         destinations_data = validated_data.pop('destinations')
         route = Route.objects.create(**validated_data)
@@ -46,17 +47,24 @@ class RouteSerializer(serializers.ModelSerializer):
         return route
 
     def update(self, instance, validated_data):
-        waypoints_data = validated_data.pop('waypoints')
-        destinations_data = validated_data.pop('destinations')
-        route = Route.objects.update(**validated_data)
+        print(dict(validated_data))
+        waypoints_list = validated_data.pop('waypoints')
+        destinations_list = validated_data.pop('destinations')
 
-        for waypoint_data in waypoints_data:
-            Waypoint.objects.update_or_create(route=route, **waypoint_data)
+        # The default update() implementation but without m2m fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
 
-        for destination_data in destinations_data:
-            Destination.objects.update_or_create(route=route, **destination_data)
+        instance.save()
 
-        return route
+        for waypoint_data in waypoints_list:
+            print("Waypoint data: ", dict(waypoint_data))
+            Waypoint.objects.update_or_create(**waypoint_data)
+
+        for destination_data in destinations_list:
+            Destination.objects.update_or_create(**destination_data)
+
+        return instance
 
 
 class RouteListSerializer(serializers.ModelSerializer):
