@@ -68,12 +68,12 @@ function App() {
                                 onClick={() => {
                                     if (!selectedTour) return;
 
-                                    const newTour: TourRoute = {...selectedTour};
-                                    newTour.waypoints = routePoints.points.map(value => Waypoint.fromLatLng(selectedTour.id, value));
+                                    const newTour: TourRoute = selectedTour.clone();
+                                    newTour.waypoints = routePoints.points.map(value => Waypoint.fromLatLng(selectedTour.pk, value));
                                     setSelectedTour(newTour);
                                     console.log(newTour);
 
-                                    api.put(`routes/${newTour.id}/`, TourRoute.packData(newTour))
+                                    api.patch(`routes/${newTour.pk}/`, selectedTour.packData())
                                         .then(value => console.log(value))
                                         .catch(reason => console.error(reason));
                                 }}/>

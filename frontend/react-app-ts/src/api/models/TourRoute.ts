@@ -1,30 +1,31 @@
 import {TimestampModel} from "./mixins/TimestampModel";
 import {Waypoint, WaypointType} from "./Waypoint";
 import {Destination} from "../Destination";
+import {PackableApiModel} from "./mixins/PackableApiModel";
 
 
 export type TourRouteResponse = TimestampModel & {
-    id: number,
+    pk: number,
     title: string,
     description: string,
-    image: URL,
+    image?: URL,
     waypoints?: WaypointType[]
     destinations?: Destination[]
 }
 
 
-export class TourRoute implements TimestampModel {
-    id: number;
+export class TourRoute implements TimestampModel, PackableApiModel {
+    pk: number;
     created_at?: Date;
     updated_at?: Date;
     title: string;
     description: string;
-    image: URL;
+    image?: URL;
     waypoints: Waypoint[];
     destinations?: Destination[];
 
     constructor(args: TourRouteResponse) {
-        this.id = args.id;
+        this.pk = args.pk;
         this.created_at = args.created_at && new Date(args.created_at);
         this.updated_at = args.updated_at && new Date(args.updated_at);
         this.title = args.title;
@@ -34,23 +35,24 @@ export class TourRoute implements TimestampModel {
         this.destinations = args.destinations;
     }
 
-    public static packData(instance: TourRoute) {
+    public packData(): TourRouteResponse {
         return {
-            id: instance.id,
-            title: instance.title,
-            description: instance.description,
-            // image: instance.image,
-            waypoints: instance.waypoints,
-            destinations: instance.destinations?.map(destination => {
-                destination.photos.map(photo => {
-                    // delete photo.image
-                })
+            pk: this.pk,
+            title: this.title,
+            description: this.description,
+            // image: this.image,
+            waypoints: this.waypoints.map(value => value.packData()),
+            destinations: this.destinations?.map(destination => {
+                delete destination.photos;
+                return destination;
             })
         };
     }
-}
 
-export type TourRoutePack = ReturnType<typeof TourRoute.packData>
+    public clone() {
+        return new TourRoute(this.packData())
+    }
+}
 
 // export type TourRoute = TimestampModel & {
 //     id: number,

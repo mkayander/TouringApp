@@ -3,11 +3,13 @@ import {LatLngModel} from "./mixins/LatLngModel";
 import {LatLng} from "leaflet";
 
 export type WaypointType = TimestampModel & LatLngModel & {
-    route: number,
-    label: string,
+    pk?: number
+    route: number
+    label: string
 }
 
 export class Waypoint implements TimestampModel {
+    pk?: number;
     route: number;
     label: string;
     latLng: LatLng;
@@ -15,6 +17,7 @@ export class Waypoint implements TimestampModel {
     updated_at?: Date;
 
     constructor(args: WaypointType) {
+        this.pk = args.pk;
         this.route = args.route;
         this.label = args.label;
         this.latLng = new LatLng(args.latitude, args.longitude);
@@ -29,5 +32,15 @@ export class Waypoint implements TimestampModel {
             longitude: latLng.lng,
             route: routeId
         });
+    }
+
+    public packData() {
+        return {
+            pk: this.pk,
+            route: this.route,
+            label: this.label,
+            latitude: this.latLng.lat,
+            longitude: this.latLng.lng,
+        };
     }
 }
