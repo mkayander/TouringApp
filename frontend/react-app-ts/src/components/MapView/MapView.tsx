@@ -8,7 +8,7 @@ import "./MapView.css";
 import styled from "styled-components";
 import {MapEventsController} from "../MapEventsController/MapEventsController";
 import {TourRoute} from "../../api/models/TourRoute";
-import {GeoPointsHook} from "../../hooks/useGeoPoints";
+import {GeoPointsHook} from "../../hooks/useWaypoints";
 
 
 enum CursorMode {

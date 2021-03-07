@@ -10,8 +10,7 @@ import {NumberParam, useQueryParam} from "use-query-params";
 import api from "./api/api";
 import styled from "styled-components";
 import {FaPen, FaSatelliteDish, FaSave} from "react-icons/fa";
-import {GeoPointsHook, useGeoPoints} from "./hooks/useGeoPoints";
-import {Waypoint} from "./api/models/Waypoint";
+import {GeoPointsHook, useWaypoints} from "./hooks/useWaypoints";
 
 
 const Toolbar = styled.ul`
@@ -30,7 +29,7 @@ function App() {
     const startPos = new LatLng(55.4331145, 37.5562910);
 
     const [drawMode, setDrawMode] = useState(false);
-    const routePoints: GeoPointsHook = useGeoPoints();
+    const pointsHook: GeoPointsHook = useWaypoints();
 
     const [routeId, setRouteId] = useQueryParam("routeId", NumberParam);
     const [selectedTour, setSelectedTour] = useState<TourRoute>();
@@ -43,7 +42,7 @@ function App() {
 
         api.get<TourRouteResponse>(`routes/${routeId}/`)
             .then(value => {
-                setSelectedTour(new TourRoute(value.data));
+                setSelectedTour(TourRoute.fromApiResponse(value.data));
             });
     }, [routeId]);
 
@@ -69,11 +68,11 @@ function App() {
                                     if (!selectedTour) return;
 
                                     const newTour: TourRoute = selectedTour.clone();
-                                    newTour.waypoints = routePoints.points.map(value => Waypoint.fromLatLng(selectedTour.pk, value));
+                                    newTour.waypoints = pointsHook.points;
                                     setSelectedTour(newTour);
                                     console.log(newTour);
 
-                                    api.patch(`routes/${newTour.pk}/`, selectedTour.packData())
+                                    api.patch(`routes/${newTour.pk}/`, newTour.packData())
                                         .then(value => console.log(value))
                                         .catch(reason => console.error(reason));
                                 }}/>
@@ -81,7 +80,7 @@ function App() {
 
                 <MapView setMapInstance={setMapInstance} setUserPosition={setUserPosition} startPosition={startPos}
                          defaultZoom={13}
-                         drawEnabled={drawMode} tour={selectedTour} routePoints={routePoints}/>
+                         drawEnabled={drawMode} tour={selectedTour} routePoints={pointsHook}/>
             </Container>
         </>
     );
