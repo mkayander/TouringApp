@@ -56,8 +56,8 @@ export const Sidebar: React.FC<SidebarProps> = ({activeRouteId, setRouteId, sele
                     <MenuItem icon={<FaGem/>}>Dashboard</MenuItem>
                     <SubMenu title="Маршруты" icon={<FaRoute/>} defaultOpen={true}>
                         {routes.map(route => (
-                            <MenuItem key={route.id} active={route.id === activeRouteId}
-                                      onClick={() => setRouteId(route.id)}>{route.title}</MenuItem>
+                            <MenuItem key={route.pk} active={route.pk === activeRouteId}
+                                      onClick={() => setRouteId(route.pk)}>{route.title}</MenuItem>
                         ))}
                     </SubMenu>
                 </Menu>
