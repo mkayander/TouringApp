@@ -4,13 +4,13 @@ import {LatLng} from "leaflet";
 
 export type WaypointType = TimestampModel & LatLngModel & {
     pk?: number
-    route: number
+    route?: number
     label: string
 }
 
 export class Waypoint implements TimestampModel {
     pk?: number;
-    route: number;
+    route?: number;
     label: string;
     latLng: LatLng;
     created_at?: Date;
@@ -25,8 +25,9 @@ export class Waypoint implements TimestampModel {
         this.updated_at = args.updated_at && new Date(args.updated_at);
     }
 
-    public static fromLatLng(routeId: number, latLng: LatLng, label: string = "") {
+    public static fromLatLng(latLng: LatLng, label: string = "", routeId?: number, pk?: number) {
         return new Waypoint({
+            pk: pk,
             label: label,
             latitude: latLng.lat,
             longitude: latLng.lng,
@@ -34,10 +35,20 @@ export class Waypoint implements TimestampModel {
         });
     }
 
-    public packData() {
-        return {
+    public clone() {
+        return new Waypoint({
             pk: this.pk,
             route: this.route,
+            label: this.label,
+            latitude: this.latLng.lat,
+            longitude: this.latLng.lng
+        });
+    }
+
+    public packData(routeId?: number) {
+        return {
+            pk: this.pk,
+            route: routeId || this.route,
             label: this.label,
             latitude: this.latLng.lat,
             longitude: this.latLng.lng,

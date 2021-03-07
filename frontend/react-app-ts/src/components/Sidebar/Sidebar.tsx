@@ -20,7 +20,7 @@ export const Sidebar: React.FC<SidebarProps> = ({activeRouteId, setRouteId, sele
         api.get<TourRouteResponse[]>("routes/")
             .then(value => {
                 const result = value.data.map(value => {
-                    return new TourRoute(value);
+                    return TourRoute.fromApiResponse(value);
                 });
                 setRoutes(result);
             })
@@ -29,7 +29,7 @@ export const Sidebar: React.FC<SidebarProps> = ({activeRouteId, setRouteId, sele
             });
     }, []);
 
-    console.log(selectedTour?.waypoints);
+    console.log(routes);
 
     return (
         <ProSidebar collapsed={false}
