@@ -13,8 +13,8 @@ class TimestampModelMixin(models.Model):
 
 
 class GeoPointMixin(models.Model):
-    longitude = models.DecimalField(verbose_name="Долгота", max_digits=9, decimal_places=6)
-    latitude = models.DecimalField(verbose_name="Широта", max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(verbose_name="Долгота", max_digits=17, decimal_places=15)
+    latitude = models.DecimalField(verbose_name="Широта", max_digits=17, decimal_places=15)
 
     class Meta:
         abstract = True
