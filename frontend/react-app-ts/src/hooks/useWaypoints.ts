@@ -30,4 +30,4 @@ export const useWaypoints = () => {
     return {points, setPoints, addPoint, removePoint, getPoint, lastPoint, addFromLatLng, getLatLngList};
 };
 
-export type GeoPointsHook = ReturnType<typeof useWaypoints>
+export type WaypointsHook = ReturnType<typeof useWaypoints>
