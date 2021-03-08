@@ -48,6 +48,7 @@ class Waypoint(TimestampModelMixin, GeoPointMixin):
         constraints = [
             models.UniqueConstraint(fields=["route", "longitude", "latitude"], name="unique_waypoint")
         ]
+        ordering = ['pk']
 
 
 class Destination(TimestampModelMixin, GeoPointMixin):
