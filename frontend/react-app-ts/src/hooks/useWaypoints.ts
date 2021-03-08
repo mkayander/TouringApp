@@ -27,11 +27,7 @@ export const useWaypoints = () => {
         return points.map(value => value.latLng);
     };
 
-    const setFromWaypoints = (waypoints: Waypoint[]) => {
-        setPoints(waypoints);
-    };
-
-    return {points, addPoint, removePoint, getPoint, lastPoint, addFromLatLng, getLatLngList, setFromWaypoints};
+    return {points, setPoints, addPoint, removePoint, getPoint, lastPoint, addFromLatLng, getLatLngList};
 };
 
 export type GeoPointsHook = ReturnType<typeof useWaypoints>
