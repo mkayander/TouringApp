@@ -7,8 +7,9 @@ import {LatLng, LeafletEventHandlerFnMap, Map as LeafletMap} from "leaflet";
 import "./MapView.css";
 import styled from "styled-components";
 import {MapEventsController} from "../MapEventsController/MapEventsController";
-import {TourRoute} from "../../api/models/TourRoute";
-import {GeoPointsHook} from "../../hooks/useWaypoints";
+import {WaypointsHook} from "../../hooks/useWaypoints";
+import {TourRouteHook} from "../../hooks/useTourRoute";
+import {EditTool, EditToolsHook} from "../../hooks/useEditTools";
 
 
 enum CursorMode {
@@ -16,6 +17,17 @@ enum CursorMode {
     Drawing,
     Dragging
 }
+
+
+const getCursorMode = (toolsHook: EditToolsHook): CursorMode => {
+    switch (toolsHook.activeTool) {
+        case EditTool.Draw:
+            return CursorMode.Drawing;
+
+        default:
+            return CursorMode.Default;
+    }
+};
 
 
 type OverlayProps = {
@@ -44,10 +56,10 @@ type MapViewProps = {
     setUserPosition: Dispatch<LatLng>
     startPosition: LatLng
     defaultZoom: number
-    drawEnabled: boolean
+    toolsHook: EditToolsHook
     dragging?: boolean
-    tour?: TourRoute
-    routePoints: GeoPointsHook
+    routeHook: TourRouteHook
+    waypointsHook: WaypointsHook
 }
 
 export const MapView: React.FC<MapViewProps> = ({
@@ -55,24 +67,21 @@ export const MapView: React.FC<MapViewProps> = ({
                                                     setUserPosition,
                                                     startPosition,
                                                     defaultZoom,
-                                                    drawEnabled,
-                                                    tour,
-                                                    routePoints
+                                                    toolsHook,
+                                                    routeHook,
+                                                    waypointsHook
                                                 }) => {
-    const getCursorMode = (drawing: boolean = drawEnabled): CursorMode => {
-        return drawing ? CursorMode.Drawing : CursorMode.Default;
-    };
 
-    const [cursorMode, editCursorMode] = useState<CursorMode>(CursorMode.Default);
+    const [cursorMode, setCursorMode] = useState<CursorMode>(CursorMode.Default);
 
-    useEffect(() => editCursorMode(getCursorMode()), [drawEnabled]);
+    useEffect(() => setCursorMode(getCursorMode(toolsHook)), [toolsHook.activeTool]);
 
     const handlers: LeafletEventHandlerFnMap = {
         dragstart() {
-            editCursorMode(CursorMode.Dragging);
+            setCursorMode(CursorMode.Dragging);
         },
         dragend() {
-            editCursorMode(getCursorMode());
+            setCursorMode(getCursorMode(toolsHook));
         },
         locationfound(e) {
             setUserPosition(e.latlng);
@@ -100,10 +109,11 @@ export const MapView: React.FC<MapViewProps> = ({
                     </Popup>
                 </Marker>
                 <LocationMarker/>
-                <DrawController enabled={drawEnabled} tour={tour} waypoints={tour?.waypoints || []}
-                                routePoints={routePoints}/>
+                <DrawController enabled={toolsHook.activeTool === EditTool.Draw} routeHook={routeHook}
+                                waypointsHook={waypointsHook}/>
 
-                <MapEventsController handlers={handlers}/>
+                <MapEventsController handlers={handlers} activeRouteId={routeHook.routeId}
+                                     waypointsHook={waypointsHook}/>
             </MapContainer>
         </Overlay>
     );

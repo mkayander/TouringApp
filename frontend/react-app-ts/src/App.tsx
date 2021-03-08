@@ -6,11 +6,12 @@ import {ToolButton} from "./components/ToggleButton/ToolButton";
 import {MapView} from "./components/MapView/MapView";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {TourRoute, TourRouteResponse} from "./api/models/TourRoute";
-import {NumberParam, useQueryParam} from "use-query-params";
 import api from "./api/api";
 import styled from "styled-components";
 import {FaPen, FaSatelliteDish, FaSave} from "react-icons/fa";
-import {GeoPointsHook, useWaypoints} from "./hooks/useWaypoints";
+import {useWaypoints, WaypointsHook} from "./hooks/useWaypoints";
+import {TourRouteHook, useTourRoute} from "./hooks/useTourRoute";
+import {EditTool, useEditTools} from "./hooks/useEditTools";
 
 
 const Toolbar = styled.ul`
@@ -28,11 +29,14 @@ const Toolbar = styled.ul`
 function App() {
     const startPos = new LatLng(55.4331145, 37.5562910);
 
-    const [drawMode, setDrawMode] = useState(false);
-    const pointsHook: GeoPointsHook = useWaypoints();
+    const tools = useEditTools();
 
-    const [routeId, setRouteId] = useQueryParam("routeId", NumberParam);
-    const [selectedTour, setSelectedTour] = useState<TourRoute>();
+    // Waypoints hook
+    const pointsHook: WaypointsHook = useWaypoints();
+
+    // Tour route hook
+    const routeHook: TourRouteHook = useTourRoute();
+    const {routeId, activeRoute, setActiveRoute} = routeHook;
 
     const [mapInstance, setMapInstance] = useState<LeafletMap>();
     const [userPosition, setUserPosition] = useState<LatLng>();
@@ -42,21 +46,21 @@ function App() {
 
         api.get<TourRouteResponse>(`routes/${routeId}/`)
             .then(value => {
-                setSelectedTour(TourRoute.fromApiResponse(value.data));
+                setActiveRoute(TourRoute.fromApiResponse(value.data));
             });
     }, [routeId]);
 
-    console.log(selectedTour);
+    console.log(activeRoute);
 
     return (
         <>
-            <Sidebar activeRouteId={routeId} setRouteId={setRouteId} selectedTour={selectedTour}/>
+            <Sidebar routeHook={routeHook}/>
             <Container>
                 <h1>React Typescript Leaflet TEST</h1>
-                <h6>{selectedTour?.title}</h6>
+                <h6>{activeRoute?.title}</h6>
                 <Toolbar>
-                    <ToolButton label={"Нанести маршрут"} icon={<FaPen/>} active={drawMode}
-                                onClick={() => setDrawMode(!drawMode)}/>
+                    <ToolButton label={"Нанести маршрут"} icon={<FaPen/>} active={tools.activeTool === EditTool.Draw}
+                                onClick={() => tools.toggleTool(EditTool.Draw)}/>
 
                     <ToolButton label={"Моё местоположение"} icon={<FaSatelliteDish/>}
                                 onClick={() => {
@@ -65,11 +69,11 @@ function App() {
 
                     <ToolButton label={"Сохранить изменения"} icon={<FaSave/>}
                                 onClick={() => {
-                                    if (!selectedTour) return;
+                                    if (!activeRoute) return;
 
-                                    const newTour: TourRoute = selectedTour.clone();
+                                    const newTour: TourRoute = activeRoute.clone();
                                     newTour.waypoints = pointsHook.points;
-                                    setSelectedTour(newTour);
+                                    setActiveRoute(newTour);
                                     console.log(newTour);
 
                                     api.patch(`routes/${newTour.pk}/`, newTour.packData())
@@ -80,7 +84,8 @@ function App() {
 
                 <MapView setMapInstance={setMapInstance} setUserPosition={setUserPosition} startPosition={startPos}
                          defaultZoom={13}
-                         drawEnabled={drawMode} tour={selectedTour} routePoints={pointsHook}/>
+                         toolsHook={tools} routeHook={routeHook}
+                         waypointsHook={pointsHook}/>
             </Container>
         </>
     );

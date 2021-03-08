@@ -4,16 +4,17 @@ import {FaGem, FaRoute} from "react-icons/fa";
 import 'react-pro-sidebar/dist/css/styles.css';
 import {TourRoute, TourRouteResponse} from "../../api/models/TourRoute";
 import api from "../../api/api";
+import {TourRouteHook} from "../../hooks/useTourRoute";
 
 
 export type SidebarProps = {
-    activeRouteId?: number | null
-    setRouteId: Dispatch<number>
-    selectedTour?: TourRoute
+    routeHook: TourRouteHook
 }
 
 
-export const Sidebar: React.FC<SidebarProps> = ({activeRouteId, setRouteId, selectedTour}) => {
+export const Sidebar: React.FC<SidebarProps> = ({routeHook}) => {
+    const {routeId, setRouteId, activeRoute} = routeHook;
+
     const [routes, setRoutes] = useState<TourRoute[]>([]);
 
     useEffect(() => {
@@ -56,16 +57,16 @@ export const Sidebar: React.FC<SidebarProps> = ({activeRouteId, setRouteId, sele
                     <MenuItem icon={<FaGem/>}>Dashboard</MenuItem>
                     <SubMenu title="Маршруты" icon={<FaRoute/>} defaultOpen={true}>
                         {routes.map(route => (
-                            <MenuItem key={route.pk} active={route.pk === activeRouteId}
+                            <MenuItem key={route.pk} active={route.pk === routeId}
                                       onClick={() => setRouteId(route.pk)}>{route.title}</MenuItem>
                         ))}
                     </SubMenu>
                 </Menu>
                 <Menu>
-                    {selectedTour && (
+                    {activeRoute && (
                         <>
                             <MenuItem>Информация о маршруте</MenuItem>
-                            <MenuItem>Кол-во точек: {selectedTour.waypoints.length}</MenuItem>
+                            <MenuItem>Кол-во точек: {activeRoute.waypoints.length}</MenuItem>
                         </>
                     )}
                 </Menu>
