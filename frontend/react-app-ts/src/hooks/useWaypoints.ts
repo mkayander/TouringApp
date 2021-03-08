@@ -3,8 +3,8 @@ import {Waypoint} from "../api/models/Waypoint";
 import {LatLng} from "leaflet";
 
 
-export const useWaypoints = (startPoint?: Waypoint) => {
-    const [points, setPoints] = useState<Waypoint[]>(startPoint ? [startPoint] : []);
+export const useWaypoints = () => {
+    const [points, setPoints] = useState<Waypoint[]>([]);
 
     const addPoint = (point: Waypoint) => {
         setPoints([...points, point]);
