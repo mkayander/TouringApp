@@ -13,7 +13,7 @@ export const useEditTools = () => {
         if (activeTool === tool) {
             setActiveTool(null);
         } else {
-            setActiveTool(EditTool.Draw);
+            setActiveTool(tool);
         }
     };
 
