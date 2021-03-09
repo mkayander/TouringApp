@@ -8,7 +8,7 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 import {TourRoute, TourRouteResponse} from "./api/models/TourRoute";
 import api from "./api/api";
 import styled from "styled-components";
-import {FaPen, FaSatelliteDish, FaSave} from "react-icons/fa";
+import {FaArrowAltCircleDown, FaPen, FaRemoveFormat, FaSatelliteDish, FaSave} from "react-icons/fa";
 import {useWaypoints, WaypointsHook} from "./hooks/useWaypoints";
 import {TourRouteHook, useTourRoute} from "./hooks/useTourRoute";
 import {EditTool, useEditTools} from "./hooks/useEditTools";
@@ -17,7 +17,7 @@ import {EditTool, useEditTools} from "./hooks/useEditTools";
 const Toolbar = styled.ul`
   display: flex;
   flex-flow: row wrap;
-  padding: 1rem 0;
+  padding-bottom: 1rem;
 
   button:not(:first-child):not(:last-child) {
     margin-left: 1rem;
@@ -63,29 +63,48 @@ function App() {
             <Container>
                 <h1>React Typescript Leaflet TEST</h1>
                 <h6>{activeRoute?.title}</h6>
-                <Toolbar>
-                    <ToolButton label={"Нанести маршрут"} icon={<FaPen/>} active={tools.activeTool === EditTool.Draw}
-                                onClick={() => tools.toggleTool(EditTool.Draw)}/>
 
-                    <ToolButton label={"Моё местоположение"} icon={<FaSatelliteDish/>}
-                                onClick={() => {
-                                    if (mapInstance && userPosition) mapInstance.panTo(userPosition);
-                                }}/>
+                <div style={{display: "flex", flexFlow: "row wrap"}}>
 
-                    <ToolButton label={"Сохранить изменения"} icon={<FaSave/>}
-                                onClick={() => {
-                                    if (!activeRoute) return;
 
-                                    const newTour: TourRoute = activeRoute.clone();
-                                    newTour.waypoints = pointsHook.points;
-                                    setActiveRoute(newTour);
-                                    console.log(newTour);
+                    <Toolbar>
+                        <ToolButton label={"Нанести маршрут"} icon={<FaPen/>}
+                                    active={tools.activeTool === EditTool.Draw}
+                                    onClick={() => tools.toggleTool(EditTool.Draw)}/>
 
-                                    api.patch(`routes/${newTour.pk}/`, newTour.packData())
-                                        .then(value => console.log(value))
-                                        .catch(reason => console.error(reason));
-                                }}/>
-                </Toolbar>
+                        <ToolButton label={"Удалить точки маршрута"} icon={<FaRemoveFormat/>}
+                                    active={tools.activeTool === EditTool.Delete}
+                                    onClick={() => tools.toggleTool(EditTool.Delete)}/>
+
+                        <ToolButton label={"Вставить точки маршрута"} icon={<FaArrowAltCircleDown/>}
+                                    active={tools.activeTool === EditTool.Insert}
+                                    onClick={() => tools.toggleTool(EditTool.Insert)}/>
+
+                    </Toolbar>
+
+                    <Toolbar style={{justifyContent: "end", marginLeft: "auto"}}>
+                        <ToolButton label={"Моё местоположение"} icon={<FaSatelliteDish/>}
+                                    style={{margin: "0 1rem"}}
+                                    onClick={() => {
+                                        if (mapInstance && userPosition) mapInstance.panTo(userPosition);
+                                    }}/>
+
+                        <ToolButton label={"Сохранить изменения"} icon={<FaSave/>}
+                                    onClick={() => {
+                                        if (!activeRoute) return;
+
+                                        const newTour: TourRoute = activeRoute.clone();
+                                        newTour.waypoints = pointsHook.points;
+                                        setActiveRoute(newTour);
+                                        console.log(newTour);
+
+                                        api.patch(`routes/${newTour.pk}/`, newTour.packData())
+                                            .then(value => console.log(value))
+                                            .catch(reason => console.error(reason));
+                                    }}/>
+                    </Toolbar>
+
+                </div>
 
                 <MapView setMapInstance={setMapInstance} setUserPosition={setUserPosition} startPosition={startPos}
                          defaultZoom={13}
