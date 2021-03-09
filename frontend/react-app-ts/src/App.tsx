@@ -46,7 +46,12 @@ function App() {
 
         api.get<TourRouteResponse>(`routes/${routeId}/`)
             .then(value => {
-                setActiveRoute(TourRoute.fromApiResponse(value.data));
+                const newRoute = TourRoute.fromApiResponse(value.data);
+                setActiveRoute(newRoute);
+
+                if (newRoute.waypoints[0]) {
+                    mapInstance?.panTo(newRoute.waypoints[0].latLng);
+                }
             });
     }, [routeId]);
 
