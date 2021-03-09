@@ -21,6 +21,8 @@ enum CursorMode {
 
 const getCursorMode = (toolsHook: EditToolsHook): CursorMode => {
     switch (toolsHook.activeTool) {
+        case EditTool.Delete:
+        case EditTool.Insert:
         case EditTool.Draw:
             return CursorMode.Drawing;
 
@@ -109,7 +111,7 @@ export const MapView: React.FC<MapViewProps> = ({
                     </Popup>
                 </Marker>
                 <LocationMarker/>
-                <DrawController enabled={toolsHook.activeTool === EditTool.Draw} routeHook={routeHook}
+                <DrawController toolsHook={toolsHook} routeHook={routeHook}
                                 waypointsHook={waypointsHook}/>
 
                 <MapEventsController handlers={handlers} activeRouteId={routeHook.routeId}
