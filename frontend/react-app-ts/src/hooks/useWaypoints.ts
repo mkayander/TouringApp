@@ -10,8 +10,8 @@ export const useWaypoints = () => {
         setPoints([...points, point]);
     };
 
-    const removePoint = (point: Waypoint) => {
-        const newList = points.filter(value => value === point);
+    const removeWaypoint = (point: Waypoint) => {
+        const newList = points.filter(value => value !== point);
         setPoints(newList);
     };
 
@@ -19,15 +19,21 @@ export const useWaypoints = () => {
 
     const lastPoint = () => points[points.length - 1];
 
-    const addFromLatLng = (latLng: LatLng) => {
+    const addPos = (latLng: LatLng) => {
         setPoints([...points, Waypoint.fromLatLng(latLng)]);
+    };
+
+    const insertPos = (latLng: LatLng, index: number) => {
+        const newArray = [...points];
+        newArray.splice(index, 0, Waypoint.fromLatLng(latLng));
+        setPoints(newArray);
     };
 
     const getLatLngList = () => {
         return points.map(value => value.latLng);
     };
 
-    return {points, setPoints, addPoint, removePoint, getPoint, lastPoint, addFromLatLng, getLatLngList};
+    return {points, setPoints, addPoint, removeWaypoint, getPoint, lastPoint, addPos, insertPos, getLatLngList};
 };
 
 export type WaypointsHook = ReturnType<typeof useWaypoints>
