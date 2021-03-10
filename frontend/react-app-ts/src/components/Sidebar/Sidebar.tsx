@@ -1,4 +1,4 @@
-import React, {Dispatch, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarHeader, SubMenu} from 'react-pro-sidebar';
 import {FaGem, FaRoute} from "react-icons/fa";
 import 'react-pro-sidebar/dist/css/styles.css';
