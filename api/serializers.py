@@ -7,6 +7,7 @@ class WaypointSerializer(serializers.ModelSerializer):
     class Meta:
         model = Waypoint
         fields = ['pk', 'route', 'label', 'longitude', 'latitude', 'created_at', 'updated_at']
+        extra_kwargs = {'pk': {'read_only': False}}
 
 
 class DestinationPhotoSerializer(serializers.ModelSerializer):
