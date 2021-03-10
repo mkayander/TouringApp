@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 
@@ -17,7 +19,8 @@ class RouteViewSet(viewsets.GenericViewSet,
     }
 
     def update(self, request, *args, **kwargs):
-        print("View data:", dict(request.data))
+        print("View data:")
+        pprint(dict(request.data))
         return super().update(request, *args, **kwargs)
 
     def get_serializer_class(self):

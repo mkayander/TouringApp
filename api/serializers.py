@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from rest_framework import serializers
 
 from routes.models import Route, Waypoint, Destination, DestinationPhoto
@@ -7,6 +9,16 @@ class WaypointSerializer(serializers.ModelSerializer):
     class Meta:
         model = Waypoint
         fields = ['pk', 'route', 'index', 'label', 'longitude', 'latitude', 'created_at', 'updated_at']
+
+    def validate(self, attrs):
+        # print("\nWaypoint validate attrs:")
+        # pprint(attrs)
+        return super().validate(attrs)
+
+    def update(self, instance, validated_data):
+        # print("\nWaypoint update data serialized:")
+        # pprint(validated_data)
+        return super().update(instance, validated_data)
 
 
 class DestinationPhotoSerializer(serializers.ModelSerializer):
@@ -92,7 +104,8 @@ class RouteSerializer(serializers.ModelSerializer):
         return route
 
     def update(self, instance, validated_data):
-        print(dict(validated_data))
+        print("Route update validated:")
+        pprint(dict(validated_data))
         waypoints_list = validated_data.pop('waypoints')
         destinations_list = validated_data.pop('destinations')
 
