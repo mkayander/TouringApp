@@ -36,6 +36,7 @@ class Route(TimestampModelMixin):
 
 
 class Waypoint(TimestampModelMixin, GeoPointMixin):
+    index = models.PositiveIntegerField(verbose_name="Индекс", help_text="Порядковый номер путевой точки в маршруте")
     route = models.ForeignKey(Route, on_delete=models.CASCADE, related_name="waypoints")
     label = models.CharField(verbose_name="Метка", max_length=32, null=True, blank=True)
 
@@ -46,9 +47,10 @@ class Waypoint(TimestampModelMixin, GeoPointMixin):
         verbose_name = "Путевая точка"
         verbose_name_plural = "Путевые точки"
         constraints = [
-            models.UniqueConstraint(fields=["route", "longitude", "latitude"], name="unique_waypoint")
+            models.UniqueConstraint(fields=["route", "longitude", "latitude"], name="unique_waypoint"),
+            models.UniqueConstraint(fields=["index", "route"], name="unique_route_waypoint_index")
         ]
-        ordering = ['pk']
+        ordering = ['index']
 
 
 class Destination(TimestampModelMixin, GeoPointMixin):

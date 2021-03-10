@@ -5,18 +5,21 @@ import {LatLng} from "leaflet";
 export type WaypointType = TimestampModel & LatLngModel & {
     pk?: number
     route?: number
+    index?: number
     label: string
 }
 
 export class Waypoint implements TimestampModel {
     pk?: number;
     route?: number;
+    index?: number;
     label: string;
     latLng: LatLng;
     created_at?: Date;
     updated_at?: Date;
 
     constructor(args: WaypointType) {
+        this.index = args.index;
         this.pk = args.pk;
         this.route = args.route;
         this.label = args.label;
@@ -45,10 +48,11 @@ export class Waypoint implements TimestampModel {
         });
     }
 
-    public packData(routeId?: number) {
+    public packData(routeId?: number, index?: number) {
         return {
             pk: this.pk,
             route: routeId || this.route,
+            index: index,
             label: this.label,
             latitude: this.latLng.lat,
             longitude: this.latLng.lng,
