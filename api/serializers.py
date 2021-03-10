@@ -6,7 +6,7 @@ from routes.models import Route, Waypoint, Destination, DestinationPhoto
 class WaypointSerializer(serializers.ModelSerializer):
     class Meta:
         model = Waypoint
-        fields = ['pk', 'route', 'label', 'longitude', 'latitude', 'created_at', 'updated_at']
+        fields = ['pk', 'route', 'index', 'label', 'longitude', 'latitude', 'created_at', 'updated_at']
 
 
 class DestinationPhotoSerializer(serializers.ModelSerializer):
