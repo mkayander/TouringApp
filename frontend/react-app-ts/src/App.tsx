@@ -79,7 +79,6 @@ function App() {
                         <ToolButton label={"Вставить точки маршрута"} icon={<FaArrowAltCircleDown/>}
                                     active={tools.activeTool === EditTool.Insert}
                                     onClick={() => tools.toggleTool(EditTool.Insert)}/>
-
                     </Toolbar>
 
                     <Toolbar style={{justifyContent: "end", marginLeft: "auto"}}>

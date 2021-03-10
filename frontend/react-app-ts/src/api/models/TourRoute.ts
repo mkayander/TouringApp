@@ -67,7 +67,7 @@ export class TourRoute implements TimestampModel, PackableApiModel {
             title: this.title,
             description: this.description,
             // image: this.image,
-            waypoints: this.waypoints.map(value => value.packData(this.pk)),
+            waypoints: this.waypoints.map((waypoint, index) => waypoint.packData(this.pk, index)),
             destinations: this.destinations?.map(destination => {
                 delete destination.photos;
                 return destination;

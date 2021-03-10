@@ -20,8 +20,8 @@ const getClosestWaypointIndex = (points: Waypoint[], target: LatLng): number => 
 
 export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, routeHook, waypointsHook}) => {
     const {points, setPoints, lastPoint, addPos, insertPos, removeWaypoint} = waypointsHook;
-    const [hoverPoint, setHoverPoint] = useState<LatLng | null>();
-    const [targetWaypointIndex, setTargetWaypointIndex] = useState<number | null>();
+    const [hoverPoint, setHoverPoint] = useState<LatLng | null>(null);
+    const [targetWaypointIndex, setTargetWaypointIndex] = useState<number | null>(null);
     const {activeTool} = toolsHook;
 
     useMapEvents({
@@ -32,13 +32,13 @@ export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, routeH
                     break;
 
                 case EditTool.Insert:
-                    if (targetWaypointIndex) {
+                    if (targetWaypointIndex !== null) {
                         insertPos(e.latlng, targetWaypointIndex + 1);
                     }
                     break;
 
                 case EditTool.Delete:
-                    if (targetWaypointIndex) {
+                    if (targetWaypointIndex !== null) {
                         removeWaypoint(points[targetWaypointIndex]);
                         setTargetWaypointIndex(null);
                     }
@@ -83,11 +83,11 @@ export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, routeH
                             {(activeTool === EditTool.Draw) &&
                             <Polyline positions={[lastPoint().latLng, hoverPoint]} color={color} opacity={0.5}/>}
 
-                            {(targetWaypointIndex && activeTool === EditTool.Delete) &&
+                            {(activeTool === EditTool.Delete && targetWaypointIndex !== null && points[targetWaypointIndex]) &&
                             <CircleMarker center={points[targetWaypointIndex].latLng} radius={5} color={"orange"}
                                           opacity={0.75}/>}
 
-                            {(targetWaypointIndex && activeTool === EditTool.Insert) && (
+                            {(activeTool === EditTool.Insert && targetWaypointIndex !== null) && (
                                 <>
                                     <Polyline positions={[points[targetWaypointIndex].latLng, hoverPoint]} color={color}
                                               opacity={0.5}/>
