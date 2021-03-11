@@ -1,4 +1,6 @@
+from django.http import HttpRequest
 from rest_framework import viewsets, mixins
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from api.serializers import RouteSerializer, RouteListSerializer, WaypointSerializer
@@ -39,3 +41,9 @@ class WaypointsViewSet(viewsets.GenericViewSet,
                        mixins.CreateModelMixin):
     queryset = Waypoint.objects.all()
     serializer_class = WaypointSerializer
+
+
+@api_view(['POST'])
+def update_route_data(request: HttpRequest):
+
+    return Response({})
