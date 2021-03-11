@@ -7,6 +7,7 @@ class WaypointSerializer(serializers.ModelSerializer):
     class Meta:
         model = Waypoint
         fields = ['pk', 'route', 'index', 'label', 'longitude', 'latitude', 'created_at', 'updated_at']
+        extra_kwargs = {'pk': {'read_only': False}}
 
 
 class DestinationPhotoSerializer(serializers.ModelSerializer):
@@ -103,11 +104,16 @@ class RouteSerializer(serializers.ModelSerializer):
         instance.save()
 
         for waypoint_data in waypoints_list:
-            print("Waypoint data: ", dict(waypoint_data))
-            Waypoint.objects.update_or_create(**waypoint_data)
+            print("\nWaypoint data: ", dict(waypoint_data))
+            try:
+                pk = waypoint_data.pop('pk')
+            except KeyError:
+                pk = None
+            Waypoint.objects.update_or_create(pk=pk, defaults=waypoint_data)
 
         for destination_data in destinations_list:
-            Destination.objects.update_or_create(**destination_data)
+            pk = destination_data.pop('pk')
+            Destination.objects.update_or_create(pk=pk, defaults=destination_data)
 
         return instance
 
