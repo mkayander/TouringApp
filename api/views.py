@@ -1,6 +1,6 @@
-from pprint import pprint
-from typing import List, Type
+from typing import Type, List
 
+from django.db import IntegrityError
 from django.db.models import Model
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view
@@ -72,36 +72,15 @@ def update_route_data(request: Request, route_pk: int):
     waypoints_serializer = WaypointSerializer(data=waypoints_raw_list, many=True, partial=True)
     waypoints_serializer.is_valid(raise_exception=True)
 
-    delete_waypoints: List[Waypoint] = []
-    updated_waypoints: List[Waypoint] = []
-    new_waypoints: List[Waypoint] = []
+    waypoints_backup: List[Waypoint] = list(instance.waypoints.all())
 
-    present_pks: List[int] = []
-    for item in waypoints_serializer.validated_data:
-        if 'pk' in item:
-            obj: Waypoint = get_and_update(Waypoint, **item)
-            updated_waypoints.append(obj)
-            present_pks.append(item['pk'])
-        else:
-            print("Adding item")
-            obj = Waypoint(**item)
-            new_waypoints.append(obj)
+    new_waypoints: List[Waypoint] = [Waypoint(**data) for data in waypoints_serializer.validated_data]
 
-    print("\n Data: ")
-    pprint(delete_waypoints)
-    pprint(updated_waypoints)
-    pprint(new_waypoints)
-
-    instance.waypoints.exclude(pk__in=present_pks).delete()
-
-    updated_waypoints.reverse()
-    # Waypoint.objects.bulk_update(updated_waypoints, ['index', 'label'])
-    for obj in updated_waypoints:
-        obj.save()
-    Waypoint.objects.bulk_create(new_waypoints)
-
-    # tour_serializer = RouteSerializer(data=request.data, partial=True)
-    # tour_serializer.is_valid(raise_exception=True)
-    # instance = tour_serializer.update()
+    instance.waypoints.all().delete()
+    try:
+        instance.waypoints.bulk_create(new_waypoints)
+    except (IntegrityError, AttributeError) as e:
+        print(f"Failed to replace waypoints - {e} \n Loading backup...")
+        instance.waypoints.bulk_create(waypoints_backup)
 
     return Response(RouteSerializer(Route.objects.get(pk=route_pk)).data, status=200)
