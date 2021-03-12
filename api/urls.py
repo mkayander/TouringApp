@@ -9,4 +9,5 @@ router.register('waypoints', views.WaypointsViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('routes/repost/<int:route_pk>/', views.update_route_data, name="route_repost")
 ]
