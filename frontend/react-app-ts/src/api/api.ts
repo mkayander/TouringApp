@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import {TourRoute, TourRouteResponse} from "./models/TourRoute";
 
 const api = axios.create({
     baseURL: `http://${window.location.hostname}:8000/api/`,
@@ -13,3 +14,17 @@ api.interceptors.request.use((config) => {
 }, error => console.error(error));
 
 export default api;
+
+export const fetchRouteData = (pk: number): Promise<TourRoute> => new Promise<TourRoute>((resolve, reject) => {
+    api.get<TourRouteResponse>(`routes/${pk}/`)
+        .then(response => {
+            resolve(TourRoute.fromApiResponse(response.data));
+        })
+        .catch(reason => reject(reason));
+});
+
+export const repostRouteData = (route: TourRoute): Promise<TourRoute> => new Promise<TourRoute>((resolve, reject) => {
+    api.post<TourRouteResponse>(`routes/repost/${route.pk}/`, route.packData())
+        .then(response => resolve(TourRoute.fromApiResponse(response.data)))
+        .catch(reason => reject(reason));
+});

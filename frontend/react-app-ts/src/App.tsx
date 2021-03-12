@@ -5,8 +5,8 @@ import './App.css';
 import {ToolButton} from "./components/ToggleButton/ToolButton";
 import {MapView} from "./components/MapView/MapView";
 import {Sidebar} from "./components/Sidebar/Sidebar";
-import {TourRoute, TourRouteResponse} from "./api/models/TourRoute";
-import api from "./api/api";
+import {TourRoute} from "./api/models/TourRoute";
+import {fetchRouteData, repostRouteData} from "./api/api";
 import styled from "styled-components";
 import {FaArrowAltCircleDown, FaPen, FaRemoveFormat, FaSatelliteDish, FaSave} from "react-icons/fa";
 import {useWaypoints, WaypointsHook} from "./hooks/useWaypoints";
@@ -44,15 +44,11 @@ function App() {
     useEffect(() => {
         if (routeId === null || routeId === undefined) return;
 
-        api.get<TourRouteResponse>(`routes/${routeId}/`)
-            .then(value => {
-                const newRoute = TourRoute.fromApiResponse(value.data);
+        fetchRouteData(routeId)
+            .then(newRoute => {
                 setActiveRoute(newRoute);
-
-                if (newRoute.waypoints[0]) {
-                    mapInstance?.panTo(newRoute.waypoints[0].latLng);
-                }
-            });
+            })
+            .catch(reason => console.error(reason));
     }, [routeId]);
 
     console.log(activeRoute);
@@ -94,12 +90,13 @@ function App() {
 
                                         const newTour: TourRoute = activeRoute.clone();
                                         newTour.waypoints = pointsHook.points;
-                                        setActiveRoute(newTour);
-                                        console.log(newTour);
+                                        // setActiveRoute(newTour);
+                                        // console.log(newTour);
 
-                                        api.patch(`routes/${newTour.pk}/`, newTour.packData())
-                                            .then(value => console.log(value))
-                                            .catch(reason => console.error(reason));
+                                        repostRouteData(newTour)
+                                            .then(value => {
+                                                setActiveRoute(value);
+                                            });
                                     }}/>
                     </Toolbar>
 
