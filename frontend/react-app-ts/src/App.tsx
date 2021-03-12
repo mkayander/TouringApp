@@ -51,6 +51,12 @@ function App() {
             .catch(reason => console.error(reason));
     }, [routeId]);
 
+    useEffect(() => {
+        if (routeHook.activeRoute?.waypoints[0]) {
+            mapInstance?.panTo(routeHook.activeRoute?.waypoints[0].latLng);
+        }
+    }, [mapInstance, routeHook.activeRoute]);
+
     console.log(activeRoute);
 
     return (
