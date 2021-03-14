@@ -7,7 +7,7 @@ from django.db import migrations
 def generate_index(apps, schema_editor):
     Waypoint = apps.get_model('routes', 'Waypoint')
     for row in Waypoint.objects.all():
-        row.index = round((time.time() * 1000) % 100000000)
+        row.index = row.pk
         row.save(update_fields=['index'])
 
 
