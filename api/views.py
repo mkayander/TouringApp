@@ -1,14 +1,16 @@
-from typing import Type, List
+from typing import Type, List, TypeVar
 
 from django.db import IntegrityError
 from django.db.models import Model
+from django.db.models.manager import Manager
 from rest_framework import viewsets, mixins
 from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework.serializers import ModelSerializer
 
-from api.serializers import RouteSerializer, RouteListSerializer, WaypointSerializer
+from api.serializers import RouteSerializer, RouteListSerializer, WaypointSerializer, DestinationSerializer
 from routes.models import Route, Waypoint
 
 
@@ -56,6 +58,23 @@ def get_and_update(model: Type[Model], **kwargs):
     return obj
 
 
+T = TypeVar('T')
+
+
+def process_data_repost(raw_list: List[T], serializer_class: Type[ModelSerializer], queryset: Type[Manager]):
+    serializer = serializer_class(data=raw_list, many=True, partial=True)
+    serializer.is_valid(raise_exception=True)
+    waypoints_backup = list(queryset)
+    new_waypoints = [serializer_class.Meta.model(**data) for data in serializer.validated_data]
+
+    queryset.delete()
+    try:
+        queryset.bulk_create(new_waypoints)
+    except (IntegrityError, AttributeError) as e:
+        print(f"Failed to replace waypoints - {e} \n Loading backup...")
+        queryset.bulk_create(waypoints_backup)
+
+
 @api_view(['POST'])
 def update_route_data(request: Request, route_pk: int):
     queryset = Route.objects.all()
@@ -69,18 +88,8 @@ def update_route_data(request: Request, route_pk: int):
     serializer.is_valid(raise_exception=True)
     serializer.save()
 
-    waypoints_serializer = WaypointSerializer(data=waypoints_raw_list, many=True, partial=True)
-    waypoints_serializer.is_valid(raise_exception=True)
+    process_data_repost(waypoints_raw_list, WaypointSerializer, instance.waypoints.all())
 
-    waypoints_backup: List[Waypoint] = list(instance.waypoints.all())
-
-    new_waypoints: List[Waypoint] = [Waypoint(**data) for data in waypoints_serializer.validated_data]
-
-    instance.waypoints.all().delete()
-    try:
-        instance.waypoints.bulk_create(new_waypoints)
-    except (IntegrityError, AttributeError) as e:
-        print(f"Failed to replace waypoints - {e} \n Loading backup...")
-        instance.waypoints.bulk_create(waypoints_backup)
+    process_data_repost(destinations_raw_list, DestinationSerializer, instance.destinations.all())
 
     return Response(RouteSerializer(Route.objects.get(pk=route_pk)).data, status=200)
