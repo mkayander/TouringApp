@@ -62,6 +62,16 @@ T = TypeVar('T')
 
 
 def process_data_repost(raw_list: List[T], serializer_class: Type[ModelSerializer], queryset: Type[Manager]):
+    """
+    Receive raw JSON data list from the POST request, deserialize the list, make a list of new Model instances,
+    delete the existing models from given queryset, and repost the new data back. \n
+    The existing data is being backed up to a variable, and saved back to the database if a error occurs while
+    trying to save the new data.
+    :param raw_list: Raw JSON list of data from, usually popped from request.data
+    :param serializer_class: DRF serializer class for the needed django model
+    :param queryset: A queryset where needed models exist. All of the existing models from that queryset
+    would be deleted and replaced by the new data from the request
+    """
     serializer = serializer_class(data=raw_list, many=True, partial=True)
     serializer.is_valid(raise_exception=True)
     waypoints_backup = list(queryset)
