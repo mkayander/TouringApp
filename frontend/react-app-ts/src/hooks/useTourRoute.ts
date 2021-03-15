@@ -15,7 +15,7 @@ export const useTourRoute = () => {
             .then(newRoute => {
                 setActiveRoute(newRoute);
                 // enqueueSnackbar(`Тур "${newRoute.title}" успешно загружен!`, {variant: "success"})
-                toast.dark(`Загружен тур "${newRoute.title}"`, {autoClose: 2000})
+                toast.dark(`Загружен тур "${newRoute.title}"`, {autoClose: 2000});
             })
             .catch(reason => console.error(reason));
     }, [routeId]);
