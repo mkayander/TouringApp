@@ -86,8 +86,6 @@ function App() {
 
                                         const newTour: TourRoute = activeRoute.clone();
                                         newTour.waypoints = pointsHook.points;
-                                        // setActiveRoute(newTour);
-                                        // console.log(newTour);
 
                                         repostRouteData(newTour)
                                             .then(value => {
