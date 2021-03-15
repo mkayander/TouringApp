@@ -6,7 +6,7 @@ import {ToolButton} from "./components/ToggleButton/ToolButton";
 import {MapView} from "./components/MapView/MapView";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {TourRoute} from "./api/models/TourRoute";
-import {fetchRouteData, repostRouteData} from "./api/api";
+import {repostRouteData} from "./api/api";
 import styled from "styled-components";
 import {FaArrowAltCircleDown, FaPen, FaRemoveFormat, FaSatelliteDish, FaSave} from "react-icons/fa";
 import {useWaypoints, WaypointsHook} from "./hooks/useWaypoints";
@@ -40,16 +40,6 @@ function App() {
 
     const [mapInstance, setMapInstance] = useState<LeafletMap>();
     const [userPosition, setUserPosition] = useState<LatLng>();
-
-    useEffect(() => {
-        if (routeId === null || routeId === undefined) return;
-
-        fetchRouteData(routeId)
-            .then(newRoute => {
-                setActiveRoute(newRoute);
-            })
-            .catch(reason => console.error(reason));
-    }, [routeId]);
 
     useEffect(() => {
         if (routeHook.activeRoute?.waypoints[0]) {
