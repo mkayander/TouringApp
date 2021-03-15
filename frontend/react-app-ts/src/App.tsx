@@ -12,6 +12,7 @@ import {FaArrowAltCircleDown, FaPen, FaRemoveFormat, FaSatelliteDish, FaSave} fr
 import {useWaypoints, WaypointsHook} from "./hooks/useWaypoints";
 import {TourRouteHook, useTourRoute} from "./hooks/useTourRoute";
 import {EditTool, useEditTools} from "./hooks/useEditTools";
+import {toast} from "react-toastify";
 
 
 const Toolbar = styled.ul`
@@ -25,6 +26,18 @@ const Toolbar = styled.ul`
   }
 `;
 
+
+toast.configure({
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: false,
+    newestOnTop: false,
+    closeOnClick: true,
+    rtl: false,
+    pauseOnFocusLoss: false,
+    draggable: true,
+    pauseOnHover: true
+});
 
 function App() {
     const startPos = new LatLng(55.4331145, 37.5562910);
@@ -88,8 +101,9 @@ function App() {
                                         newTour.waypoints = pointsHook.points;
 
                                         repostRouteData(newTour)
-                                            .then(value => {
-                                                setActiveRoute(value);
+                                            .then(route => {
+                                                setActiveRoute(route);
+                                                toast.success(`✅ Тур "${route.title}" сохранён успешно!`);
                                             });
                                     }}/>
                     </Toolbar>
