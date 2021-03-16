@@ -9,6 +9,7 @@ import {TourRouteHook} from "../../hooks/useTourRoute";
 
 export type SidebarProps = {
     routeHook: TourRouteHook
+    modalHook: ModalHook
 }
 
 
@@ -30,7 +31,8 @@ export const Sidebar: React.FC<SidebarProps> = ({routeHook}) => {
             });
     }, []);
 
-    console.log(routes);
+export const Sidebar: React.FC<SidebarProps> = ({routeHook, modalHook}) => {
+    const {routeId, setRouteId, activeRoute, routesList} = routeHook;
 
     return (
         <ProSidebar collapsed={false}
@@ -56,7 +58,7 @@ export const Sidebar: React.FC<SidebarProps> = ({routeHook}) => {
                 <Menu iconShape="square">
                     <MenuItem icon={<FaGem/>}>Dashboard</MenuItem>
                     <SubMenu title="Маршруты" icon={<FaRoute/>} defaultOpen={true}>
-                        {routes.map(route => (
+                        {routesList.map(route => (
                             <MenuItem key={route.pk} active={route.pk === routeId}
                                       onClick={() => setRouteId(route.pk)}>{route.title}</MenuItem>
                         ))}

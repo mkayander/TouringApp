@@ -15,6 +15,17 @@ api.interceptors.request.use((config) => {
 
 export default api;
 
+export const fetchRoutesList = (): Promise<TourRoute[]> => new Promise<TourRoute[]>((resolve, reject) => {
+    api.get<TourRouteResponse[]>("routes/")
+        .then(value => {
+            const result = value.data.map(value => {
+                return TourRoute.fromApiResponse(value);
+            });
+            resolve(result);
+        })
+        .catch(reason => reject(reason));
+});
+
 export const fetchRouteData = (pk: number): Promise<TourRoute> => new Promise<TourRoute>((resolve, reject) => {
     api.get<TourRouteResponse>(`routes/${pk}/`)
         .then(response => {
