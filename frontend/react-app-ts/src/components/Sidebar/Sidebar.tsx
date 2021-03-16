@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarHeader, SubMenu} from 'react-pro-sidebar';
-import {FaGem, FaRoute} from "react-icons/fa";
+import {FaGem, FaPlus, FaRoute} from "react-icons/fa";
 import 'react-pro-sidebar/dist/css/styles.css';
-import {TourRoute, TourRouteResponse} from "../../api/models/TourRoute";
-import api from "../../api/api";
 import {TourRouteHook} from "../../hooks/useTourRoute";
+import {ModalHook, ModalType} from "../../hooks/useModal";
+import styled from "styled-components";
+import {StyledButton} from "../styled/StyledButton";
 
 
 export type SidebarProps = {
@@ -13,23 +14,13 @@ export type SidebarProps = {
 }
 
 
-export const Sidebar: React.FC<SidebarProps> = ({routeHook}) => {
-    const {routeId, setRouteId, activeRoute} = routeHook;
+const AddButton = styled(StyledButton)`
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
 
-    const [routes, setRoutes] = useState<TourRoute[]>([]);
+`;
 
-    useEffect(() => {
-        api.get<TourRouteResponse[]>("routes/")
-            .then(value => {
-                const result = value.data.map(value => {
-                    return TourRoute.fromApiResponse(value);
-                });
-                setRoutes(result);
-            })
-            .catch(reason => {
-                console.error(reason);
-            });
-    }, []);
 
 export const Sidebar: React.FC<SidebarProps> = ({routeHook, modalHook}) => {
     const {routeId, setRouteId, activeRoute, routesList} = routeHook;
@@ -62,6 +53,9 @@ export const Sidebar: React.FC<SidebarProps> = ({routeHook, modalHook}) => {
                             <MenuItem key={route.pk} active={route.pk === routeId}
                                       onClick={() => setRouteId(route.pk)}>{route.title}</MenuItem>
                         ))}
+                        <AddButton onClick={() => modalHook.setActiveModal(ModalType.CreateRoute)}>
+                            <FaPlus/>
+                        </AddButton>
                     </SubMenu>
                 </Menu>
                 <Menu>
