@@ -22,13 +22,12 @@ export const useTourRoute = () => {
         fetchRouteData(routeId)
             .then(newRoute => {
                 setActiveRoute(newRoute);
-                // enqueueSnackbar(`Тур "${newRoute.title}" успешно загружен!`, {variant: "success"})
                 toast.dark(`Загружен тур "${newRoute.title}"`, {autoClose: 2000});
             })
-            .catch(reason => console.error(reason));
+            .catch(reason => toast.error(`❌ Ошибка при загрузке данных о туре! ${reason}`));
     }, [routeId]);
 
-    return {routeId, setRouteId, activeRoute, setActiveRoute};
+    return {routeId, setRouteId, activeRoute, setActiveRoute, routesList};
 };
 
 export type TourRouteHook = ReturnType<typeof useTourRoute>
