@@ -27,6 +27,10 @@ class Route(TimestampModelMixin):
                               help_text="Основное изображение/фото, представляющее маршрут.",
                               upload_to="route_headers/", null=True, blank=True)
 
+    class Meta:
+        verbose_name = "Маршрут"
+        verbose_name_plural = "Маршруты"
+
     def __str__(self):
         return self.title
 
