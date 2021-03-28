@@ -1,5 +1,8 @@
+from constance import config
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
+from geopy.distance import distance, Distance
 
 from routes.choices import DESTINATION_TYPES
 
@@ -34,9 +37,17 @@ class Route(TimestampModelMixin):
     def __str__(self):
         return self.title
 
-    class Meta:
-        verbose_name = "Маршрут"
-        verbose_name_plural = "Маршруты"
+    @cached_property
+    def total_distance(self):
+        lat_long_tuples = map((lambda point: (point.longitude, point.latitude)), self.waypoints.all())
+        total_distance: Distance = distance(*lat_long_tuples)
+        return round(total_distance.km, 3)
+
+    @cached_property
+    def estimated_duration(self):
+        duration = self.total_distance / config.HUMAN_SPEED
+        duration += config.DEFAULT_TIME_SPENDING / 60 * self.destinations.count()
+        return round(duration * 60, 2)
 
 
 class Waypoint(TimestampModelMixin, GeoPointMixin):
