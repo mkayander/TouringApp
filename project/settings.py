@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'rest_framework',
+    'constance',
 
     'account',
     'routes',
@@ -152,3 +153,24 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
+
+# Constance
+CONSTANCE_BACKEND = 'constance.backends.redisd.RedisBackend'
+CONSTANCE_REDIS_CONNECTION = {
+    'host': 'localhost',
+    'port': 6379,
+    'db': 8,
+}
+
+CONSTANCE_CONFIG = {
+    # 'TEL_NUMBER': ("+7 (995) 898-38-59", "Основной номер телефона, указанный на сайте"),
+    # 'MAIN_EMAIL': ("cloudsc@mail.ru", "Основной адрес электронной почты, указанный на сайте")
+    'HUMAN_SPEED': (4.0, "Средняя скорость человека в черте города (км/ч)"),
+    'DEFAULT_TIME_SPENDING': (5, "Среднее время, затрачиваемое на точку притяжения (минуты)")
+}
+
+CONSTANCE_CONFIG_FIELDSETS = {
+    'Расчёт времени': ('HUMAN_SPEED', 'DEFAULT_TIME_SPENDING')
+}
+
+CONSTANCE_SUPERUSER_ONLY = False
