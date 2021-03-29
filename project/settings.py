@@ -26,7 +26,7 @@ SECRET_KEY = '*)!f)4$2!#5fl_itz0-4w9juv3n06naq3%qjwu*ua577$*p1+3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["10.36.240.155", "192.168.0.186", "127.0.0.1"]
+ALLOWED_HOSTS = ["10.36.240.155", "192.168.0.186", "127.0.0.1", "localhost"]
 
 # Application definition
 
@@ -163,8 +163,6 @@ CONSTANCE_REDIS_CONNECTION = {
 }
 
 CONSTANCE_CONFIG = {
-    # 'TEL_NUMBER': ("+7 (995) 898-38-59", "Основной номер телефона, указанный на сайте"),
-    # 'MAIN_EMAIL': ("cloudsc@mail.ru", "Основной адрес электронной почты, указанный на сайте")
     'HUMAN_SPEED': (4.0, "Средняя скорость человека в черте города (км/ч)"),
     'DEFAULT_TIME_SPENDING': (5, "Среднее время, затрачиваемое на точку притяжения (минуты)")
 }
