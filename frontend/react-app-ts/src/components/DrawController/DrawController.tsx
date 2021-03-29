@@ -63,7 +63,7 @@ export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, routeH
     const waypoints = routeHook.activeRoute?.waypoints || [];
 
     useEffect(() => {
-        if (waypoints.length === 0) return;
+        // if (waypoints.length === 0) return;
 
         setPoints(waypoints);
         // map.panTo(waypoints[0].latLng);
