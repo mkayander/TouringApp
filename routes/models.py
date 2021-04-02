@@ -25,6 +25,7 @@ class GeoPointMixin(models.Model):
 
 class Route(TimestampModelMixin):
     title = models.CharField(max_length=64, verbose_name="Название", unique=True)
+    short_description = models.CharField(max_length=64, verbose_name="Короткое описание", null=True, blank=True)
     description = models.TextField(verbose_name="Описание", null=True, blank=True)
     image = models.ImageField(verbose_name="Изображение",
                               help_text="Основное изображение/фото, представляющее маршрут.",
