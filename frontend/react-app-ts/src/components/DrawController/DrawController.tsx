@@ -1,7 +1,7 @@
 import {CircleMarker, Polyline, useMapEvents} from "react-leaflet";
 import {WaypointsHook} from "../../hooks/useWaypoints";
 import L, {LatLng} from "leaflet";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {TourRouteHook} from "../../hooks/useTourRoute";
 import {EditTool, EditToolsHook} from "../../hooks/useEditTools";
 import {Waypoint} from "../../api/models/Waypoint";
@@ -18,8 +18,8 @@ const getClosestWaypointIndex = (points: Waypoint[], target: LatLng): number => 
         .reduce((iMax, val, i, arr) => val < arr[iMax] ? i : iMax, 0);
 };
 
-export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, routeHook, waypointsHook}) => {
-    const {points, setPoints, lastPoint, addPos, insertPos, removeWaypoint} = waypointsHook;
+export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, waypointsHook}) => {
+    const {points, lastPoint, addPos, insertPos, removeWaypoint} = waypointsHook;
     const [hoverPoint, setHoverPoint] = useState<LatLng | null>(null);
     const [targetWaypointIndex, setTargetWaypointIndex] = useState<number | null>(null);
     const {activeTool} = toolsHook;
@@ -59,16 +59,6 @@ export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, routeH
             setTargetWaypointIndex(null);
         }
     });
-
-    const waypoints = routeHook.activeRoute?.waypoints || [];
-
-    useEffect(() => {
-        // if (waypoints.length === 0) return;
-
-        setPoints(waypoints);
-        // map.panTo(waypoints[0].latLng);
-
-    }, [waypoints]);
 
     const color = "red";
 
