@@ -7,3 +7,9 @@ SECRET_KEY = os.environ.get("DJANGO_TOUR_SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ["tour-up.ru"]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://tour-up.ru",
+    "http://tour-up.ru:3000"
+]
+
