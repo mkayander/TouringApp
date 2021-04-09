@@ -21,7 +21,7 @@ class DestinationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Destination
-        fields = ['route', 'longitude', 'latitude', 'title', 'type', 'radius', 'description', 'created_at',
+        fields = ['route', 'longitude', 'latitude', 'title', 'address', 'type', 'radius', 'description', 'created_at',
                   'updated_at', 'photos']
         nested_list_fields = ['photos']
 
