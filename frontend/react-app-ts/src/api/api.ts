@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import {TourRoute, TourRouteResponse} from "./models/TourRoute";
 
 const api = axios.create({
-    baseURL: `http://${window.location.hostname}:8000/api/`,
+    baseURL: `https://${window.location.hostname}/api/`,
     responseType: "json"
 });
 
