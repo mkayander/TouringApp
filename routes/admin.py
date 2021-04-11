@@ -10,7 +10,8 @@ class RouteAdmin(admin.ModelAdmin):
 
 @admin.register(Waypoint)
 class WaypointAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["__str__", "route", "index"]
+    list_filter = ["route"]
 
 
 @admin.register(Destination)
