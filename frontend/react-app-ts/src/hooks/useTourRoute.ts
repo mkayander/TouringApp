@@ -1,7 +1,7 @@
 import {NumberParam, useQueryParam} from "use-query-params";
 import {useEffect, useState} from "react";
 import {TourRoute} from "../api/models/TourRoute";
-import {createTourRoute, CreateTourRouteArgs, fetchRouteData, fetchRoutesList} from "../api/api";
+import {createTourRoute, CreateTourRouteArgs, deleteTourRoute, fetchRouteData, fetchRoutesList} from "../api/api";
 import {toast} from "react-toastify";
 import {AxiosResponse} from "axios";
 
@@ -46,7 +46,19 @@ export const useTourRoute = () => {
             });
     };
 
-    return {routeId, setRouteId, activeRoute, setActiveRoute, routesList, createRoute};
+    const deleteRoute = (route: TourRoute) => {
+        return deleteTourRoute(route.pk)
+            .then(() => {
+                if (activeRoute === route) setActiveRoute(undefined);
+                refreshRoutesList();
+                toast.dark(`Тур ${route.title} успешно удалён!`);
+            })
+            .catch(response => {
+                toast.error(`❌ Ошибка при удалении тура "${route.title}"! ${Object.entries(response.data).map(arr => arr[1])}`);
+            });
+    };
+
+    return {routeId, setRouteId, activeRoute, setActiveRoute, routesList, createRoute, deleteRoute};
 };
 
 export type TourRouteHook = ReturnType<typeof useTourRoute>

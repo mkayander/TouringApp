@@ -18,6 +18,7 @@ class RouteViewSet(viewsets.GenericViewSet,
                    mixins.RetrieveModelMixin,
                    mixins.CreateModelMixin,
                    mixins.UpdateModelMixin,
+                   mixins.DestroyModelMixin,
                    mixins.ListModelMixin):
     queryset = Route.objects.all()
     serializer_class = RouteSerializer

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarHeader, SubMenu} from 'react-pro-sidebar';
-import {FaGem, FaPlus, FaRoute} from "react-icons/fa";
+import {FaGem, FaPlus, FaRoute, FaTrash} from "react-icons/fa";
 import 'react-pro-sidebar/dist/css/styles.css';
 import {TourRouteHook} from "../../hooks/useTourRoute";
 import {ModalHook, ModalType} from "../../hooks/useModal";
@@ -23,7 +23,7 @@ const AddButton = styled(StyledButton)`
 
 
 export const Sidebar: React.FC<SidebarProps> = ({routeHook, modalHook}) => {
-    const {routeId, setRouteId, activeRoute, routesList} = routeHook;
+    const {routeId, setRouteId, activeRoute, routesList, deleteRoute} = routeHook;
 
     return (
         <ProSidebar collapsed={false}
@@ -51,7 +51,16 @@ export const Sidebar: React.FC<SidebarProps> = ({routeHook, modalHook}) => {
                     <SubMenu title="Маршруты" icon={<FaRoute/>} defaultOpen={true}>
                         {routesList.map(route => (
                             <MenuItem key={route.pk} active={route.pk === routeId}
-                                      onClick={() => setRouteId(route.pk)}>{route.title}</MenuItem>
+                                      onClick={() => setRouteId(route.pk)}>
+                                <h6>{route.title}</h6>
+                                <FaTrash className={"text-danger"} onClick={() => {
+                                    deleteRoute(route)
+                                        .then(value => {
+
+                                        })
+                                        .catch();
+                                }}/>
+                            </MenuItem>
                         ))}
                         <AddButton onClick={() => modalHook.setActiveModal(ModalType.CreateRoute)}>
                             <FaPlus/>

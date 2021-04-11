@@ -52,10 +52,19 @@ export type CreateTourRouteArgs = {
 
 export const createTourRoute = (
     args: CreateTourRouteArgs
-): Promise<TourRoute> => new Promise<TourRoute>((resolve, reject) => {
+): Promise<TourRoute> => new Promise((resolve, reject) => {
     api.post<TourRouteResponse>('routes/', args)
         .then(response => resolve(TourRoute.fromApiResponse(response.data)))
         .catch(reason => {
             reject(reason.response);
         });
+});
+
+export const deleteTourRoute = (id: Number): Promise<boolean> => new Promise((resolve, reject) => {
+    api.delete(`routes/${id}/`)
+        .then(response => {
+            resolve(true);
+            console.log(response);
+        })
+        .catch(reason => reject(reason.response));
 });
