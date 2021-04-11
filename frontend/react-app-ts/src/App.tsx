@@ -91,6 +91,7 @@ function App() {
             <Container>
                 <h1>React Typescript Leaflet TEST</h1>
                 <h6>{activeRoute?.title}</h6>
+                <br/>
 
                 <div style={{display: "flex", flexFlow: "row wrap"}}>
                     <Toolbar>
