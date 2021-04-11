@@ -16,7 +16,8 @@ class WaypointAdmin(admin.ModelAdmin):
 
 @admin.register(Destination)
 class DestinationAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["title", "type", "route", "address"]
+    list_filter = ["route"]
 
 
 @admin.register(DestinationPhoto)
