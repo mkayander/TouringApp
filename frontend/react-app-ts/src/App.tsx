@@ -76,8 +76,9 @@ function App() {
     const [userPosition, setUserPosition] = useState<LatLng>();
 
     useEffect(() => {
-        if (routeHook.activeRoute?.waypoints[0]) {
-            mapInstance?.panTo(routeHook.activeRoute?.waypoints[0].latLng);
+        const newPoints = routeHook.activeRoute?.waypoints;
+        if (newPoints && newPoints[0]) {
+            mapInstance?.panTo(newPoints[0].latLng);
         }
     }, [mapInstance, routeHook.activeRoute]);
 
