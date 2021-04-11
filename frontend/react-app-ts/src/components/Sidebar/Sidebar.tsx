@@ -54,11 +54,9 @@ export const Sidebar: React.FC<SidebarProps> = ({routeHook, modalHook}) => {
                                       onClick={() => setRouteId(route.pk)}>
                                 <h6>{route.title}</h6>
                                 <FaTrash className={"text-danger"} onClick={() => {
-                                    deleteRoute(route)
-                                        .then(value => {
-
-                                        })
-                                        .catch();
+                                    if (window.confirm(`Вы действительно хотите удалить тур "${route.title}"?`)) {
+                                        deleteRoute(route).catch();
+                                    }
                                 }}/>
                             </MenuItem>
                         ))}
