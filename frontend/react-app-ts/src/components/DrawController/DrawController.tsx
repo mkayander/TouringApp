@@ -26,6 +26,7 @@ export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, waypoi
 
     useMapEvents({
         click(e) {
+	    console.log("Map click: ", e.latlng);
             switch (activeTool) {
                 case EditTool.Draw:
                     addPos(e.latlng);
