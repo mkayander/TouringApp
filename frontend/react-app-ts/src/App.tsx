@@ -63,12 +63,13 @@ function App() {
 
     const tools = useEditTools();
 
-    // Waypoints hook
-    const pointsHook: WaypointsHook = useWaypoints();
-
     // Tour route hook
     const routeHook: TourRouteHook = useTourRoute();
-    const {routeId, activeRoute, setActiveRoute} = routeHook;
+
+    // Waypoints hook
+    const pointsHook: WaypointsHook = useWaypoints(routeHook);
+
+    const {activeRoute, setActiveRoute} = routeHook;
 
     const modalHook = useModal();
 

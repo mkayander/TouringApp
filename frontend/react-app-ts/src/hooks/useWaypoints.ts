@@ -1,10 +1,18 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Waypoint} from "../api/models/Waypoint";
 import {LatLng} from "leaflet";
+import {TourRouteHook} from "./useTourRoute";
 
 
-export const useWaypoints = () => {
+export const useWaypoints = (routeHook: TourRouteHook) => {
     const [points, setPoints] = useState<Waypoint[]>([]);
+
+    useEffect(() => {
+        const newPoints = routeHook.activeRoute?.waypoints;
+        if (newPoints != undefined) {
+            setPoints(newPoints);
+        }
+    }, [routeHook.activeRoute?.waypoints]);
 
     const addPoint = (point: Waypoint) => {
         setPoints([...points, point]);
@@ -18,6 +26,8 @@ export const useWaypoints = () => {
     const getPoint = (index: number) => points.length > index ? points[index] : null;
 
     const lastPoint = () => points[points.length - 1];
+
+    const middlePoint = () => points[points.length / 2];
 
     const addPos = (latLng: LatLng) => {
         setPoints([...points, Waypoint.fromLatLng(latLng)]);
@@ -33,7 +43,18 @@ export const useWaypoints = () => {
         return points.map(value => value.latLng);
     };
 
-    return {points, setPoints, addPoint, removeWaypoint, getPoint, lastPoint, addPos, insertPos, getLatLngList};
+    return {
+        points,
+        setPoints,
+        addPoint,
+        removeWaypoint,
+        getPoint,
+        addPos,
+        insertPos,
+        getLatLngList,
+        lastPoint,
+        middlePoint,
+    };
 };
 
 export type WaypointsHook = ReturnType<typeof useWaypoints>
