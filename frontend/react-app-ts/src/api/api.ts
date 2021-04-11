@@ -44,3 +44,18 @@ export const repostRouteData = (route: TourRoute): Promise<TourRoute> => new Pro
         .then(response => resolve(TourRoute.fromApiResponse(response.data)))
         .catch(reason => reject(reason));
 });
+
+export type CreateTourRouteArgs = {
+    title: String,
+    description: String
+}
+
+export const createTourRoute = (
+    args: CreateTourRouteArgs
+): Promise<TourRoute> => new Promise<TourRoute>((resolve, reject) => {
+    api.post<TourRouteResponse>('routes/', args)
+        .then(response => resolve(TourRoute.fromApiResponse(response.data)))
+        .catch(reason => {
+            reject(reason.response);
+        });
+});
