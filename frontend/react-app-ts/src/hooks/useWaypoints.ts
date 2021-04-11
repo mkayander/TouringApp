@@ -9,7 +9,7 @@ export const useWaypoints = (routeHook: TourRouteHook) => {
 
     useEffect(() => {
         const newPoints = routeHook.activeRoute?.waypoints;
-        if (newPoints != undefined) {
+        if (newPoints !== undefined) {
             setPoints(newPoints);
         }
     }, [routeHook.activeRoute?.waypoints]);
