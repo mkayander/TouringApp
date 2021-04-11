@@ -1,24 +1,38 @@
 import {useState} from "react";
 import {CreateRouteModal} from "../components/Modal/CreateRouteModal";
+import {TourRouteHook} from "./useTourRoute";
 
 export enum ModalType {
     CreateRoute
 }
 
-export const useModal = () => {
-    const [activeModal, setActiveModal] = useState<ModalType>();
+export type DefaultModalProps = {
+    closeModal?: Function
+}
 
-    const renderModal = () => {
+export const useModal = (routeHook: TourRouteHook) => {
+    const [activeModal, setActiveModal] = useState<ModalType | null>(null);
+
+    const closeModal = () => {
+        setActiveModal(null);
+    };
+
+    const getModalComponent = () => {
         switch (activeModal) {
             case ModalType.CreateRoute:
-                return CreateRouteModal;
+                const fc = CreateRouteModal;
+                fc.defaultProps = {
+                    closeModal: closeModal,
+                    routeHook: routeHook
+                };
+                return fc;
 
             default:
                 return null;
         }
     };
 
-    return {activeModal, setActiveModal, getModalComponent: renderModal};
+    return {activeModal, setActiveModal, getModalComponent};
 };
 
 export type ModalHook = ReturnType<typeof useModal>

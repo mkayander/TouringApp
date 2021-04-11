@@ -33,7 +33,7 @@ type OverlayProps = {
 
 const Overlay = styled.div<OverlayProps>`
   transition: 0.3s;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   height: 100%;
@@ -69,12 +69,12 @@ function App() {
     // Waypoints hook
     const pointsHook: WaypointsHook = useWaypoints(routeHook);
 
-    const {activeRoute, setActiveRoute} = routeHook;
-
-    const modalHook = useModal();
+    const modalHook = useModal(routeHook);
 
     const [mapInstance, setMapInstance] = useState<LeafletMap>();
     const [userPosition, setUserPosition] = useState<LatLng>();
+
+    const {activeRoute, setActiveRoute} = routeHook;
 
     useEffect(() => {
         const newPoints = routeHook.activeRoute?.waypoints;
@@ -138,8 +138,8 @@ function App() {
 
             {ModalComponent && <ModalComponent/>}
 
-            <Overlay active={modalHook.activeModal !== undefined} onClick={() => {
-                modalHook.setActiveModal(undefined);
+            <Overlay active={modalHook.activeModal !== null} onClick={() => {
+                modalHook.setActiveModal(null);
             }}/>
         </>
     );

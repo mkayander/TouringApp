@@ -18,7 +18,8 @@ const View = styled.div`
   padding: 1rem 1rem;
   margin: auto 1rem;
   border-radius: 10px;
-  min-width: 600px;
+  min-width: 40%;
+  max-width: 600px;
   //min-height: 600px;
   overflow: hidden;
   background: #393f4c;
@@ -39,7 +40,7 @@ type ModalProps = {
 
 export const ModalBase: React.FC<HTMLAttributes<HTMLDivElement> & ModalProps> = ({children, modalTitle}) => {
     return (
-        <Container>
+        <Container >
             <View>
                 <h4>{modalTitle}</h4>
                 <hr/>
