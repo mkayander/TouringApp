@@ -6,7 +6,6 @@ import {ToolButton} from "./components/ToggleButton/ToolButton";
 import {MapView} from "./components/MapView/MapView";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {TourRoute} from "./api/models/TourRoute";
-import {repostRouteData} from "./api/api";
 import styled from "styled-components";
 import {FaArrowAltCircleDown, FaPen, FaRemoveFormat, FaSatelliteDish, FaSave} from "react-icons/fa";
 import {useWaypoints, WaypointsHook} from "./hooks/useWaypoints";
@@ -74,7 +73,7 @@ function App() {
     const [mapInstance, setMapInstance] = useState<LeafletMap>();
     const [userPosition, setUserPosition] = useState<LatLng>();
 
-    const {activeRoute, setActiveRoute} = routeHook;
+    const {activeRoute, repostRoute} = routeHook;
 
     useEffect(() => {
         const newPoints = routeHook.activeRoute?.waypoints;
@@ -122,11 +121,7 @@ function App() {
                                         const newTour: TourRoute = activeRoute.clone();
                                         newTour.waypoints = pointsHook.points;
 
-                                        repostRouteData(newTour)
-                                            .then(route => {
-                                                setActiveRoute(route);
-                                                toast.success(`✅ Тур "${route.title}" сохранён успешно!`);
-                                            });
+                                        repostRoute(newTour).then();
                                     }}/>
                     </Toolbar>
                 </div>

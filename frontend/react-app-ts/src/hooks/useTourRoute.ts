@@ -1,13 +1,20 @@
 import {NumberParam, useQueryParam} from "use-query-params";
 import {useEffect, useState} from "react";
 import {TourRoute} from "../api/models/TourRoute";
-import {createTourRoute, CreateTourRouteArgs, deleteTourRoute, fetchRouteData, fetchRoutesList} from "../api/api";
+import {
+    createTourRoute,
+    CreateTourRouteArgs,
+    deleteTourRoute,
+    fetchRouteData,
+    fetchRoutesList,
+    repostRouteData
+} from "../api/api";
 import {toast} from "react-toastify";
 import {AxiosResponse} from "axios";
 
 export const useTourRoute = () => {
     const [routeId, setRouteId] = useQueryParam("routeId", NumberParam);
-    const [activeRoute, setActiveRoute] = useState<TourRoute>();
+    const [activeRoute, setActiveRoute] = useState<TourRoute | null>(null);
 
     const [routesList, setRoutesList] = useState<TourRoute[]>([]);
 
@@ -17,20 +24,38 @@ export const useTourRoute = () => {
             .catch(reason => toast.error(`❌ Ошибка при загрузке списка туров! ${reason}`));
     };
 
-    useEffect(() => {
-        refreshRoutesList();
-    }, []);
-
-    useEffect(() => {
-        if (routeId === null || routeId === undefined) return;
+    const refreshFullActiveRoute = () => {
+        if (routeId === null || routeId === undefined) {
+            setActiveRoute(null);
+            return;
+        }
 
         fetchRouteData(routeId)
             .then(newRoute => {
                 setActiveRoute(newRoute);
                 toast.dark(`Загружен тур "${newRoute.title}"`, {autoClose: 2000});
             })
-            .catch(reason => toast.error(`❌ Ошибка при загрузке данных о туре! ${reason}`));
+            .catch(reason => {
+                setRouteId(null);
+                toast.error(`❌ Ошибка при загрузке данных о туре! ${reason}`);
+            });
+    };
+
+    useEffect(() => {
+        refreshRoutesList();
+    }, []);
+
+    useEffect(() => {
+        refreshFullActiveRoute();
     }, [routeId]);
+
+    const repostRoute = (route: TourRoute) => {
+        return repostRouteData(route)
+            .then(route => {
+                setActiveRoute(route);
+                toast.success(`✅ Тур "${route.title}" сохранён успешно!`);
+            });
+    };
 
     const createRoute = (args: CreateTourRouteArgs) => {
         return createTourRoute(args)
@@ -49,7 +74,7 @@ export const useTourRoute = () => {
     const deleteRoute = (route: TourRoute) => {
         return deleteTourRoute(route.pk)
             .then(() => {
-                if (activeRoute === route) setActiveRoute(undefined);
+                if (activeRoute === route) setActiveRoute(null);
                 refreshRoutesList();
                 toast.dark(`Тур ${route.title} успешно удалён!`);
             })
@@ -58,7 +83,7 @@ export const useTourRoute = () => {
             });
     };
 
-    return {routeId, setRouteId, activeRoute, setActiveRoute, routesList, createRoute, deleteRoute};
+    return {routeId, setRouteId, activeRoute, routesList, repostRoute, createRoute, deleteRoute};
 };
 
 export type TourRouteHook = ReturnType<typeof useTourRoute>
