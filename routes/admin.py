@@ -5,7 +5,7 @@ from routes.models import Route, Waypoint, Destination, DestinationPhoto
 
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["title", "short_description", "image"]
 
 
 @admin.register(Waypoint)
