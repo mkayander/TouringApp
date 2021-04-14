@@ -80,6 +80,8 @@ function App() {
         if (newPoints && newPoints[0]) {
             mapInstance?.panTo(newPoints[0].latLng);
         }
+
+        console.log("route: ", routeHook.activeRoute);
     }, [mapInstance, routeHook.activeRoute]);
 
     const ModalComponent = modalHook.getModalComponent();
@@ -119,7 +121,7 @@ function App() {
                                         if (!activeRoute) return;
 
                                         const newTour: TourRoute = activeRoute.clone();
-                                        newTour.waypoints = pointsHook.points;
+                                        newTour.waypoints = pointsHook.state;
 
                                         repostRoute(newTour).then();
                                     }}/>

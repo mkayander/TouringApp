@@ -21,6 +21,8 @@ api.interceptors.request.use((config) => {
 export default api;
 
 export const fetchRoutesList = (): Promise<TourRoute[]> => new Promise<TourRoute[]>((resolve, reject) => {
+    console.log("env: ", process.env.REACT_APP_DEV_RUN);
+
     api.get<TourRouteResponse[]>("routes/")
         .then(value => {
             const result = value.data.map(value => {

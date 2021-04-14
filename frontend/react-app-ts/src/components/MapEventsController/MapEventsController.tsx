@@ -19,7 +19,7 @@ export const MapEventsController: React.FC<MapEventsControllerProps> = ({
     useEffect(() => {
         console.log("Selected tour route was changed.");
 
-        const firstPoint = waypointsHook.points[0];
+        const firstPoint = waypointsHook.state[0];
         if (firstPoint) {
             // map.panTo(firstPoint.latLng);
         }

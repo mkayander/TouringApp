@@ -19,14 +19,14 @@ const getClosestWaypointIndex = (points: Waypoint[], target: LatLng): number => 
 };
 
 export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, waypointsHook}) => {
-    const {points, lastPoint, addPos, insertPos, removeWaypoint} = waypointsHook;
+    const {state, addPos, insertPos, removeItem} = waypointsHook;
     const [hoverPoint, setHoverPoint] = useState<LatLng | null>(null);
     const [targetWaypointIndex, setTargetWaypointIndex] = useState<number | null>(null);
     const {activeTool} = toolsHook;
 
     useMapEvents({
         click(e) {
-	    console.log("Map click: ", e.latlng);
+            console.log("Map click: ", e.latlng);
             switch (activeTool) {
                 case EditTool.Draw:
                     addPos(e.latlng);
@@ -40,7 +40,7 @@ export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, waypoi
 
                 case EditTool.Delete:
                     if (targetWaypointIndex !== null) {
-                        removeWaypoint(points[targetWaypointIndex]);
+                        removeItem(state[targetWaypointIndex]);
                         setTargetWaypointIndex(null);
                     }
                     break;
@@ -52,7 +52,7 @@ export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, waypoi
             setHoverPoint(e.latlng);
 
             if (activeTool === EditTool.Delete || activeTool === EditTool.Insert) {
-                setTargetWaypointIndex(getClosestWaypointIndex(points, e.latlng));
+                setTargetWaypointIndex(getClosestWaypointIndex(state, e.latlng));
             }
         },
         mouseout() {
@@ -63,27 +63,33 @@ export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, waypoi
 
     const color = "red";
 
+    const lastItem = waypointsHook.lastItem();
+
     return (
         <div>
-            {points.length > 0 ? (
+            {waypointsHook.isNotEmpty() ? (
                 <>
-                    <CircleMarker center={points[0].latLng} radius={2} color={color}/>
+                    {/*Start marker*/}
+                    <CircleMarker center={state[0].latLng} radius={2} color={color}/>
 
                     {hoverPoint && (
                         <>
-                            {(activeTool === EditTool.Draw) &&
-                            <Polyline positions={[lastPoint().latLng, hoverPoint]} color={color} opacity={0.5}/>}
+                            {/* Draw tool rendering */}
+                            {(activeTool === EditTool.Draw) && lastItem &&
+                            <Polyline positions={[lastItem.latLng, hoverPoint]} color={color} opacity={0.5}/>}
 
-                            {(activeTool === EditTool.Delete && targetWaypointIndex !== null && points[targetWaypointIndex]) &&
-                            <CircleMarker center={points[targetWaypointIndex].latLng} radius={5} color={"orange"}
+                            {/* Delete tool rendering */}
+                            {(activeTool === EditTool.Delete && targetWaypointIndex !== null && state[targetWaypointIndex]) &&
+                            <CircleMarker center={state[targetWaypointIndex].latLng} radius={5} color={"orange"}
                                           opacity={0.75}/>}
 
+                            {/* Insert tool rendering */}
                             {(activeTool === EditTool.Insert && targetWaypointIndex !== null) && (
                                 <>
-                                    <Polyline positions={[points[targetWaypointIndex].latLng, hoverPoint]} color={color}
+                                    <Polyline positions={[state[targetWaypointIndex].latLng, hoverPoint]} color={color}
                                               opacity={0.5}/>
                                     <Polyline
-                                        positions={[hoverPoint, points[Math.min(targetWaypointIndex + 1, points.length - 1)].latLng]}
+                                        positions={[hoverPoint, state[Math.min(targetWaypointIndex + 1, state.length - 1)].latLng]}
                                         color={color}
                                         opacity={0.5}/>
                                 </>
@@ -93,9 +99,11 @@ export const DrawController: React.FC<DrawControllerProps> = ({toolsHook, waypoi
                 </>
             ) : null}
 
-            <Polyline positions={points.map(value => value.latLng)} color={color} renderer={L.svg({padding: 100})}/>
+            <Polyline positions={state.map(value => value.latLng)} color={color} renderer={L.svg({padding: 100})}/>
 
-            {points.length > 1 && <CircleMarker center={lastPoint().latLng} radius={2} color={color}/>}
+            {/*End marker*/}
+            {lastItem &&
+            <CircleMarker center={lastItem.latLng} radius={2} color={color}/>}
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
+import {MapContainer, TileLayer} from "react-leaflet";
 import {LocationMarker} from "../LocationMarker/LocationMarker";
 import {DrawController} from "../DrawController/DrawController";
 import React, {Dispatch, useEffect, useState} from "react";
@@ -10,6 +10,7 @@ import {MapEventsController} from "../MapEventsController/MapEventsController";
 import {WaypointsHook} from "../../hooks/useWaypoints";
 import {TourRouteHook} from "../../hooks/useTourRoute";
 import {EditTool, EditToolsHook} from "../../hooks/useEditTools";
+import {DestinationsController} from "../DestinationsController/DestinationsController";
 
 
 enum CursorMode {
@@ -104,15 +105,17 @@ export const MapView: React.FC<MapViewProps> = ({
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={startPosition}>
-                    <Popup>
-                        Это стартовая точка данной карты <br/>
-                        В данном случае, это "ИСТ РГУТиС".
-                    </Popup>
-                </Marker>
+                {/*<Marker position={startPosition}>*/}
+                {/*    <Popup>*/}
+                {/*        Это стартовая точка данной карты <br/>*/}
+                {/*        В данном случае, это "ИСТ РГУТиС".*/}
+                {/*    </Popup>*/}
+                {/*</Marker>*/}
                 <LocationMarker/>
                 <DrawController toolsHook={toolsHook} routeHook={routeHook}
                                 waypointsHook={waypointsHook}/>
+
+                <DestinationsController toolsHook={toolsHook} routeHook={routeHook}/>
 
                 <MapEventsController handlers={handlers} activeRouteId={routeHook.routeId}
                                      waypointsHook={waypointsHook}/>

@@ -1,11 +1,22 @@
-import {useEffect, useState} from "react";
 import {Waypoint} from "../api/models/Waypoint";
 import {LatLng} from "leaflet";
 import {TourRouteHook} from "./useTourRoute";
+import {ArrayHook, useGenericArrayHook} from "./generics/useGenericArrayHook";
+import {useEffect} from "react";
 
+export interface WaypointsHook extends ArrayHook<Waypoint> {
+    addPos(latLng: LatLng): void
 
-export const useWaypoints = (routeHook: TourRouteHook) => {
-    const [points, setPoints] = useState<Waypoint[]>([]);
+    insertPos(latLng: LatLng, index: number): void
+
+    getLatLngList(): LatLng[]
+}
+
+export const useWaypoints = (routeHook: TourRouteHook): WaypointsHook => {
+    const arrayHook = useGenericArrayHook<Waypoint>([]);
+    const {state: points, setState: setPoints} = arrayHook;
+
+    // const [state, setPoints] = useState<Waypoint[]>([]);
 
     useEffect(() => {
         const newPoints = routeHook.activeRoute?.waypoints;
@@ -13,21 +24,6 @@ export const useWaypoints = (routeHook: TourRouteHook) => {
             setPoints(newPoints);
         }
     }, [routeHook.activeRoute?.waypoints]);
-
-    const addPoint = (point: Waypoint) => {
-        setPoints([...points, point]);
-    };
-
-    const removeWaypoint = (point: Waypoint) => {
-        const newList = points.filter(value => value !== point);
-        setPoints(newList);
-    };
-
-    const getPoint = (index: number) => points.length > index ? points[index] : null;
-
-    const lastPoint = () => points[points.length - 1];
-
-    const middlePoint = () => points[points.length / 2];
 
     const addPos = (latLng: LatLng) => {
         setPoints([...points, Waypoint.fromLatLng(latLng)]);
@@ -44,17 +40,9 @@ export const useWaypoints = (routeHook: TourRouteHook) => {
     };
 
     return {
-        points,
-        setPoints,
-        addPoint,
-        removeWaypoint,
-        getPoint,
         addPos,
         insertPos,
         getLatLngList,
-        lastPoint,
-        middlePoint,
+        ...arrayHook
     };
 };
-
-export type WaypointsHook = ReturnType<typeof useWaypoints>
