@@ -1,0 +1,1778 @@
+[
+{
+  "model": "routes.route",
+  "pk": 1,
+  "fields": {
+    "created_at": "2021-04-06T13:51:40.247Z",
+    "updated_at": "2021-04-11T18:02:24.722Z",
+    "title": "Подольские Лётчики",
+    "short_description": "\"Вечная слава героям-летчикам Подольска\"",
+    "description": "В год 75-летия Победы мы отдаем дань уважения воинам-освободителям.\r\nВспомним о подвиге Героев-летчиков, Подольчан.\r\nДолг живущих на Земле – вечно помнить, знать героев Великой Отечественной войны.",
+    "image": "route_headers/tKYhe5dmkkI.jpg"
+  }
+},
+{
+  "model": "routes.route",
+  "pk": 2,
+  "fields": {
+    "created_at": "2021-04-06T13:53:06.614Z",
+    "updated_at": "2021-04-07T13:07:25.929Z",
+    "title": "Памятник Талалихину",
+    "short_description": "Память о первом",
+    "description": "Стоит на живописном месте",
+    "image": "route_headers/Black-Lungs-Architects-min.png"
+  }
+},
+{
+  "model": "routes.route",
+  "pk": 3,
+  "fields": {
+    "created_at": "2021-04-11T18:02:40.233Z",
+    "updated_at": "2021-04-12T08:12:07.742Z",
+    "title": "Прогулка",
+    "short_description": null,
+    "description": "Прямо у дома",
+    "image": "route_headers/104956_1.jpg"
+  }
+},
+{
+  "model": "routes.route",
+  "pk": 4,
+  "fields": {
+    "created_at": "2021-04-11T18:05:10.398Z",
+    "updated_at": "2021-04-12T08:11:51.355Z",
+    "title": "Деловые Линии",
+    "short_description": null,
+    "description": "Большой Распределительный Центр",
+    "image": "route_headers/abc-photo-67924093_1280x0.jpg"
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 69,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.947Z",
+    "updated_at": "2021-04-11T18:02:24.947Z",
+    "longitude": "37.563910154797696",
+    "latitude": "55.431803879695210",
+    "index": 0,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 70,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.947Z",
+    "updated_at": "2021-04-11T18:02:24.947Z",
+    "longitude": "37.563609592735460",
+    "latitude": "55.431861741288950",
+    "index": 1,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 71,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.947Z",
+    "updated_at": "2021-04-11T18:02:24.947Z",
+    "longitude": "37.563770608125960",
+    "latitude": "55.432184546518776",
+    "index": 2,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 72,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.947Z",
+    "updated_at": "2021-04-11T18:02:24.947Z",
+    "longitude": "37.563572022477710",
+    "latitude": "55.432208909070500",
+    "index": 3,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 73,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.947Z",
+    "updated_at": "2021-04-11T18:02:24.947Z",
+    "longitude": "37.562922593736126",
+    "latitude": "55.432114504098784",
+    "index": 4,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 74,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.947Z",
+    "updated_at": "2021-04-11T18:02:24.947Z",
+    "longitude": "37.562793781423740",
+    "latitude": "55.432364219984410",
+    "index": 5,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 75,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.947Z",
+    "updated_at": "2021-04-11T18:02:24.947Z",
+    "longitude": "37.558232109511540",
+    "latitude": "55.431621163264830",
+    "index": 6,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 76,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.947Z",
+    "updated_at": "2021-04-11T18:02:24.947Z",
+    "longitude": "37.557852674652410",
+    "latitude": "55.431563601540990",
+    "index": 7,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 77,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.947Z",
+    "updated_at": "2021-04-11T18:02:24.947Z",
+    "longitude": "37.556516246911540",
+    "latitude": "55.432206168918630",
+    "index": 8,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 78,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.947Z",
+    "updated_at": "2021-04-11T18:02:24.947Z",
+    "longitude": "37.556253255107090",
+    "latitude": "55.432184851685214",
+    "index": 9,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 79,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.556108341255680",
+    "latitude": "55.432236622089270",
+    "index": 10,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 80,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.556301559724230",
+    "latitude": "55.432398023501480",
+    "index": 11,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 81,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.554981233522376",
+    "latitude": "55.432888314310590",
+    "index": 12,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 82,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.554830952491280",
+    "latitude": "55.432952264836760",
+    "index": 13,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 83,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.553473056031650",
+    "latitude": "55.431813320911250",
+    "index": 14,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 84,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.552038904821690",
+    "latitude": "55.432342426118765",
+    "index": 15,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 85,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.548979612402780",
+    "latitude": "55.433581846907515",
+    "index": 16,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 86,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.548587808285950",
+    "latitude": "55.433737152420070",
+    "index": 17,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 87,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.548485831872000",
+    "latitude": "55.433737152420070",
+    "index": 18,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 88,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.547192341568575",
+    "latitude": "55.432707861354720",
+    "index": 19,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 89,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.545898851265100",
+    "latitude": "55.431648089850940",
+    "index": 20,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 90,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.545668062538780",
+    "latitude": "55.431468413126080",
+    "index": 21,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 91,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.544916657383240",
+    "latitude": "55.431127329636084",
+    "index": 22,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 92,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.543097183470940",
+    "latitude": "55.430542608225990",
+    "index": 23,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 93,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.542479957807444",
+    "latitude": "55.430752743479600",
+    "index": 24,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 94,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.542292106518560",
+    "latitude": "55.430700971129660",
+    "index": 25,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 95,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.948Z",
+    "updated_at": "2021-04-11T18:02:24.948Z",
+    "longitude": "37.542887863463335",
+    "latitude": "55.430481699247750",
+    "index": 26,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 96,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.542963003978860",
+    "latitude": "55.430499971951070",
+    "index": 27,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 97,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.543306503478554",
+    "latitude": "55.430161925570280",
+    "index": 28,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 98,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.543443770498140",
+    "latitude": "55.430047818909166",
+    "index": 29,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 99,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.544442065919070",
+    "latitude": "55.429770678826060",
+    "index": 30,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 100,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.544828502856200",
+    "latitude": "55.429657994939260",
+    "index": 31,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 101,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.545048557223170",
+    "latitude": "55.429594039076690",
+    "index": 32,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 102,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.545719454683470",
+    "latitude": "55.429557492822970",
+    "index": 33,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 103,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.545757024941260",
+    "latitude": "55.428573776783960",
+    "index": 34,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 104,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.545107596199680",
+    "latitude": "55.428674281404320",
+    "index": 35,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 105,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.544506472075240",
+    "latitude": "55.428881381027416",
+    "index": 36,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 106,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.542005366343275",
+    "latitude": "55.429694541099956",
+    "index": 37,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 107,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.541951694546476",
+    "latitude": "55.429755451292580",
+    "index": 38,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 108,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.541237859648724",
+    "latitude": "55.429548356254244",
+    "index": 39,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 109,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.540040978579550",
+    "latitude": "55.429109798469575",
+    "index": 40,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 110,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.539217371306800",
+    "latitude": "55.428851570296450",
+    "index": 41,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 111,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.537338858417960",
+    "latitude": "55.428269860803450",
+    "index": 42,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 112,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.949Z",
+    "updated_at": "2021-04-11T18:02:24.949Z",
+    "longitude": "37.536583651939765",
+    "latitude": "55.428041730502756",
+    "index": 43,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 113,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.536433370908670",
+    "latitude": "55.428035639223350",
+    "index": 44,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 114,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.535971793455964",
+    "latitude": "55.427895539537474",
+    "index": 45,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 115,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.535821512424870",
+    "latitude": "55.427752393692806",
+    "index": 46,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 116,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.535708801651550",
+    "latitude": "55.427676252074620",
+    "index": 47,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 117,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.534018140051590",
+    "latitude": "55.427152393761475",
+    "index": 48,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 118,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.533942999536066",
+    "latitude": "55.427155439469410",
+    "index": 49,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 119,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.533041313349430",
+    "latitude": "55.426866096164870",
+    "index": 50,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 120,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.532785149638860",
+    "latitude": "55.426942983390370",
+    "index": 51,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 121,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.529709755680890",
+    "latitude": "55.426004889186160",
+    "index": 52,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 122,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.529543544333200",
+    "latitude": "55.426041656502520",
+    "index": 53,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 123,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.528700897123070",
+    "latitude": "55.425776671557430",
+    "index": 54,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 124,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.528690162763716",
+    "latitude": "55.425651792978330",
+    "index": 55,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 125,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.526972665265330",
+    "latitude": "55.425121816077540",
+    "index": 56,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 126,
+  "fields": {
+    "created_at": "2021-04-11T18:02:24.950Z",
+    "updated_at": "2021-04-11T18:02:24.950Z",
+    "longitude": "37.526548658070460",
+    "latitude": "55.425539097336255",
+    "index": 57,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 127,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.015Z",
+    "updated_at": "2021-04-11T18:02:25.015Z",
+    "longitude": "37.522800026915490",
+    "latitude": "55.429490927082360",
+    "index": 58,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 128,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.015Z",
+    "updated_at": "2021-04-11T18:02:25.015Z",
+    "longitude": "37.522510140885270",
+    "latitude": "55.429423997135210",
+    "index": 59,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 129,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.015Z",
+    "updated_at": "2021-04-11T18:02:25.015Z",
+    "longitude": "37.522536982184380",
+    "latitude": "55.429347940239340",
+    "index": 60,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 130,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.015Z",
+    "updated_at": "2021-04-11T18:02:25.015Z",
+    "longitude": "37.522268569193420",
+    "latitude": "55.429256671770910",
+    "index": 61,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 131,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.522069943580110",
+    "latitude": "55.429271883196960",
+    "index": 62,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 132,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.521264704607326",
+    "latitude": "55.429341855681340",
+    "index": 63,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 133,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.520888926419990",
+    "latitude": "55.429171487676705",
+    "index": 64,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 134,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.520888926419990",
+    "latitude": "55.428617786584470",
+    "index": 65,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 135,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.520303786099760",
+    "latitude": "55.428505220028060",
+    "index": 66,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 136,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.520035373108804",
+    "latitude": "55.427534700460356",
+    "index": 67,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 137,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.519332131072560",
+    "latitude": "55.427598591196755",
+    "index": 68,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 138,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.518246873064260",
+    "latitude": "55.423806212318205",
+    "index": 69,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 139,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.518848118163930",
+    "latitude": "55.423209837485544",
+    "index": 70,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 140,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.519234632870890",
+    "latitude": "55.422811234999564",
+    "index": 71,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 141,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.519532339502916",
+    "latitude": "55.422637029394720",
+    "index": 72,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 142,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.526559391605680",
+    "latitude": "55.424934273441070",
+    "index": 73,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 143,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.526645283762790",
+    "latitude": "55.424891676754240",
+    "index": 74,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 144,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.526988852391170",
+    "latitude": "55.424462664703710",
+    "index": 75,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 145,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.527960507418370",
+    "latitude": "55.423458575727980",
+    "index": 76,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 146,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.528298707786960",
+    "latitude": "55.423066061278625",
+    "index": 77,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 147,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.528400704723540",
+    "latitude": "55.423093446134274",
+    "index": 78,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 148,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.016Z",
+    "updated_at": "2021-04-11T18:02:25.016Z",
+    "longitude": "37.530027311779946",
+    "latitude": "55.421303315285385",
+    "index": 79,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 149,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.530645107306640",
+    "latitude": "55.420664352949146",
+    "index": 80,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 150,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.531096041131406",
+    "latitude": "55.420475689732754",
+    "index": 81,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 151,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.532239480472820",
+    "latitude": "55.420177478294590",
+    "index": 82,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 152,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.534155949228100",
+    "latitude": "55.419690597638116",
+    "index": 83,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 153,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.534376047880690",
+    "latitude": "55.419909694676260",
+    "index": 84,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 154,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.534703511729600",
+    "latitude": "55.419824490416985",
+    "index": 85,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 155,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.536883025216056",
+    "latitude": "55.421936284662630",
+    "index": 86,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 156,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.537956677179790",
+    "latitude": "55.421619827011696",
+    "index": 87,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 157,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.539126957820310",
+    "latitude": "55.421269894926200",
+    "index": 88,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 158,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.539695993361070",
+    "latitude": "55.421260766221610",
+    "index": 89,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 159,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.542568012364130",
+    "latitude": "55.421288152329050",
+    "index": 90,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 160,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.542621694962335",
+    "latitude": "55.420862144063160",
+    "index": 91,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 161,
+  "fields": {
+    "created_at": "2021-04-11T18:02:25.017Z",
+    "updated_at": "2021-04-11T18:02:25.017Z",
+    "longitude": "37.542525066285600",
+    "latitude": "55.420840843529234",
+    "index": 92,
+    "route": 1,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 162,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.824Z",
+    "updated_at": "2021-04-11T18:04:27.824Z",
+    "longitude": "37.498575333167050",
+    "latitude": "55.420200815508736",
+    "index": 0,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 163,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.824Z",
+    "updated_at": "2021-04-11T18:04:27.824Z",
+    "longitude": "37.498441126671570",
+    "latitude": "55.420161256702784",
+    "index": 1,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 164,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.824Z",
+    "updated_at": "2021-04-11T18:04:27.824Z",
+    "longitude": "37.498618279245620",
+    "latitude": "55.419978677084984",
+    "index": 2,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 165,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.824Z",
+    "updated_at": "2021-04-11T18:04:27.824Z",
+    "longitude": "37.498430390151940",
+    "latitude": "55.419619601374450",
+    "index": 3,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 166,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.498639752284890",
+    "latitude": "55.419394416636210",
+    "index": 4,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 167,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.499042371771280",
+    "latitude": "55.419528310419090",
+    "index": 5,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 168,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.499149736967650",
+    "latitude": "55.419899558988480",
+    "index": 6,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 169,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.499069213070380",
+    "latitude": "55.420076052986190",
+    "index": 7,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 170,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.498618279245620",
+    "latitude": "55.420629873858600",
+    "index": 8,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 171,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.496776966127760",
+    "latitude": "55.420094310940925",
+    "index": 9,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 172,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.497029274339240",
+    "latitude": "55.419814354707306",
+    "index": 10,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 173,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.497313792109630",
+    "latitude": "55.419899558988480",
+    "index": 11,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 174,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.497458735124740",
+    "latitude": "55.419762623446950",
+    "index": 12,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 175,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.497378211227470",
+    "latitude": "55.419914774019360",
+    "index": 13,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 176,
+  "fields": {
+    "created_at": "2021-04-11T18:04:27.825Z",
+    "updated_at": "2021-04-11T18:04:27.825Z",
+    "longitude": "37.497872091130800",
+    "latitude": "55.420073009992920",
+    "index": 14,
+    "route": 3,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 177,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.835Z",
+    "updated_at": "2021-04-11T18:06:25.835Z",
+    "longitude": "37.657853922430746",
+    "latitude": "55.333491928510120",
+    "index": 0,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 178,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.835Z",
+    "updated_at": "2021-04-11T18:06:25.835Z",
+    "longitude": "37.657853922430746",
+    "latitude": "55.333284551046950",
+    "index": 1,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 179,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.835Z",
+    "updated_at": "2021-04-11T18:06:25.835Z",
+    "longitude": "37.660194483711734",
+    "latitude": "55.333296749751310",
+    "index": 2,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 180,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.835Z",
+    "updated_at": "2021-04-11T18:06:25.835Z",
+    "longitude": "37.661826434696640",
+    "latitude": "55.333296749751310",
+    "index": 3,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 181,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.835Z",
+    "updated_at": "2021-04-11T18:06:25.835Z",
+    "longitude": "37.661912326853710",
+    "latitude": "55.333516325787370",
+    "index": 4,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 182,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.835Z",
+    "updated_at": "2021-04-11T18:06:25.835Z",
+    "longitude": "37.662814194503270",
+    "latitude": "55.333650510543730",
+    "index": 5,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 183,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.835Z",
+    "updated_at": "2021-04-11T18:06:25.835Z",
+    "longitude": "37.663479858720820",
+    "latitude": "55.334126252836560",
+    "index": 6,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 184,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.835Z",
+    "updated_at": "2021-04-11T18:06:25.835Z",
+    "longitude": "37.661955272932280",
+    "latitude": "55.334382419397550",
+    "index": 7,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 185,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.835Z",
+    "updated_at": "2021-04-11T18:06:25.835Z",
+    "longitude": "37.661955272932280",
+    "latitude": "55.334650782589860",
+    "index": 8,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 186,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.653688152811370",
+    "latitude": "55.334626386011140",
+    "index": 9,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 187,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.653602260654260",
+    "latitude": "55.334443411191760",
+    "index": 10,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 188,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.653580787615000",
+    "latitude": "55.333613914746160",
+    "index": 11,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 189,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.653795518007750",
+    "latitude": "55.333284551046950",
+    "index": 12,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 190,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.654418236146720",
+    "latitude": "55.333272352338850",
+    "index": 13,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 191,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.654396763107450",
+    "latitude": "55.333638311948300",
+    "index": 14,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 192,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.654697385657300",
+    "latitude": "55.334162848160950",
+    "index": 15,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 193,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.657725084195064",
+    "latitude": "55.334187245025106",
+    "index": 16,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 194,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.661396973911110",
+    "latitude": "55.334223840293184",
+    "index": 17,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 195,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.661396973911110",
+    "latitude": "55.333723702037510",
+    "index": 18,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.waypoint",
+  "pk": 196,
+  "fields": {
+    "created_at": "2021-04-11T18:06:25.836Z",
+    "updated_at": "2021-04-11T18:06:25.836Z",
+    "longitude": "37.659614711651294",
+    "latitude": "55.333699304887936",
+    "index": 19,
+    "route": 4,
+    "label": ""
+  }
+},
+{
+  "model": "routes.destination",
+  "pk": 1,
+  "fields": {
+    "created_at": "2021-04-11T18:26:00.769Z",
+    "updated_at": "2021-04-11T18:26:00.769Z",
+    "longitude": "37.563910154797696",
+    "latitude": "55.431803879695210",
+    "route": 1,
+    "title": "Старт",
+    "address": "Подольск, Вокзальная площадь",
+    "type": "simple",
+    "radius": 8,
+    "description": "Памятник Подольскому рабочему"
+  }
+},
+{
+  "model": "routes.destination",
+  "pk": 2,
+  "fields": {
+    "created_at": "2021-04-11T18:31:15.541Z",
+    "updated_at": "2021-04-13T07:48:18.489Z",
+    "longitude": "37.557971177899900",
+    "latitude": "55.431652675375000",
+    "route": 1,
+    "title": "Савельев Евгений Петрович",
+    "address": "Революционный проспект, 32/34 Подольск",
+    "type": "simple",
+    "radius": 8,
+    "description": "По этому адресу проживал Герой Советского Союза Савельев Евгений Петрович"
+  }
+},
+{
+  "model": "routes.destination",
+  "pk": 3,
+  "fields": {
+    "created_at": "2021-04-11T18:33:22.575Z",
+    "updated_at": "2021-04-11T18:33:22.575Z",
+    "longitude": "37.556082479165255",
+    "latitude": "55.433113541668796",
+    "route": 1,
+    "title": "Бывший индустриальный техникум",
+    "address": "Рабочая улица, 7",
+    "type": "sight",
+    "radius": 8,
+    "description": "В этом здании работал Евгений Петрович на должности заместителем директора индустриального техникума, в здании которого в военные годы обучались Подольские курсанты. Здесь расположена площадь Славы и памятник ВОВ."
+  }
+},
+{
+  "model": "routes.destination",
+  "pk": 4,
+  "fields": {
+    "created_at": "2021-04-11T18:35:07.686Z",
+    "updated_at": "2021-04-13T07:45:57.559Z",
+    "longitude": "37.558126406339525",
+    "latitude": "55.431654695239010",
+    "route": 1,
+    "title": "Пономарёв Василий Михайлович",
+    "address": "Проспект Ленина, 158",
+    "type": "simple",
+    "radius": 8,
+    "description": "По этому адресу проживал Герой Советского Союза Пономарёв Василий Михайлович."
+  }
+}
+]
