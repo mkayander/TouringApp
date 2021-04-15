@@ -4,23 +4,29 @@ import {EditToolsHook} from "../../hooks/useEditTools";
 import {Popup} from "react-leaflet";
 import {LatLng} from "leaflet";
 import {DraggableMarker} from "./DraggableMarker";
+import {DestinationsHook} from "../../hooks/useDestinations";
 
 type DestinationsControllerProps = {
     routeHook: TourRouteHook
     toolsHook: EditToolsHook
+    destinationsHook: DestinationsHook
 }
 
-export const DestinationsController: React.FC<DestinationsControllerProps> = ({toolsHook, routeHook}) => {
+export const DestinationsController: React.FC<DestinationsControllerProps> = ({
+                                                                                  toolsHook,
+                                                                                  routeHook,
+                                                                                  destinationsHook
+                                                                              }) => {
 
     return (
         <>
-            {routeHook.activeRoute?.destinations.map(destination =>
+            {routeHook.activeRoute?.destinations.map((destination, index) =>
                 <DraggableMarker
                     key={destination.pk}
                     draggable={true}
                     position={new LatLng(destination.latitude, destination.longitude)}
                     onMarkerMoved={(event) => {
-                        console.log("Marker was moved! : ", event, event.target.getLatLng());
+                        destinationsHook.updateLocation(index, event.target.getLatLng());
                     }}
                 >
                     <Popup>

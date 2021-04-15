@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {Dispatch, useState} from "react";
 
 export interface ArrayHook<Type> {
     state: Type[]
@@ -18,12 +18,17 @@ export interface ArrayHook<Type> {
     middleItem(): Type | null
 }
 
-export interface PrivateArrayHook<Type> extends ArrayHook<Type>{
+export interface PrivateArrayHook<Type> extends ArrayHook<Type> {
     setState: React.Dispatch<Type[]>
 }
 
 export function useGenericArrayHook<Type>(initialValue: Type[]): PrivateArrayHook<Type> {
     const [state, setState] = useState(initialValue);
+    return useNestedGenericArrayHook<Type>(initialValue, state, setState);
+}
+
+export function useNestedGenericArrayHook<Type>(initialValue: Type[], state: Type[], setState: Dispatch<Type[]>): PrivateArrayHook<Type> {
+    // const [state, setState] = useState(initialValue);
     const isEmpty = (): boolean => state.length === 0;
     const isNotEmpty = (): boolean => state.length > 0;
 

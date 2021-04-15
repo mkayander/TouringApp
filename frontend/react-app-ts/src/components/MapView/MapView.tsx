@@ -11,6 +11,7 @@ import {WaypointsHook} from "../../hooks/useWaypoints";
 import {TourRouteHook} from "../../hooks/useTourRoute";
 import {EditTool, EditToolsHook} from "../../hooks/useEditTools";
 import {DestinationsController} from "../DestinationsController/DestinationsController";
+import {DestinationsHook} from "../../hooks/useDestinations";
 
 
 enum CursorMode {
@@ -63,6 +64,8 @@ type MapViewProps = {
     dragging?: boolean
     routeHook: TourRouteHook
     waypointsHook: WaypointsHook
+    destinationsHook: DestinationsHook
+    panTarget?: LatLng
 }
 
 export const MapView: React.FC<MapViewProps> = ({
@@ -72,7 +75,9 @@ export const MapView: React.FC<MapViewProps> = ({
                                                     defaultZoom,
                                                     toolsHook,
                                                     routeHook,
-                                                    waypointsHook
+                                                    waypointsHook,
+                                                    destinationsHook,
+                                                    panTarget
                                                 }) => {
 
     const [cursorMode, setCursorMode] = useState<CursorMode>(CursorMode.Default);
@@ -105,20 +110,17 @@ export const MapView: React.FC<MapViewProps> = ({
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {/*<Marker position={startPosition}>*/}
-                {/*    <Popup>*/}
-                {/*        Это стартовая точка данной карты <br/>*/}
-                {/*        В данном случае, это "ИСТ РГУТиС".*/}
-                {/*    </Popup>*/}
-                {/*</Marker>*/}
+
                 <LocationMarker/>
+
                 <DrawController toolsHook={toolsHook} routeHook={routeHook}
                                 waypointsHook={waypointsHook}/>
 
-                <DestinationsController toolsHook={toolsHook} routeHook={routeHook}/>
+                <DestinationsController toolsHook={toolsHook} routeHook={routeHook}
+                                        destinationsHook={destinationsHook}/>
 
                 <MapEventsController handlers={handlers} activeRouteId={routeHook.routeId}
-                                     waypointsHook={waypointsHook}/>
+                                     waypointsHook={waypointsHook} panTarget={panTarget}/>
             </MapContainer>
         </Overlay>
     );

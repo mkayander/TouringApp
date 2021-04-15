@@ -1,5 +1,5 @@
 import React, {useMemo} from "react";
-import {Marker, MarkerProps, Popup} from "react-leaflet";
+import {Marker, MarkerProps} from "react-leaflet";
 import {DragEndEvent, LeafletEventHandlerFnMap} from "leaflet";
 
 type DraggableMarkerProps = MarkerProps & {
@@ -19,9 +19,6 @@ export const DraggableMarker: React.FC<DraggableMarkerProps> = ({onMarkerMoved, 
     );
 
     return (
-        <Marker eventHandlers={eventHandlers} draggable={draggable} {...rest}>
-            <Popup>
-            </Popup>
-        </Marker>
+        <Marker eventHandlers={eventHandlers} draggable={draggable} {...rest}/>
     );
 };

@@ -11,8 +11,9 @@ import {
 } from "../api/api";
 import {toast} from "react-toastify";
 import {AxiosResponse} from "axios";
+import {Destination} from "../api/models/Destination";
 
-export const useTourRoute = () => {
+export const useTourRoute = (onRouteChanged?: (route: TourRoute | null) => void) => {
     const [routeId, setRouteId] = useQueryParam("routeId", NumberParam);
     const [activeRoute, setActiveRoute] = useState<TourRoute | null>(null);
 
@@ -24,21 +25,25 @@ export const useTourRoute = () => {
             .catch(reason => toast.error(`❌ Ошибка при загрузке списка туров! ${reason}`));
     };
 
-    const refreshFullActiveRoute = () => {
+    const refreshFullActiveRoute = (): boolean => {
         if (routeId === null || routeId === undefined) {
             setActiveRoute(null);
-            return;
+            onRouteChanged?.call(this, null)
+            return false;
         }
 
         fetchRouteData(routeId)
             .then(newRoute => {
                 setActiveRoute(newRoute);
+                onRouteChanged?.call(this, newRoute);
                 toast.dark(`Загружен тур "${newRoute.title}"`, {autoClose: 2000});
             })
             .catch(reason => {
                 setRouteId(null);
                 toast.error(`❌ Ошибка при загрузке данных о туре! ${reason}`);
             });
+
+        return true;
     };
 
     useEffect(() => {
@@ -83,7 +88,15 @@ export const useTourRoute = () => {
             });
     };
 
-    return {routeId, setRouteId, activeRoute, routesList, repostRoute, createRoute, deleteRoute};
+    const updateDestinations = (destinations: Destination[]) => {
+        if (activeRoute === null) return;
+
+        const newRoute = activeRoute.clone();
+        newRoute.destinations = destinations;
+        setActiveRoute(newRoute);
+    };
+
+    return {routeId, setRouteId, activeRoute, routesList, repostRoute, createRoute, deleteRoute, updateDestinations};
 };
 
 export type TourRouteHook = ReturnType<typeof useTourRoute>

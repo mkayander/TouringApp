@@ -1,14 +1,20 @@
 import {useEffect} from "react";
 import {TourRouteHook} from "./useTourRoute";
 import {Destination} from "../api/models/Destination";
-import {ArrayHook, useGenericArrayHook} from "./generics/useGenericArrayHook";
+import {ArrayHook, useNestedGenericArrayHook} from "./generics/useGenericArrayHook";
+import {LatLng} from "leaflet";
 
-interface DestinationHook extends ArrayHook<Destination> {
+export interface DestinationsHook extends ArrayHook<Destination> {
     updateDestination(item: Destination): boolean
+    updateLocation(index: number, latLng: LatLng): boolean
 }
 
-export const useDestinations = (routeHook: TourRouteHook): DestinationHook => {
-    const arrayHook = useGenericArrayHook<Destination>([]);
+export const useDestinations = (routeHook: TourRouteHook): DestinationsHook => {
+    const arrayHook = useNestedGenericArrayHook<Destination>([],
+        routeHook.activeRoute?.destinations || [],
+        destinations => {
+            routeHook.updateDestinations(destinations);
+        });
     const {state: destinations, setState: setDestinations} = arrayHook;
 
     useEffect(() => {
@@ -33,8 +39,22 @@ export const useDestinations = (routeHook: TourRouteHook): DestinationHook => {
         return isSuccessfull;
     };
 
+    const updateLocation = (index: number, latLng: LatLng): boolean => {
+        if (!(index in destinations)) return false;
+
+        destinations.splice(index, 1, {
+            ...destinations[index],
+            latitude: latLng.lat,
+            longitude: latLng.lng,
+        });
+        setDestinations(destinations);
+
+        return true;
+    };
+
     return {
         updateDestination,
+        updateLocation,
         ...arrayHook
     };
 };

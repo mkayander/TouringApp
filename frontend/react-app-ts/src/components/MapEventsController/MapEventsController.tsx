@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {LeafletEventHandlerFnMap} from "leaflet";
+import {LatLng, LeafletEventHandlerFnMap} from "leaflet";
 import {useMapEvents} from "react-leaflet";
 import {WaypointsHook} from "../../hooks/useWaypoints";
 
@@ -7,12 +7,14 @@ type MapEventsControllerProps = {
     handlers: LeafletEventHandlerFnMap
     activeRouteId?: number | null
     waypointsHook: WaypointsHook
+    panTarget?: LatLng
 }
 
 export const MapEventsController: React.FC<MapEventsControllerProps> = ({
                                                                             handlers,
                                                                             activeRouteId,
-                                                                            waypointsHook
+                                                                            waypointsHook,
+                                                                            panTarget
                                                                         }) => {
     const map = useMapEvents(handlers);
 
@@ -25,6 +27,10 @@ export const MapEventsController: React.FC<MapEventsControllerProps> = ({
         }
 
     }, [activeRouteId]);
+
+    useEffect(() => {
+        panTarget && map.panTo(panTarget);
+    }, [panTarget]);
 
     return null;
 };

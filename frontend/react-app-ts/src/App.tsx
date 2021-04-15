@@ -13,6 +13,7 @@ import {TourRouteHook, useTourRoute} from "./hooks/useTourRoute";
 import {EditTool, useEditTools} from "./hooks/useEditTools";
 import {toast} from "react-toastify";
 import {useModal} from "./hooks/useModal";
+import {DestinationsHook, useDestinations} from "./hooks/useDestinations";
 
 
 const Toolbar = styled.ul`
@@ -62,24 +63,34 @@ function App() {
 
     const tools = useEditTools();
 
+    const [mapInstance, setMapInstance] = useState<LeafletMap>();
+    const [userPosition, setUserPosition] = useState<LatLng>();
+
+    const [panTarget, setPanTarget] = useState<LatLng>();
+
     // Tour route hook
-    const routeHook: TourRouteHook = useTourRoute();
+    const routeHook: TourRouteHook = useTourRoute(route => {
+        const newPoints = route?.waypoints;
+        if (newPoints && newPoints[0]) {
+            setPanTarget(newPoints[0].latLng);
+        }
+    });
 
     // Waypoints hook
     const pointsHook: WaypointsHook = useWaypoints(routeHook);
 
-    const modalHook = useModal(routeHook);
+    const destinationsHook: DestinationsHook = useDestinations(routeHook);
 
-    const [mapInstance, setMapInstance] = useState<LeafletMap>();
-    const [userPosition, setUserPosition] = useState<LatLng>();
+    // Modal hook
+    const modalHook = useModal(routeHook);
 
     const {activeRoute, repostRoute} = routeHook;
 
     useEffect(() => {
-        const newPoints = routeHook.activeRoute?.waypoints;
-        if (newPoints && newPoints[0]) {
-            mapInstance?.panTo(newPoints[0].latLng);
-        }
+        // const newPoints = routeHook.activeRoute?.waypoints;
+        // if (newPoints && newPoints[0]) {
+        //     mapInstance?.panTo(newPoints[0].latLng);
+        // }
 
         console.log("route: ", routeHook.activeRoute);
     }, [mapInstance, routeHook.activeRoute]);
@@ -131,7 +142,7 @@ function App() {
                 <MapView setMapInstance={setMapInstance} setUserPosition={setUserPosition} startPosition={startPos}
                          defaultZoom={13}
                          toolsHook={tools} routeHook={routeHook}
-                         waypointsHook={pointsHook}/>
+                         waypointsHook={pointsHook} destinationsHook={destinationsHook} panTarget={panTarget}/>
             </Container>
 
             {ModalComponent && <ModalComponent/>}
