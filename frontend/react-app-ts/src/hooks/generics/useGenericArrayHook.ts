@@ -3,8 +3,6 @@ import React, {useState} from "react";
 export interface ArrayHook<Type> {
     state: Type[]
 
-    setState: React.Dispatch<Type[]>
-
     isEmpty(): boolean
 
     isNotEmpty(): boolean;
@@ -20,7 +18,11 @@ export interface ArrayHook<Type> {
     middleItem(): Type | null
 }
 
-export function useGenericArrayHook<Type>(initialValue: Type[]): ArrayHook<Type> {
+export interface PrivateArrayHook<Type> extends ArrayHook<Type>{
+    setState: React.Dispatch<Type[]>
+}
+
+export function useGenericArrayHook<Type>(initialValue: Type[]): PrivateArrayHook<Type> {
     const [state, setState] = useState(initialValue);
     const isEmpty = (): boolean => state.length === 0;
     const isNotEmpty = (): boolean => state.length > 0;
