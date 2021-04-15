@@ -5,9 +5,8 @@ import './App.css';
 import {ToolButton} from "./components/ToggleButton/ToolButton";
 import {MapView} from "./components/MapView/MapView";
 import {Sidebar} from "./components/Sidebar/Sidebar";
-import {TourRoute} from "./api/models/TourRoute";
 import styled from "styled-components";
-import {FaArrowAltCircleDown, FaPen, FaRemoveFormat, FaSatelliteDish, FaSave} from "react-icons/fa";
+import {FaArrowAltCircleDown, FaHandHolding, FaPen, FaRemoveFormat, FaSatelliteDish, FaSave} from "react-icons/fa";
 import {useWaypoints, WaypointsHook} from "./hooks/useWaypoints";
 import {TourRouteHook, useTourRoute} from "./hooks/useTourRoute";
 import {EditTool, useEditTools} from "./hooks/useEditTools";
@@ -118,6 +117,10 @@ function App() {
                         <ToolButton label={"Вставить точки маршрута"} icon={<FaArrowAltCircleDown/>}
                                     active={tools.activeTool === EditTool.Insert}
                                     onClick={() => tools.toggleTool(EditTool.Insert)}/>
+
+                        <ToolButton label={"Переместить целевые точки"} icon={<FaHandHolding/>}
+                                    active={tools.activeTool === EditTool.Drag}
+                                    onClick={() => tools.toggleTool(EditTool.Drag)}/>
                     </Toolbar>
 
                     <Toolbar style={{justifyContent: "end", marginLeft: "auto"}}>
@@ -129,12 +132,8 @@ function App() {
 
                         <ToolButton label={"Сохранить изменения"} icon={<FaSave/>}
                                     onClick={() => {
-                                        if (!activeRoute) return;
-
-                                        const newTour: TourRoute = activeRoute.clone();
-                                        newTour.waypoints = pointsHook.state;
-
-                                        repostRoute(newTour).then();
+                                        pointsHook.apply(); // Apply drawed hooks to actual tour state
+                                        routeHook.repostRoute()?.then(); // Send our new tour to server
                                     }}/>
                     </Toolbar>
                 </div>

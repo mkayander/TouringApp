@@ -12,6 +12,7 @@ import {
 import {toast} from "react-toastify";
 import {AxiosResponse} from "axios";
 import {Destination} from "../api/models/Destination";
+import {Waypoint} from "../api/models/Waypoint";
 
 export const useTourRoute = (onRouteChanged?: (route: TourRoute | null) => void) => {
     const [routeId, setRouteId] = useQueryParam("routeId", NumberParam);
@@ -28,7 +29,7 @@ export const useTourRoute = (onRouteChanged?: (route: TourRoute | null) => void)
     const refreshFullActiveRoute = (): boolean => {
         if (routeId === null || routeId === undefined) {
             setActiveRoute(null);
-            onRouteChanged?.call(this, null)
+            onRouteChanged?.call(this, null);
             return false;
         }
 
@@ -54,8 +55,10 @@ export const useTourRoute = (onRouteChanged?: (route: TourRoute | null) => void)
         refreshFullActiveRoute();
     }, [routeId]);
 
-    const repostRoute = (route: TourRoute) => {
-        return repostRouteData(route)
+    const repostRoute = () => {
+        if (activeRoute === null) return;
+
+        return repostRouteData(activeRoute)
             .then(route => {
                 setActiveRoute(route);
                 toast.success(`✅ Тур "${route.title}" сохранён успешно!`);
@@ -96,7 +99,26 @@ export const useTourRoute = (onRouteChanged?: (route: TourRoute | null) => void)
         setActiveRoute(newRoute);
     };
 
-    return {routeId, setRouteId, activeRoute, routesList, repostRoute, createRoute, deleteRoute, updateDestinations};
+    const updateWaypoints = (waypoints: Waypoint[]) => {
+        if (activeRoute === null) return;
+
+        const newRoute = activeRoute.clone();
+        newRoute.waypoints = waypoints;
+        setActiveRoute(newRoute);
+    };
+
+    return {
+        routeId,
+        setRouteId,
+        activeRoute,
+        routesList,
+
+        repostRoute,
+        createRoute,
+        deleteRoute,
+        updateDestinations,
+        updateWaypoints
+    };
 };
 
 export type TourRouteHook = ReturnType<typeof useTourRoute>

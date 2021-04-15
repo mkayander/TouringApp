@@ -10,6 +10,8 @@ export interface WaypointsHook extends ArrayHook<Waypoint> {
     insertPos(latLng: LatLng, index: number): void
 
     getLatLngList(): LatLng[]
+
+    apply(): void
 }
 
 export const useWaypoints = (routeHook: TourRouteHook): WaypointsHook => {
@@ -39,10 +41,15 @@ export const useWaypoints = (routeHook: TourRouteHook): WaypointsHook => {
         return points.map(value => value.latLng);
     };
 
+    const apply = () => {
+        routeHook.updateWaypoints(points);
+    };
+
     return {
         addPos,
         insertPos,
         getLatLngList,
+        apply,
         ...arrayHook
     };
 };
