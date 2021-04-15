@@ -1,9 +1,13 @@
 import {useState} from "react";
 
 export enum EditTool {
+    // Waypoints tools
     Draw,
     Delete,
-    Insert
+    Insert,
+
+    // Destination tools
+    Drag
 }
 
 export const useEditTools = () => {
