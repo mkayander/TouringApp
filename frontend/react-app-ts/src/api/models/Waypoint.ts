@@ -28,13 +28,13 @@ export class Waypoint implements TimestampModel {
         this.updated_at = args.updated_at && new Date(args.updated_at);
     }
 
-    public static fromLatLng(latLng: LatLng, label: string = "", routeId?: number, pk?: number) {
+    public static fromLatLng(latLng: LatLng, index?: number, routeId?: number, label: string = "") {
         return new Waypoint({
-            pk: pk,
+            route: routeId,
+            index: index,
             label: label,
             latitude: latLng.lat,
             longitude: latLng.lng,
-            route: routeId
         });
     }
 

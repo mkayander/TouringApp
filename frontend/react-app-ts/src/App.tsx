@@ -132,8 +132,8 @@ function App() {
 
                         <ToolButton label={"Сохранить изменения"} icon={<FaSave/>}
                                     onClick={() => {
-                                        pointsHook.apply(); // Apply drawed hooks to actual tour state
-                                        routeHook.repostRoute()?.then(); // Send our new tour to server
+                                        const newRoute = pointsHook.apply(); // Apply drawed hooks to actual tour state
+                                        routeHook.repostRoute(newRoute)?.then(); // Send our new tour to server
                                     }}/>
                     </Toolbar>
                 </div>

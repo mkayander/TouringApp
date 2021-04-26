@@ -55,10 +55,12 @@ export const useTourRoute = (onRouteChanged?: (route: TourRoute | null) => void)
         refreshFullActiveRoute();
     }, [routeId]);
 
-    const repostRoute = () => {
+    const repostRoute = (inputRoute?: TourRoute) => {
         if (activeRoute === null) return;
 
-        return repostRouteData(activeRoute)
+        const tourRoute = inputRoute || activeRoute
+
+        return repostRouteData(tourRoute)
             .then(route => {
                 setActiveRoute(route);
                 toast.success(`✅ Тур "${route.title}" сохранён успешно!`);
@@ -105,6 +107,8 @@ export const useTourRoute = (onRouteChanged?: (route: TourRoute | null) => void)
         const newRoute = activeRoute.clone();
         newRoute.waypoints = waypoints;
         setActiveRoute(newRoute);
+
+        return newRoute;
     };
 
     return {
