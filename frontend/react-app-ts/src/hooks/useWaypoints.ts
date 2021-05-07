@@ -3,6 +3,7 @@ import {LatLng} from "leaflet";
 import {TourRouteHook} from "./useTourRoute";
 import {ArrayHook, useGenericArrayHook} from "./generics/useGenericArrayHook";
 import {useEffect} from "react";
+import {TourRoute} from "../api/models/TourRoute";
 
 export interface WaypointsHook extends ArrayHook<Waypoint> {
     addPos(latLng: LatLng): void
@@ -11,7 +12,7 @@ export interface WaypointsHook extends ArrayHook<Waypoint> {
 
     getLatLngList(): LatLng[]
 
-    apply(): void
+    apply(): TourRoute | undefined
 }
 
 export const useWaypoints = (routeHook: TourRouteHook): WaypointsHook => {
@@ -41,8 +42,16 @@ export const useWaypoints = (routeHook: TourRouteHook): WaypointsHook => {
         return points.map(value => value.latLng);
     };
 
-    const apply = () => {
-        routeHook.updateWaypoints(points);
+    const apply = (): TourRoute | undefined => {
+        const routeId = routeHook.activeRoute?.pk;
+
+        const peparedPoints = points.map((point, index) => {
+                point.index = index;
+                point.route = routeId;
+                return point;
+            })
+
+        return routeHook.updateWaypoints(peparedPoints);
     };
 
     return {
@@ -51,5 +60,5 @@ export const useWaypoints = (routeHook: TourRouteHook): WaypointsHook => {
         getLatLngList,
         apply,
         ...arrayHook
-    };
+    }
 };
