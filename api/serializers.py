@@ -13,7 +13,7 @@ class WaypointSerializer(serializers.ModelSerializer):
 class DestinationPhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = DestinationPhoto
-        fields = ['destination', 'image', 'created_at', 'updated_at']
+        fields = ['pk', 'destination', 'image', 'created_at', 'updated_at']
 
 
 class DestinationSerializer(serializers.ModelSerializer):
@@ -24,6 +24,7 @@ class DestinationSerializer(serializers.ModelSerializer):
         fields = ['pk', 'route', 'longitude', 'latitude', 'title', 'address', 'type', 'radius', 'description',
                   'created_at', 'updated_at', 'photos']
         nested_list_fields = ['photos']
+        extra_kwargs = {'pk': {'read_only': False}}
 
 
 class RouteSerializer(serializers.ModelSerializer):
