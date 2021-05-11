@@ -19,7 +19,7 @@ export const DestinationsController: React.FC<DestinationsControllerProps> = ({
                                                                               }) => {
 
     return (
-        <>
+        <div>
             {routeHook.activeRoute?.destinations.map((destination, index) =>
                 <DraggableMarker
                     key={destination.pk}
@@ -35,6 +35,6 @@ export const DestinationsController: React.FC<DestinationsControllerProps> = ({
                     </Popup>
                 </DraggableMarker>)
             }
-        </>
+        </div>
     );
 };
