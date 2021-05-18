@@ -1,4 +1,9 @@
+import sys
+from io import BytesIO
+
+from PIL import Image
 from constance import config
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
@@ -6,7 +11,6 @@ from geopy.distance import distance, Distance
 
 from routes.choices import DESTINATION_TYPES
 
-from PIL import Image
 
 class TimestampModelMixin(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
@@ -113,6 +117,7 @@ class DestinationPhoto(TimestampModelMixin):
         img = img.resize((1920, 1080))
         img.save(output, format='JPEG', quality=20, optimize=True)
         output.seek(0)
-        self.image = InMemoryUploadedFile(output, 'ImageField', f'{self.image.name.split(".")[0]}.jpg', 'image/jpeg', sys.getsizeof(output), None)
+        self.image = InMemoryUploadedFile(output, 'ImageField', f'{self.image.name.split(".")[0]}.jpg', 'image/jpeg',
+                                          sys.getsizeof(output), None)
 
         super().save(*args, **kwargs)
