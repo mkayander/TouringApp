@@ -6,6 +6,7 @@ from geopy.distance import distance, Distance
 
 from routes.choices import DESTINATION_TYPES
 
+from PIL import Image
 
 class TimestampModelMixin(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
@@ -105,3 +106,13 @@ class DestinationPhoto(TimestampModelMixin):
     class Meta:
         verbose_name = "Фотография точки"
         verbose_name_plural = "Фотографии точек"
+
+    def save(self, *args, **kwargs):
+        img = Image.open(self.image)
+        output = BytesIO()
+        img = img.resize((1920, 1080))
+        img.save(output, format='JPEG', quality=20, optimize=True)
+        output.seek(0)
+        self.image = InMemoryUploadedFile(output, 'ImageField', f'{self.image.name.split(".")[0]}.jpg', 'image/jpeg', sys.getsizeof(output), None)
+
+        super().save(*args, **kwargs)
