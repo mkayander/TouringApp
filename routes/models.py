@@ -114,8 +114,10 @@ class DestinationPhoto(TimestampModelMixin):
     def save(self, *args, **kwargs):
         img = Image.open(self.image)
         output = BytesIO()
-        img = img.resize((1920, 1080))
-        img.save(output, format='JPEG', quality=20, optimize=True)
+        
+        # img = img.resize((1920, 1080))
+        
+        img.save(output, format='JPEG', quality=40, optimize=True)
         output.seek(0)
         self.image = InMemoryUploadedFile(output, 'ImageField', f'{self.image.name.split(".")[0]}.jpg', 'image/jpeg',
                                           sys.getsizeof(output), None)
