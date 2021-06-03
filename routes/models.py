@@ -87,7 +87,7 @@ class Destination(TimestampModelMixin, GeoPointMixin):
     address = models.CharField(verbose_name="Адрес", max_length=128, null=True, blank=True)
     type = models.CharField(verbose_name="Тип", max_length=16, choices=DESTINATION_TYPES)
     radius = models.PositiveIntegerField(verbose_name="Радиус области входа", help_text="В метрах", default=8)
-    short_description = models.TextField(verbose_name="Краткое описание", null=True, blank=True)
+    short_description = models.CharField(verbose_name="Краткое описание", max_length=128, null=True, blank=True)
     description = models.TextField(verbose_name="Описание", null=True, blank=True)
 
     def __str__(self):

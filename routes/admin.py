@@ -6,6 +6,7 @@ from routes.models import Route, Waypoint, Destination, DestinationPhoto
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
     list_display = ["title", "short_description", "image"]
+    list_editable = ["short_description"]
 
 
 @admin.register(Waypoint)
@@ -16,9 +17,9 @@ class WaypointAdmin(admin.ModelAdmin):
 
 @admin.register(Destination)
 class DestinationAdmin(admin.ModelAdmin):
-    list_display = ["title", "route", "type", "radius", "address"]
+    list_display = ["title", "route", "type", "radius", "address", "short_description", "description"]
     list_filter = ["route"]
-    list_editable = ["type", "radius", "address"]
+    list_editable = ["type", "radius", "address", "short_description", "description"]
 
 
 @admin.register(DestinationPhoto)
