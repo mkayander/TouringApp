@@ -73,12 +73,6 @@ class Waypoint(TimestampModelMixin, GeoPointMixin):
         ]
         ordering = ['index']
 
-    def save(self, *args, **kwargs):
-        if self.index is None:
-            self.index = Waypoint.objects.last().index + 1
-
-        super().save(*args, **kwargs)
-
 
 class Destination(TimestampModelMixin, GeoPointMixin):
     route = models.ForeignKey(Route, verbose_name="Маршрут", on_delete=models.CASCADE,
