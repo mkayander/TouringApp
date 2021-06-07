@@ -8,6 +8,7 @@ export type Destination = TimestampModel & LatLngModel & {
     type: string,
     address: string,
     radius: number,
+    short_description: string,
     description: string,
     photos?: DestinationPhoto[]
 }

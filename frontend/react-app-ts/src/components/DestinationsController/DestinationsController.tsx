@@ -31,6 +31,7 @@ export const DestinationsController: React.FC<DestinationsControllerProps> = ({
                 >
                     <Popup>
                         <h5>{destination.title}</h5>
+                        <h6>{destination.short_description}</h6>
                         <p>{destination.description}</p>
                     </Popup>
                 </DraggableMarker>)
