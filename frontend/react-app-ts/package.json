@@ -36,8 +36,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env REACT_APP_RUN_MODE=development react-scripts start",
     "build": "react-scripts build",
+    "build-unsplit": "npx ./scripts/build.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -63,6 +64,9 @@
     "@types/leaflet": "^1.5.23",
     "@types/styled-components": "^5.1.7",
     "babel-plugin-styled-components": "^1.12.0",
+    "cross-env": "^7.0.3",
+    "mini-css-extract-plugin": "^1.6.0",
+    "rewire": "^5.0.0",
     "typescript-plugin-css-modules": "^3.2.0"
   }
 }
