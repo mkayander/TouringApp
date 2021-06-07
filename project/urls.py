@@ -21,7 +21,8 @@ from project import settings
 
 urlpatterns = [
     path('', admin.site.urls),
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
+    path('react/', include('frontend.urls'))
 ]
 
 if settings.DEBUG:

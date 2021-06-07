@@ -140,6 +140,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     # BASE_DIR / "web/static",
+    "frontend/react-app-ts/build/"
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
