@@ -20,9 +20,9 @@ from django.urls import path, include
 from project import settings
 
 urlpatterns = [
-    path('', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('react/', include('frontend.urls'))
+    path('', include('frontend.urls'))
 ]
 
 if settings.DEBUG:
