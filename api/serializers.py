@@ -21,7 +21,7 @@ class DestinationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Destination
-        fields = ['pk', 'route', 'longitude', 'latitude', 'title', 'address', 'type', 'radius', 'description',
+        fields = ['pk', 'route', 'longitude', 'latitude', 'title', 'address', 'type', 'radius', 'short_description', 'description',
                   'created_at', 'updated_at', 'photos']
         nested_list_fields = ['photos']
         extra_kwargs = {'pk': {'read_only': False}}
