@@ -5,4 +5,4 @@ from django.shortcuts import render
 
 @login_required
 def index(request: HttpRequest):
-    render(request, "react/index.html")
+    return render(request, "react/index.html")
