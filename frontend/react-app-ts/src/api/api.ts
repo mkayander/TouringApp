@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import {TourRoute, TourRouteResponse} from "./models/TourRoute";
 
-const getBaseUrl = () => process.env.REACT_APP_DEV_RUN ?
+const getBaseUrl = () => process.env.REACT_APP_RUN_MODE === "development" ?
     `http://${window.location.hostname}:8000/api/` :
     `https://${window.location.hostname}/api/`;
 
