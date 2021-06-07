@@ -100,7 +100,7 @@ function App() {
         <>
             <Sidebar routeHook={routeHook} modalHook={modalHook}/>
             <Container>
-                <h1>React Typescript Leaflet TEST</h1>
+                <h1>Редактор Туристических Маршрутов</h1>
                 <h6>{activeRoute?.title}</h6>
                 <br/>
 

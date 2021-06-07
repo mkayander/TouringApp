@@ -9,20 +9,20 @@ type ToggleButtonProps = {
     active?: boolean
 }
 
-export const ToolButton: React.FC<React.HTMLAttributes<HTMLButtonElement> & ToggleButtonProps> = ({
-                                                                                                      label,
-                                                                                                      icon,
-                                                                                                      active,
-                                                                                                      ...rest
-                                                                                                  }) => {
-    const classes = classNames({
-        active: active
-    });
+export const ToolButton: React.FC<React.HTMLAttributes<HTMLButtonElement> & ToggleButtonProps> =
+    ({
+         label,
+         icon,
+         active,
+         ...rest
+     }) => {
+        const classes = classNames({
+            active: active
+        });
 
-    return (
-        <StyledButton className={classes} title={label} active={active} {...rest}>
-            {/*<img src={iconUrl} alt={"Tool Icon"}/>*/}
-            {icon}
-        </StyledButton>
-    );
-};
+        return (
+            <StyledButton className={classes} title={label} active={active} {...rest}>
+                {icon}
+            </StyledButton>
+        );
+    };
