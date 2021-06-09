@@ -96,7 +96,7 @@ class Destination(TimestampModelMixin, GeoPointMixin):
 
 
 class DestinationPhoto(TimestampModelMixin):
-    destination = models.ForeignKey(Destination, on_delete=models.CASCADE, related_name="photos")
+    destination = models.ForeignKey(Destination, on_delete=models.DO_NOTHING, related_name="photos")
     image = models.ImageField(verbose_name="Фотография", upload_to="destination_photos/")
 
     def __str__(self):
