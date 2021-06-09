@@ -1,0 +1,92 @@
+[
+  {
+    "model": "routes.destinationphoto",
+    "pk": 1,
+    "fields": {
+      "created_at": "2021-05-18T10:59:12.637Z",
+      "updated_at": "2021-05-18T11:25:14.341Z",
+      "destination": 9,
+      "image": "destination_photos/16213370718056236670562189086919.jpg"
+    }
+  },
+  {
+    "model": "routes.destinationphoto",
+    "pk": 2,
+    "fields": {
+      "created_at": "2021-05-18T11:26:04.020Z",
+      "updated_at": "2021-05-18T11:26:04.020Z",
+      "destination": 9,
+      "image": "destination_photos/IMG_20210517_174449.jpg"
+    }
+  },
+  {
+    "model": "routes.destinationphoto",
+    "pk": 3,
+    "fields": {
+      "created_at": "2021-05-18T11:26:53.214Z",
+      "updated_at": "2021-05-18T11:31:02.445Z",
+      "destination": 9,
+      "image": "destination_photos/IMG_20210515_115433.jpg"
+    }
+  },
+  {
+    "model": "routes.destinationphoto",
+    "pk": 4,
+    "fields": {
+      "created_at": "2021-05-18T11:29:28.519Z",
+      "updated_at": "2021-05-18T11:29:28.519Z",
+      "destination": 9,
+      "image": "destination_photos/IMG-20210516-WA0004.jpg"
+    }
+  },
+  {
+    "model": "routes.destinationphoto",
+    "pk": 5,
+    "fields": {
+      "created_at": "2021-06-03T13:21:01.386Z",
+      "updated_at": "2021-06-03T13:21:01.387Z",
+      "destination": 7,
+      "image": "destination_photos/m_4.jpg"
+    }
+  },
+  {
+    "model": "routes.destinationphoto",
+    "pk": 6,
+    "fields": {
+      "created_at": "2021-06-03T13:23:48.556Z",
+      "updated_at": "2021-06-03T13:23:48.556Z",
+      "destination": 7,
+      "image": "destination_photos/unnamed.jpg"
+    }
+  },
+  {
+    "model": "routes.destinationphoto",
+    "pk": 7,
+    "fields": {
+      "created_at": "2021-06-03T13:23:53.414Z",
+      "updated_at": "2021-06-03T13:23:53.414Z",
+      "destination": 7,
+      "image": "destination_photos/3_____2___.jpg"
+    }
+  },
+  {
+    "model": "routes.destinationphoto",
+    "pk": 8,
+    "fields": {
+      "created_at": "2021-06-03T13:23:58.329Z",
+      "updated_at": "2021-06-03T13:23:58.329Z",
+      "destination": 7,
+      "image": "destination_photos/6_____2___.jpg"
+    }
+  },
+  {
+    "model": "routes.destinationphoto",
+    "pk": 9,
+    "fields": {
+      "created_at": "2021-06-03T13:24:29.650Z",
+      "updated_at": "2021-06-03T13:24:29.650Z",
+      "destination": 7,
+      "image": "destination_photos/200px-Пономарёв_Василий_Михайлович.jpg"
+    }
+  }
+]
