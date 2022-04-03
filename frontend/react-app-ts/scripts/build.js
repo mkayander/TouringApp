@@ -6,23 +6,23 @@ const config = defaults.__get__("config");
 
 // Consolidate chunk files instead
 config.optimization.splitChunks = {
-    cacheGroups: {
-        default: false,
-    },
+  cacheGroups: {
+    default: false,
+  },
 };
 // Move runtime into bundle instead of separate file
 config.optimization.runtimeChunk = false;
 
 // Renames main.00455bcf.js to main.js
-config.output.filename = 'static/js/[name].js'
+config.output.filename = "static/js/[name].js";
 
 // Renames main.b100e6da.css to main.css
-config.plugins[5].options.filename = 'static/css/[name].css'
-config.plugins[5].options.moduleFilename = () => 'static/css/main.css'
+config.plugins[5].options.filename = "static/css/[name].css";
+config.plugins[5].options.moduleFilename = () => "static/css/main.css";
 
 // CSS remove MiniCssPlugin
 config.plugins = config.plugins.filter(
-    (plugin) => !(plugin instanceof MiniCssExtractPlugin)
+  (plugin) => !(plugin instanceof MiniCssExtractPlugin)
 );
 
 // CSS replace all MiniCssExtractPlugin.loader with style-loader

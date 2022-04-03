@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 type StyleProps = {
-    active?: boolean
-}
+  active?: boolean;
+};
 
 export const StyledButton = styled.button<StyleProps>`
   transition: 0.2s;
@@ -10,9 +10,9 @@ export const StyledButton = styled.button<StyleProps>`
   width: 64px;
   height: 64px;
   border-radius: 12px;
-  background: ${(props) => props.active ? "cyan" : "darkcyan"};
+  background: ${(props) => (props.active ? "cyan" : "darkcyan")};
   box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
-  color: ${(props) => props.active ? "white" : "gainsboro"};
+  color: ${(props) => (props.active ? "white" : "gainsboro")};
 
   :active {
     background: cyan;

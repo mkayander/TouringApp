@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {HTMLAttributes} from "react";
+import React, { HTMLAttributes } from "react";
 
 const Container = styled.div`
   position: fixed;
@@ -27,7 +27,7 @@ const View = styled.div`
   z-index: 1103;
   box-shadow: rgba(0, 0, 0, 0.15) 0 0.5rem 1rem;
   pointer-events: auto;
-  
+
   h4 {
     text-align: center;
     text-transform: capitalize;
@@ -35,17 +35,19 @@ const View = styled.div`
 `;
 
 type ModalProps = {
-    modalTitle: string
-}
+  modalTitle: string;
+};
 
-export const ModalBase: React.FC<HTMLAttributes<HTMLDivElement> & ModalProps> = ({children, modalTitle}) => {
-    return (
-        <Container >
-            <View>
-                <h4>{modalTitle}</h4>
-                <hr/>
-                {children}
-            </View>
-        </Container>
-    );
+export const ModalBase: React.FC<
+  HTMLAttributes<HTMLDivElement> & ModalProps
+> = ({ children, modalTitle }) => {
+  return (
+    <Container>
+      <View>
+        <h4>{modalTitle}</h4>
+        <hr />
+        {children}
+      </View>
+    </Container>
+  );
 };

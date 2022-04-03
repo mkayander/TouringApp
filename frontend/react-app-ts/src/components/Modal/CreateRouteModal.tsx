@@ -1,72 +1,70 @@
-import React, {FormEvent, useReducer} from "react";
-import {ModalBase} from "./ModalBase";
+import React, { FormEvent, useReducer } from "react";
+import { ModalBase } from "./ModalBase";
 import styled from "styled-components";
-import {TourRouteHook} from "../../hooks/useTourRoute";
-import {DefaultModalProps} from "../../hooks/useModal";
-import {AxiosResponse} from "axios";
-
+import { TourRouteHook } from "../../hooks/useTourRoute";
+import { DefaultModalProps } from "../../hooks/useModal";
+import { AxiosResponse } from "axios";
 
 type FormErrors = null | {
-    title?: String[],
-    description?: String[]
-}
+  title?: String[];
+  description?: String[];
+};
 
 type State = {
-    title: string,
-    description: string,
-    isLoading: boolean,
-    errorMessage: string,
-    errors: FormErrors,
-}
+  title: string;
+  description: string;
+  isLoading: boolean;
+  errorMessage: string;
+  errors: FormErrors;
+};
 
 const initialState: State = {
-    title: "",
-    description: "",
-    isLoading: false,
-    errorMessage: "",
-    errors: null
+  title: "",
+  description: "",
+  isLoading: false,
+  errorMessage: "",
+  errors: null,
 };
 
 type FieldChangeAction = {
-    type: "CHANGE"
-    fieldname: string
-    payload: string
-}
+  type: "CHANGE";
+  fieldname: string;
+  payload: string;
+};
 
 type SubmitAction = {
-    type: "SUBMIT"
-}
+  type: "SUBMIT";
+};
 
 type SetErrorsAction = {
-    type: "ERROR",
-    errors: FormErrors
-}
+  type: "ERROR";
+  errors: FormErrors;
+};
 
-type Action = FieldChangeAction | SubmitAction | SetErrorsAction
+type Action = FieldChangeAction | SubmitAction | SetErrorsAction;
 
 const reducer = (state: State, action: Action) => {
-    switch (action.type) {
-        case "CHANGE":
-            return {
-                ...state,
-                [action.fieldname]: action.payload
-            };
+  switch (action.type) {
+    case "CHANGE":
+      return {
+        ...state,
+        [action.fieldname]: action.payload,
+      };
 
-        case "ERROR":
-            console.log("Form error: ", action);
-            return {
-                ...state,
-                errors: action.errors
-            };
+    case "ERROR":
+      console.log("Form error: ", action);
+      return {
+        ...state,
+        errors: action.errors,
+      };
 
-        case "SUBMIT":
-            console.log("Submit!!");
-            return {
-                ...state,
-                errors: null
-            };
-
-    }
+    case "SUBMIT":
+      console.log("Submit!!");
+      return {
+        ...state,
+        errors: null,
+      };
+  }
 };
 
 const StyledForm = styled.form`
@@ -83,7 +81,8 @@ const StyledForm = styled.form`
     }
   }
 
-  input, textarea {
+  input,
+  textarea {
     transition: 0.3s;
     width: 100%;
     border-radius: 5px;
@@ -134,81 +133,100 @@ const StyledForm = styled.form`
 `;
 
 export type CreateRouteModalProps = DefaultModalProps & {
-    routeHook?: TourRouteHook
-}
+  routeHook?: TourRouteHook;
+};
 
-export const CreateRouteModal: React.FC<CreateRouteModalProps> = ({closeModal, routeHook}) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const {title, description, errors} = state;
+export const CreateRouteModal: React.FC<CreateRouteModalProps> = ({
+  closeModal,
+  routeHook,
+}) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { title, description, errors } = state;
 
-    const formRef = React.createRef<HTMLFormElement>();
+  const formRef = React.createRef<HTMLFormElement>();
 
-    const onChangeField = (ev: { target: HTMLInputElement | HTMLTextAreaElement }) => dispatch({
-        type: "CHANGE",
-        fieldname: ev.target.name,
-        payload: ev.target.value
+  const onChangeField = (ev: {
+    target: HTMLInputElement | HTMLTextAreaElement;
+  }) =>
+    dispatch({
+      type: "CHANGE",
+      fieldname: ev.target.name,
+      payload: ev.target.value,
     });
 
-    const onSubmit = (ev: FormEvent<HTMLFormElement>) => {
-        ev.preventDefault();
-        console.log(ev);
+  const onSubmit = (ev: FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+    console.log(ev);
 
-        dispatch({
-            type: "SUBMIT"
-        });
-
-        routeHook?.createRoute({
-            title: state.title,
-            description: state.description
-        })
-            .then((value) => {
-                console.log("CreateRouteModal: ", value);
-                closeModal?.call(this);
-            })
-            .catch((response: AxiosResponse) => {
-                console.log("Modal error: ", response);
-                onError(response.data);
-            });
-    };
-
-    const onError = (error: FormErrors) => dispatch({
-        type: "ERROR",
-        errors: error
+    dispatch({
+      type: "SUBMIT",
     });
 
-    console.log("formRef: ", formRef);
+    routeHook
+      ?.createRoute({
+        title: state.title,
+        description: state.description,
+      })
+      .then((value) => {
+        console.log("CreateRouteModal: ", value);
+        closeModal?.call(this);
+      })
+      .catch((response: AxiosResponse) => {
+        console.log("Modal error: ", response);
+        onError(response.data);
+      });
+  };
 
-    return (
-        <ModalBase modalTitle={"Создать новый тур"}>
-            <StyledForm ref={formRef} onSubmit={onSubmit} onMouseEnter={() => console.log(formRef.current)}>
-                <label>
-                    Название:
-                    <input
-                        className={errors && "title" in errors ? "error" : ""}
-                        name="title"
-                        type="text"
-                        value={title}
-                        onChange={onChangeField}/>
+  const onError = (error: FormErrors) =>
+    dispatch({
+      type: "ERROR",
+      errors: error,
+    });
 
-                    {errors?.title &&
-                    errors.title.map((msg, i) => <p key={i} className={"error-msg"}>{msg}</p>)
-                    }
-                </label>
+  console.log("formRef: ", formRef);
 
-                <label>
-                    Описание:
-                    <textarea
-                        className={errors && "description" in errors ? "error" : ""}
-                        name="description"
-                        value={description}
-                        onChange={onChangeField}/>
-                </label>
-                {errors?.description &&
-                errors.description.map((msg, i) => <p key={i} className={"error-msg"}>{msg}</p>)
-                }
+  return (
+    <ModalBase modalTitle={"Создать новый тур"}>
+      <StyledForm
+        ref={formRef}
+        onSubmit={onSubmit}
+        onMouseEnter={() => console.log(formRef.current)}
+      >
+        <label>
+          Название:
+          <input
+            className={errors && "title" in errors ? "error" : ""}
+            name="title"
+            type="text"
+            value={title}
+            onChange={onChangeField}
+          />
+          {errors?.title &&
+            errors.title.map((msg, i) => (
+              <p key={i} className={"error-msg"}>
+                {msg}
+              </p>
+            ))}
+        </label>
 
-                <button type="submit">Создать</button>
-            </StyledForm>
-        </ModalBase>
-    );
+        <label>
+          Описание:
+          <textarea
+            className={errors && "description" in errors ? "error" : ""}
+            name="description"
+            value={description}
+            onChange={onChangeField}
+          />
+        </label>
+        {errors?.description &&
+          errors.description.map((msg, i) => (
+            <p key={i} className={"error-msg"}>
+              {msg}
+            </p>
+          ))}
+
+        <button type="submit">Создать</button>
+      </StyledForm>
+    </ModalBase>
+  );
 };

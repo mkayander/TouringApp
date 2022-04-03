@@ -1,6 +1,6 @@
-import {TimestampModel} from "./mixins/TimestampModel";
+import { TimestampModel } from "./mixins/TimestampModel";
 
 export type DestinationPhoto = TimestampModel & {
-    destination: number,
-    image: URL,
-}
+  destination: number;
+  image: URL;
+};

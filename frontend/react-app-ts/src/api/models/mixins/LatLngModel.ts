@@ -1,4 +1,4 @@
 export type LatLngModel = {
-    latitude: number,
-    longitude: number
-}
+  latitude: number;
+  longitude: number;
+};
