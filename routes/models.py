@@ -29,6 +29,7 @@ class GeoPointMixin(models.Model):
 
 
 class Route(TimestampModelMixin):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=64, verbose_name="Название", unique=True)
     short_description = models.CharField(max_length=64, verbose_name="Короткое описание", null=True, blank=True)
     description = models.TextField(verbose_name="Описание", null=True, blank=True)
@@ -57,6 +58,7 @@ class Route(TimestampModelMixin):
 
 
 class Waypoint(TimestampModelMixin, GeoPointMixin):
+    id = models.AutoField(primary_key=True)
     index = models.PositiveIntegerField(verbose_name="Индекс", help_text="Порядковый номер путевой точки в маршруте")
     route = models.ForeignKey(Route, on_delete=models.CASCADE, related_name="waypoints")
     label = models.CharField(verbose_name="Метка", max_length=32, null=True, blank=True)
@@ -75,6 +77,7 @@ class Waypoint(TimestampModelMixin, GeoPointMixin):
 
 
 class Destination(TimestampModelMixin, GeoPointMixin):
+    id = models.AutoField(primary_key=True)
     route = models.ForeignKey(Route, verbose_name="Маршрут", on_delete=models.CASCADE,
                               related_name="destinations")
     title = models.CharField(verbose_name="Название", max_length=64)
@@ -96,6 +99,7 @@ class Destination(TimestampModelMixin, GeoPointMixin):
 
 
 class DestinationPhoto(TimestampModelMixin):
+    id = models.AutoField(primary_key=True)
     destination = models.ForeignKey(Destination, on_delete=models.DO_NOTHING, related_name="photos")
     image = models.ImageField(verbose_name="Фотография", upload_to="destination_photos/")
 

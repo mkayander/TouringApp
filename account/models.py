@@ -30,6 +30,7 @@ class AccountUserManager(BaseUserManager):
 
 
 class Account(AbstractUser):
+    id = models.AutoField(primary_key=True)
     username = None
     email = models.EmailField(_('Email address'), unique=True)
 
